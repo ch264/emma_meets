@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+		<title>EmmaMeets | Woof</title>
+	</head>
+
+	<!-- Bulma CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
+	<!-- Animations-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+	<!-- Our CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+
+	<body>
+		<header>
+			<nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">
+				<div class="navbar-brand ">
+					<!-- Logo -->
+					<a href="{{ url_for('index') }}" class="navbar-item center"><img src="#"></a>
+
+					<!-- Hamburger icon for responsive nav -->
+					<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+						<span aria-hidden="true"></span>
+						<span aria-hidden="true"></span>
+						<span aria-hidden="true"></span>
+					</a>
+				</div>
+
+				<div id="navbarBasicExample" class="navbar-menu">
+					<div class="navbar-end">
+						
+							<a href="#" class="navbar-item nav-links">ABOUT</a>
+							<a href="#" class="navbar-item nav-links">Contact us</a>
+							<a href="#" class="navbar-item nav-links">Products</a>
+							<!-- If user is not logged in, show Login/Signup button -->
+							<a href="#" class="navbar-item nav-links" title="login">LOGIN</a>
+
+							<a href="#" class="navbar-item nav-links" title="register">SIGN UP</a>
+				
+						<!-- If user is logged in, show other pages -->
+							<a href="#" class="navbar-item nav-links">PROFILE</a>
+
+							<a href="#" class="navbar-item nav-links">LOGOUT</a>
+						
+					</div>  <!-- end of .navbar-end div -->
+				</div>  <!-- end of .navbar-menu div -->
+			</nav>
+		</header>
+		<main>
+			<section class="content">
+				{% block content %}
+					<!-- Where templates will be entered -->
+				{% endblock %}
+			</section>
+		</main>
+
+		<footer class="footer">
+			<div class="content ">
+				<p class="has-text-right">&copy; EmmaMeets 2019. 
+				Made with &#x2661; by Christina Hastenrath</p>
+			</div>
+		</footer>
+		<!-- Vendor Scripts -->
+		<!-- jQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+		<!-- Our JS file -->
+		<script></script>
+	</body>
+
+</html>

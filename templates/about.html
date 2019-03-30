@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="about-team">
+    <h2 class="subtitle is-2 animated fadeIn">About the Emma Meets Team</h2>
+    <!-- First pair of columns -->
+    <div class="columns">
+      <!-- About Nicolette -->
+      <div class="column is-half">
+        <div class="card about-card ">
+          <div class="card-content animated fadeInLeft">
+            <div class="media">
+              <div class="media-left"> 
+                <figure class="image is-128x128">
+                <img src="#" alt="Emma">
+                </figure>
+              </div>
+
+              <div class="media-content">
+                <h4 class="subtitle is-4">Meet Emma</h4>
+                <p>Emma was born in 2004 into a puppy trading organisation. She was kept in isolation in a cellar and used as a puppy breeding machine for the first four years of her life. When finally someone reported the breeders, the police rescued the dogs and we took Emma in. When she came to us she did not know the feeling of grass below her paws, what snow felt like or how to interact with other dogs.
+								Since we adopted Emma in 2007 she has come a very long way. She has learned how to play with other dogs, how to swim in a lake, how to hike up mountains and sniff along the way and how good it is to cuddle for hours on the couch, whilst watching her favorite show. We love her very much and want to share all the love for her and products that make her life easier with others. Emma looooves her yellow raincoat and will not go outside without it, because it has a hoodie and she does not like her ears to get wet.<span><a class="git" href="https://github.com/LewNic1" alt="Nicolette">&#x27A5;</a></span></p>    
+              </div>
+            </div>  <!-- end of .media div -->
+          </div>  <!-- end of .card-content div -->
+        </div>  <!-- end of div .card -->
+      </div>  <!-- end of first .column div -->
+
+      <!-- About Christina -->
+      <div class="column is-half">
+        <div class="card about-card">
+          <div class="card-content animated fadeInRight">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-128x128">
+                  <img src="{{ url_for('static', filename='../static/christina.jpeg') }}" alt="Christina">
+                </figure>
+              </div>
+
+              <div class="media-content">
+                <h4 class="subtitle is-4">Meet Christina</h4>
+                <p>Lorem Ipsum<span><a class="git" href="https://github.com/ch264" alt="Christina">&#x27A5;</a></span></p>
+              </div>
+            </div>  <!-- end of .media div -->
+          </div>  <!-- end of .card-content div -->
+        </div>  <!-- end of .card div -->
+      </div>  <!-- end of .column div -->
+    </div>  <!-- end of first .columns div-->
+
+    
+  </div>   <!-- end of container div .about-team -->
+{% endblock %}
