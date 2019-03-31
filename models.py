@@ -29,6 +29,8 @@ DATABASE = SqliteDatabase('emma.db')
 
 class User(Model):
 	username = CharField(unique=True)
+	email = CharField(unique=True)
+	password = CharField(max_length=100)
 	about_me = TextField()
 	age = IntegerField()
 	gender = CharField()
@@ -36,8 +38,8 @@ class User(Model):
 	fav_snack = CharField(255)
 	fav_toy = CharField(255)
 	breed = CharField()
-	image_filename = CharField()
-	image_url = CharField()
+	# image_filename = CharField()
+	# image_url = CharField()
 
 	class Meta:
 		database = DATABASE
@@ -49,14 +51,14 @@ class User(Model):
 			cls.create(
 				username = username,
 				about_me = about_me,
-				age = age,
+				# age = age,
 				gender = gender,
 				location = location,
 				fav_snack = fav_snack,
 				fav_toy = fav_toy,
 				breed = breed,
-				image_filename = image_filename,
-				image_url = image_url
+				# image_filename = image_filename,
+				# image_url = image_url
 			)
 		except IntegrityError:
 			raise ValueError('create error')

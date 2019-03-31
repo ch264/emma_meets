@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm as Form
-from wtforms import StringField, PasswordField, TextAreaField, SelectField
+from wtforms import StringField, PasswordField, TextAreaField, SelectField, BooleanField, SubmitField, IntegerField, FileField
 from wtforms.validators import DataRequired, Regexp, ValidationError, Length, EqualTo, Email
 
 
@@ -12,108 +12,141 @@ def name_exists(form, field):
         raise ValidationError("User with this username already exists")
 
 # Defines function email_exists to check is user exists in database with same email
-def email_exists(form, field):
-    if User.select().where(User.email == field.data).exists():
-        raise ValidationError("User with this email already exists")
+# def email_exists(form, field):
+#     if User.select().where(User.email == field.data).exists():
+#         raise ValidationError("User with this email already exists")
 
 
 # Creates a SignUpForm inheriting from Form from flask_wtf
 class SignUpForm(Form):
     # Sets names of fields equal to what type of data to receive
-    username = StringField(
-        # Label for the field
-        'Username',
-        validators=[
-            # Requires user to enter something
-            DataRequired(),
-            # Limits characters to alphanumeric
-            Regexp(
-                r'^[a-zA-Z0-9_]+$',
-                message=("Username should be one word, letters, "
-                         "numbers, and underscores only.")),
-            # Calls previously defined function
-            name_exists
-        ])
-    # email = StringField(
-    #     'Email',
-    #     validators=[
-    #         DataRequired(),
-    #         Email(),
-    #         email_exists
-    #     ])
-    # password = PasswordField(
-    #     'Password',
-    #     validators=[
-    #         DataRequired(),
-    #         Length(min=2),
-    #         # Checks that user entered password correctly in both password fields
-    #         EqualTo('password2', message='Passwords must match')
-    #     ])
-    # password2 = PasswordField(
-    #     'Confirm Password',
-    #     validators=[DataRequired()
-    #     ])
-    location = StringField(
-        'Location',
-        validators=[
-            DataRequired()
-        ])
-		about_me = StringField('About Me', validators=DataRequired(), Length(min=2))
-		age = IntegerField()('Age', validators=DataRequired())
-		gender = SelectField('Gender', choices=[('male', 'female')])
-		location = StringField('Location', validators=[DataRequired()])
-		fav_snack = StringField('Favorite Snack', validators=[DataRequired()])
-		fav_toy = StringField('Favorite Toy', validators=[DataRequired])
-		breed = StringField('Breed', validators=[DataRequired()])
-    profile_image = FileField('Profile Image')
+		username = StringField(
+			# Label for the field
+			'Username',
+			validators=[
+				# Requires user to enter something
+				DataRequired(),
+				# Limits characters to alphanumeric
+				# Regexp(
+				# 	r'^[a-zA-Z0-9_]+$',
+				# 	message=("Username should be one word, letters, "
+				# 						"numbers, and underscores only.")),
+				# # Calls previously defined function
+				# name_exists
+			])
+		email = StringField(
+			'Email',
+			validators=[
+				DataRequired(),
+				Email(),
+				# email_exists
+			])
+		password = PasswordField(
+			'Password',
+			validators=[
+				DataRequired(),
+				Length(min=2),
+				# Checks that user entered password correctly in both password fields
+				EqualTo('password2', message='Passwords must match')
+			])
+		password2 = PasswordField(
+			'Confirm Password',
+			validators=[DataRequired()
+			])
+		location = StringField(
+			'Location',
+      validators=[
+        DataRequired()
+      ])
+		about_me = StringField(
+			'About Me', 
+			validators=[
+				DataRequired(),
+				Length(min=2)
+			])
+			# convert to integerfield
+		# age = StringField()(
+		# 	'Age', 
+		# 	)
+		gender = SelectField(
+			'Gender', 
+			choices=[(
+				'male', 'female')
+			])
+		location = StringField(
+			'Location', 
+			validators=[DataRequired()
+			])
+		fav_snack = StringField(
+			'Favorite Snack', 
+			validators=[DataRequired()
+			])
+		fav_toy = StringField(
+			'Favorite Toy', 
+			validators=[DataRequired(
+			)])
+		breed = StringField(
+			'Breed', 
+			validators=[DataRequired()
+			])
+		# profile_image = FileField('Profile Image')
 
 
 # Creates a LoginForm class. Do not need if use Google 
 class LoginForm(Form):
-    email = StringField(
-        'Email',
-        validators=[
-            DataRequired(),
-            Email()
-        ])
-    password = PasswordField(
-        'Password',
-        validators=[DataRequired()]
-        )
+		email = StringField(
+			'Email',
+			validators=[
+				DataRequired(),
+				Email()
+			])
+		password = PasswordField(
+			'Password',
+			validators=[DataRequired()]
+			)
+		remember_me = BooleanField('Remember Me')
+		submit = SubmitField('Sign In')
 
 # Creates an EditUserForm class
 class EditUserForm(Form):
-    username =  StringField('Username', validators=[name_exists])
-    email = StringField('Email')
-    location =  StringField('Location')
-		about_me = StringField('About Me', validators=DataRequired(), Length(min=2))
-		age = IntegerField()('Age', validators=DataRequired())
+		username =  StringField('Username', validators=[name_exists])
+		email = StringField('Email')
+		location =  StringField('Location')
+		about_me = StringField('About Me', validators=DataRequired())
+		# age = StringField()('Age', validators=DataRequired())
 		gender = SelectField('Gender', choices=[('male', 'female')])
 		location = StringField('Location', validators=[DataRequired()])
 		fav_snack = StringField('Favorite Snack', validators=[DataRequired()])
 		fav_toy = StringField('Favorite Toy', validators=[DataRequired])
 		breed = StringField('Breed', validators=[DataRequired()])
-    profile_image = FileField('Profile Image')
+		profile_image = FileField('Profile Image')
 
 # Creates an EditRecipeForm class
 class EditReviewForm(Form):
     # Provides same category options as create review form
-    title = StringField('Title')
-    content = TextAreaField('Content')
-			rating = SelectField('Rating', choices=[('5', '5'),('4','4'), ('3','3'), ('2','2'), ('1','1')])
+		title = StringField('Title')
+		content = TextAreaField('Content')
+		rating = SelectField(
+			'Rating', 
+			choices=[('5', '5'),('4','4'), ('3','3'), ('2','2'), ('1','1')
+			])
     
 
 # Creates a new ReviewForm
 class ReviewForm(Form): 
-    title = StringField(
-        'Title',
-        validators=[DataRequired()]
-        )
-    content = TextAreaField(
-        'Let us konw what you think',
-        validators=[DataRequired()]
-        )
-		rating = SelectField('Rating', choices=[('5', '5'),('4','4'), ('3','3'), ('2','2'), ('1','1')], validators=[DataRequired()] )
+		title = StringField(
+				'Title',
+				validators=[DataRequired()]
+				)
+		content = TextAreaField(
+				'Let us konw what you think',
+				validators=[DataRequired()]
+				)
+		rating = SelectField(
+			'Rating', 
+			choices=[('5', '5'),('4','4'), ('3','3'), ('2','2'), ('1','1')], 
+			validators=[DataRequired()
+			])
   #  do we need ain image placeholder for the image of who is leaving the rview?
 
 # Create a new Product Form
