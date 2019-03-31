@@ -8,13 +8,13 @@ from flask import render_template, flash, redirect, url_for, Flask, g, request
 import os
 import forms
 
-# @app.before_request
-# def before_request():
-#         db.session.commit()
+@app.before_request
+def before_request():
+        db.session.commit()
 
-# @app.route('/')
-# def index():
-# 	return 'Hello World! this is emma meets'
+@app.route('/')
+def index():
+	return 'Hello World! this is emma meets'
 
 
 

@@ -2,7 +2,6 @@ import os
 from flask import Flask, g, request, render_template, flash, redirect, url_for, session, escape
 # from config import Config
 
-
 import models
 
 app = Flask(__name__)
@@ -24,15 +23,31 @@ def after_request(response):
   g.db.close()
   return response
 
-
+# ====================================================================
+# =========================  Initial Routes  =========================
+# ====================================================================
+		
 @app.route('/')
 def index():
-	return render_template('landing.html')
+	user = {'username': 'Miguel'}
+	return render_template('landing.html', user=user)
 
 @app.route('/about')
 def about():
 	return render_template('about.html')
 
+
+# ====================================================================
+# ========================  User Auth Routes  ========================
+# ====================================================================
+
+# ====================================================================
+# =========================  Profile Routes  =========================
+# ====================================================================
+# Route and method to go to a user's profile
+@app.route('/profile')
+def profile():
+	return render_template('profile.html', user=user)
 
 
 
@@ -46,10 +61,10 @@ if __name__ == '__main__':
 	# 			pass
 
 
-
-
 PORT = 5000
 DEBUG = True
 
 # app.config['DEBUG'] = True
 app.run(port=PORT, debug=DEBUG)
+
+

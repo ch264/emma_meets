@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="container profile-container">
+		<div class="columns">
+			<!-- User photo -->
+			<div class="column">
+				<div class="image is-pulled-right">
+					<img class="image is-rounded is-128x128" src="#" alt="{{ user.image_filename }}">
+				</div>
+			</div>
+
+			<!-- User info -->
+			<div class="column">
+				<p><span class="title has-text-danger is-bold">{{ user.username }}</span></p> 
+				<button>Woof</button>
+				<button>Follow</button>
+				<p><span class="location"><small>I live in {{ user.location }}</small></span></p>
+				<p><span class="age"><small>I live in {{ user.age}}</small></span></p>
+				<p><span class="age"><small>I live in {{ user.gender}}</small></span></p>
+				<p><span class="age"><small>I live in {{ user.fav_snack}}</small></span></p>
+				<p><span class="age"><small>I live in {{ user.breed}}</small></span></p>
+				<p><span class="age"><small>I live in {{ user.fav_toy}}</small></span></p>
+
+				<!-- If logged in user is on their profile, show Edit Profile button -->
+				
+					<a href="{{ url_for('edit_profile', username=current_user.username) }}" class="button is-dark">Edit profile</a>
+				
+
+				<!-- Show any flash messages to user from logging in or signing up -->
+				{% with messages = get_flashed_messages(with_categories=True) %}
+					{% if messages %}
+						{% for category, message in messages %}
+							<div class={{category}}>{{ message }}</div>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+			</div>  <!-- end of .column div-->
+		</div>  <!-- end of columns div-->
+	</div>  <!-- end of .container div -->
+
+	<div class="container">
+		<div class="columns is-center has-text-centered is-grouped-centered">
+			<!-- User created recipes -->
+			<div class="column ">
+				<h4>Your Reviews</h4>
+			
+					<a href="{{ url_for('add_recipe') }}" class="button is-small is-dark">Add a Recipe</a>
+			
+				<!-- is-multiline is a Bulma class to allow columns to wrap -->
+				<div class="columns is-multiline">
+					<!-- Iterate through recipes passed down from app.py -->
+					{% for review in Reviews  %}
+						<!-- Use each single recipe info in sub-template _recipe.html -->
+						{% include '_review.html' %}
+					{% endfor %}	
+				</div>  <!-- end of .columns div -->
+			</div>  <!-- end of .column div -->
+
+			<!-- User saved recipes -->
+			<div class="column">
+				<h4>Favorite Prodcuts</h4>
+				<div class="columns is-multiline">
+					<!-- Iterate through saved_recipes passed down from app.py -->
+					{% for fave in saved_recipes %}
+						<!-- Use each single fave recipe info in sub-template _recipe.html -->
+						{% include '_favorite_product.html' %}
+					{% endfor %}	
+				</div>  <!-- end of .columns div -->
+			</div>  <!-- end of .column div -->
+		</div>  <!-- end of .columns div -->
+	</div>  <!-- end of .container div -->
+{% endblock %}
