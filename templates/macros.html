@@ -1,0 +1,29 @@
+
+<!-- Defining a macro called render_field() that accepts a form field as an argument to build form inputs -->
+{% macro render_field(field) %}
+  <div class="form-input">
+    <!-- Displays to user any form errors set in forms.py -->
+    {% if field.errors %}
+      {% for error in field.errors %}
+        <div>
+          {{ error }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  
+    {{ field.label(class="label") }}
+    <!-- cols and rows for textarea field -->
+    {{ field(class="control", placeholder=field.label.text, cols="35", rows="20") }}
+  </div>
+{% endmacro %}
+
+<!-- Defining a macro called field_error() that accepts a form field as a parameter to display any errors from data validators -->
+{% macro field_error(field) %}
+  {% if field.errors %}
+    {% for error in field.errors %}
+      <div>
+        {{ error }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
