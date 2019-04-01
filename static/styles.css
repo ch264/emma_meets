@@ -1,13 +1,14 @@
 /* Global Style */
-/* /////////// */
-/* body {
+/* /////////// *//
+
+body {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  font-family: 'Questrial', sans-serif;
+  /* font-family: 'Questrial', sans-serif; */
   min-height: 100vh;
-  background-color: #F6F6F6;
-} */
-
+  /* background-color: #F6F6F6; */
+}
 
 /* Footer */
 /* ///// */
@@ -27,9 +28,20 @@ a.navbar-item {
   text-transform: uppercase;
 }
 
-.hero-body {
-  /* background-image: url('landing_hero.jpg') */
+.landing {
+  background-image: url(landing_hero.jpg);
+  background-position: center;
+  background-repeat:  no-repeat;
+  /* background-attachment: fixed; */
+  background-size:  cover;
+  /* background-color: #999; */
+  min-height: 100vh;
+  padding-left: 5em;
+  padding-top: 5em;
+} 
 
+.hero-body {
+  background-color: #F7FBFE;
 }
 
 .signupForm {
@@ -66,4 +78,20 @@ a.navbar-item {
   padding-top: 100px;
 }
 
+
+.four {
+  background-image: url(404.jpg);
+  background-position: center;
+  background-repeat:  no-repeat;
+  /* background-attachment: fixed; */
+  background-size:  cover;
+  /* background-color: #999; */
+  min-height: 100vh;
+  padding-left: 5em;
+  padding-top: 5em;
+} 
+
+p.four {
+  /* margin-top: 100px; */
+}
 /* <img src="{{ url_for('static', filename='products.jpg') }}"> */

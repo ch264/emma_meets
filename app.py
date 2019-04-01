@@ -5,7 +5,7 @@ from flask import Flask, g, request, render_template, flash, redirect, url_for, 
 # User login
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from flask_bcrypt import check_password_hash
-import models, forms, routes
+import models, forms
 # Image uploader
 # from flask_uploads import UploadSet, configure_uploads, IMAGES
 
@@ -148,6 +148,19 @@ def after_request(response):
 
 
 
+# ====================================================================
+# =========================  Error handlers  =========================
+# ====================================================================
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('500.html'), 500
+
 
 # ====================================================================
 # =========================  Initial Routes  =========================
@@ -157,9 +170,9 @@ def after_request(response):
 def index():
 	return render_template('landing.html')
 
-# @app.route('/about')
-# def about():
-# 	return render_template('about.html')
+@app.route('/about')
+def about():
+	return render_template('about.html')
 
 
 # ====================================================================

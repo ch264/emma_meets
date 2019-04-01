@@ -10,9 +10,9 @@ from peewee import *
 # db = PostgresqlExtDatabase('app', user='christinahastenrath', register_hstore=True)
 
 
-# DATABASE = PostgresqlDatabase('emma')
-# DATABASE = SqliteDatabase('emma.db')
-DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
+
+DATABASE = SqliteDatabase('emma.db')
+# DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
 
 # initialise a database
 # db = PostgresqlDatabase(
@@ -20,15 +20,7 @@ DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secr
 #     user='postgres',  # Will be passed directly to psycopg2.
 #     password='secret',  # Ditto.
 #     host='db.mysite.com')  # Ditto.
-
-# app.config['SQLALCHEMY_DATABASE_URI']='postgresql://localhost/appdb'
-# psql postgres://USERNAME:PASSWORD@babar.elephantsql.com:5432/jszlmeae
-# psql (9.3.4, server 9.2.8)
-# SSL connection (cipher: DHE-RSA-AES256-SHA, bits: 256)
-# Type "help" for help.
-
-# or pg_db = PostgresqlDatabase('my_app', user='postgres', password='secret',
-#                            host='10.1.0.9', port=5432)
+# or pg_db = PostgresqlDatabase('my_app', user='postgres', password='secret', host='10.1.0.9', port=5432)
 
 
 

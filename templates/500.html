@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="container">
+		<div class="column">
+			<h1>whooops... An unexpected error has occurred</h1>
+			<h2>(This is a 500 internal server error page)</h2>
+			<p>The administrator has been notified. Sorry for the inconvenience!</p>
+			<img src="{{ url_for('static', filename='500.jpg')}}">
+			<p><a href="{{ url_for('index') }}">Take me to the Homepage</a></p>
+		</div>
+	</div>
+  
+{% endblock %}
