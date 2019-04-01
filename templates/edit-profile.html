@@ -37,12 +37,12 @@
 					</div>
 					
 					<!-- gender field -->
-					<div class="form-input">
-						{{ field_error(form.gender) }}
+          <div class="form-input">
+            {{ field_error(form.gender) }}
 
-						{{ form.gender.label(class="label") }}
-						{{ form.gender(class="control") }}
-					</div>
+            {{ form.gender.label(class="label") }}
+            {{ form.gender(class="control", value=user.gender) }}
+          </div>
 
 				
           <!-- location field -->
@@ -86,7 +86,7 @@
       </div>  <!-- end of .column div-->
 
       <div class="column">
-        <img src="{{ url_for('static', filename='foodmeal.jpeg') }}">
+        <img src="{{ url_for('static', filename='edit-profile.jpeg') }}">
       </div>
     </div>  <!-- end of .columns div -->
   </div>

@@ -6,32 +6,43 @@
 			<!-- User photo -->
 			<div class="column">
 				<div class="image is-pulled-right">
-					<img class="image is-rounded is-128x128" src="#" alt="">
+					<img class="image is-rounded" src="#" alt="">
+					<p><span class="about_me"><small>About me: {{ user.about_me }} </small></span></p>
 				</div>
 			</div>
 
 			<!-- User info -->
 			<div class="column">
-				<p><span class="title has-text-danger is-bold">{{ user.username }}</span></p> 
-				<a href="" class="button is-dark">Woof</a>
-				<a href="" class="button is-dark">Follow</a>
+				<p><span class="title has-text-danger is-bold">{{ user.username }}</span></p>
+				<div class="columns">
+					<div class="column">
+						<a href="" class="button is-dark">Add a Review</a>
+						<a href="" class="button is-dark">Add a Product</a> 
+					</div>
+					<div class="column">
+						<a href="" class="button is-dark">Woof</a>
+						<a href="" class="button is-dark">Follow</a>
+					</div>
+				</div>
+			
+		
 			
 				<div class="columns">
 					<div class="column">
-						<p><span class="location"><small>I live in location </small></span></p>
-						<p><span class="age"><small>I live in age</small></span></p>
-						<p><span class="age"><small>I live in gender</small></span></p>
+						<p><span class="location"><small>I live in: {{ user.location }} </small></span></p>
+						<p><span class="age"><small>I am: age</small></span></p>
+						<p><span class="gender"><small>gender: {{ user.gender}}</small><nder/span></p>
 					</div>
 					<div class="column">
-						<p><span class="age"><small>I live in fav_snack</small></span></p>
-						<p><span class="age"><small>I live in breed</small></span></p>
-						<p><span class="age"><small>I live in fav_toy</small></span></p>
+						<p><span class="fav_snack"><small>fav_snack: {{ user.fav_snack }}</small></span></p>
+						<p><span class="breed"><small>breed: {{ user.breed }}</small></span></p>
+						<p><span class="fav_toy"><small>fav_toy: {{ user.fav_toy }}</small></span></p>
 					</div>
 				</div>
 			</div>
 				<!-- If logged in user is on their profile, show Edit Profile button -->
 				
-					<a href="" class="button is-dark">Edit profile</a>
+					<a href="{{ url_for('edit_profile', username=current_user.username)}}" class="button is-light">Edit Profile</a>
 				
 
 				<!-- Show any flash messages to user from logging in or signing up -->
@@ -52,8 +63,7 @@
 			<div class="column ">
 				<h4>Your Reviews</h4>
 			
-					<a href="" class="button is-dark">Add a Review</a>
-					<a href="" class="button is-dark">Add a Product</a>
+				
 			
 				<!-- is-multiline is a Bulma class to allow columns to wrap -->
 				<div class="columns is-multiline">

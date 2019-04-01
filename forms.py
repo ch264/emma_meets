@@ -111,15 +111,15 @@ class LoginForm(Form):
 
 # Creates an EditUserForm class
 class EditUserForm(Form):
-		username =  StringField('Username', validators=[name_exists])
+		# username =  StringField('Username', validators=[name_exists])
+		username =  StringField('Username')
 		email = StringField('Email')
-		location =  StringField('Location')
 		about_me = StringField('About Me', validators=[DataRequired()])
 		# age = StringField()('Age', validators=DataRequired())
-		gender = SelectField('Gender', choices=[('male' 'Male'), ('female', 'Female')])
+		gender = SelectField('Gender', choices=[('male', 'female')])
 		location = StringField('Location', validators=[DataRequired()])
 		fav_snack = StringField('Favorite Snack', validators=[DataRequired()])
-		fav_toy = StringField('Favorite Toy', validators=[DataRequired])
+		fav_toy = StringField('Favorite Toy', validators=[DataRequired()])
 		breed = StringField('Breed', validators=[DataRequired()])
 		# profile_image = FileField('Profile Image')
 

@@ -351,16 +351,17 @@ def edit_profile(username=None):
 
   if form.validate_on_submit():
     # Set user's info in database to new values entered in form
-    user.username=form.username.data,
-    user.email=form.email.data,
-    user.password=form.password.data,
-    user.about_me=form.about_me.data,
+    user.username = form.username.data
+    user.email = form.email.data
+    # user.password=form.password.data,
+    user.about_me = form.about_me.data
         # age = form.age.data,
-    user.gender = form.gender.data,
-    user.location = form.location.data,
-    user.fav_snack = form.fav_snack.data,
-    user.fav_toy = form.fav_toy.data,
+    user.gender = form.gender.data
+    user.location = form.location.data
+    user.fav_snack = form.fav_snack.data
+    user.fav_toy = form.fav_toy.data
     user.breed = form.breed.data
+    
     # Save changes to user in database
     user.save()
     flash('Your changes have been saved.', 'success')
