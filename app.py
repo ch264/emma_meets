@@ -5,7 +5,7 @@ from flask import Flask, g, request, render_template, flash, redirect, url_for, 
 # User login
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from flask_bcrypt import check_password_hash
-import models, forms
+import models, forms, routes
 # Image uploader
 # from flask_uploads import UploadSet, configure_uploads, IMAGES
 
@@ -157,10 +157,10 @@ def after_request(response):
 # =========================  Initial Routes  =========================
 # ====================================================================
 		
-@app.route('/')
-def index():
-	user = {'username': 'Miguel'}
-	return render_template('landing.html', user=user)
+# @app.route('/')
+# def index():
+# 	user = {'username': 'Miguel'}
+# 	return render_template('landing.html', user=user)
 
 @app.route('/about')
 def about():
@@ -254,28 +254,29 @@ def signup():
         # Sets variable url to change image url to match filename
         # url = images.url(filename)
         # Calls method 'create_user' as defined in models.py to create a user in database
-        models.User.create_user(
-            username=form.username.data,
-            email=form.email.data,
-            password=form.password.data,
-						about_me=form.about_me.data,
+			# print(form.username.data)
+      models.User.create_user(
+      	username=form.username.data,
+        email=form.email.data,
+        password=form.password.data,
+				about_me=form.about_me.data,
 						# age = form.age.data,
-						gender = form.gender.data,
-						location = form.location.data,
-						fav_snack = form.fav_snack.data,
-						fav_toy = form.fav_toy.data,
-						breed = form.breed.data
-						)
+				gender = form.gender.data,
+				location = form.location.data,
+				fav_snack = form.fav_snack.data,
+				fav_toy = form.fav_toy.data,
+				breed = form.breed.data
+				)
             # image_filename=filename,
             # image_url=url)
         
         # Gets newly created user from the database by matching username in the database to username entered in the form
-        user = models.User.get(models.User.username == form.username.data)
+      user = models.User.get(models.User.username == form.username.data)
         # Creates logged in session
-        login_user(user)
-        flash('Thank you for signing up', 'success')
+      login_user(user)
+      flash('Thank you for signing up', 'success')
         # Pass in current/logged in user as parameter to method 'profile' in order to redirect user to profile after signing up
-        return redirect(url_for('profile', username=user.username))
+      return redirect(url_for('profile', username=user.username))
 
     # Initial visit to this page renders the Sign Up template with the SignUpForm passed into it
     return render_template('signup.html', form=form)

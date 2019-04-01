@@ -46,6 +46,11 @@ a.navbar-item {
 }
 
 
+.profileTitle {
+  padding-top: 100px;
+}
+
+
 .productsHeader {
   padding-top: 100px;
   height: 100vh;

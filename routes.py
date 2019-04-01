@@ -1,9 +1,8 @@
 # from app import app
-from app.models import User, Review, Category, Product
-from app import app, db
+import models
 
 from flask import render_template, flash, redirect, url_for, Flask, g, request
-
+import app
 
 import os
 import forms
@@ -12,9 +11,9 @@ import forms
 def before_request():
         db.session.commit()
 
-@app.route('/')
-def index():
-	return 'Hello World! this is emma meets'
+# @app.route('/')
+# def index():
+# 	return 'Hello World! this is emma meets'
 
 
 
@@ -39,9 +38,9 @@ def after_request(response):
 def index():
 	return render_template('landing.html')
 
-@app.route('/about')
-def about():
-	return render_template('about.html')
+# @app.route('/about')
+# def about():
+# 	return render_template('about.html')
 
 # ====================================================================
 # ========================  User Auth Routes  ========================
