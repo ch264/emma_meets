@@ -45,9 +45,9 @@
 							<a href="{{ url_for('signup') }}" class="navbar-item nav-links" title="register">SIGN UP</a>
 				
 						<!-- If user is logged in, show other pages -->
-							<a href="{{ url_for('profile') }}" class="navbar-item nav-links">PROFILE</a>
+							<a href="{{ url_for('profile', username=current_user.username) }}" class="navbar-item nav-links">PROFILE</a>
 
-							<a href="" class="navbar-item nav-links">LOGOUT</a>
+							<a href="{{ url_for('logout') }}" class="navbar-item nav-links">LOGOUT</a>
 						
 					</div>  <!-- end of .navbar-end div -->
 				</div>  <!-- end of .navbar-menu div -->

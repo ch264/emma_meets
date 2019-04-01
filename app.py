@@ -5,7 +5,7 @@ from flask import Flask, g, request, render_template, flash, redirect, url_for, 
 # User login
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from flask_bcrypt import check_password_hash
-import models, forms, routes
+import models, forms
 # Image uploader
 # from flask_uploads import UploadSet, configure_uploads, IMAGES
 
@@ -66,16 +66,16 @@ login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(userid):
-    try: 
-        return models.User.get(models.User.id == userid)
-    except models.DoesNotExist:
-        return None
+  try: 
+    return models.User.get(models.User.id == userid)
+  except models.DoesNotExist:
+    return None
 
 
 
 
 
-
+# copies to routes
 # Connects to database and gets current user who is logged in
 @app.before_request
 def before_request():
@@ -156,11 +156,10 @@ def after_request(response):
 # ====================================================================
 # =========================  Initial Routes  =========================
 # ====================================================================
-		
-# @app.route('/')
-# def index():
-# 	user = {'username': 'Miguel'}
-# 	return render_template('landing.html', user=user)
+		# copied to routes
+@app.route('/')
+def index():
+	return render_template('landing.html')
 
 @app.route('/about')
 def about():
@@ -286,30 +285,28 @@ def signup():
 # Route and method to login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # Access LoginForm from forms.py
-    form = forms.LoginForm()
+  # Access LoginForm from forms.py
+  form = forms.LoginForm()
+  if form.validate_on_submit():
+    try:
+      # Find user using email address
+      user = models.User.get(models.User.email == form.email.data)
+    except models.DoesNotExist:
+      flash("Email or password not found.  Please sign up!", "error")
+    else:
+      # Check hashed password in database against user's typed password
+      if check_password_hash(user.password, form.password.data):
+        # Creates logged in session
+        login_user(user)
+        flash("You successfully logged in", "success")
 
-    if form.validate_on_submit():
-        try:
-            # Find user using email address
-            user = models.User.get(models.User.email == form.email.data)
-        except models.DoesNotExist:
-            flash("Email or password not found.  Please sign up!", "error")
-        else:
-            # Check hashed password in database against user's typed password
-            if check_password_hash(user.password, form.password.data):
-                # Creates logged in session
-                login_user(user)
-                flash("You successfully logged in", "success")
-
-                # Upon successful login, redirect to user's profile page with user passed in as a parameter to the method 'profile'
-                return redirect(url_for('profile', username=user.username))
-            else:
-                # If passwords don't match, flash error message
-                flash("Your email or password doesn't match", "error")
-    
-    # Initial visit to this page renders the login template with the LoginForm passed into it
-    return render_template('login.html', form=form)
+        # Upon successful login, redirect to user's profile page with user passed in as a parameter to the method 'profile'
+        return redirect(url_for('profile', username=user.username))
+      else:
+        # If passwords don't match, flash error message
+        flash("Your email or password doesn't match", "error")
+  # Initial visit to this page renders the login template with the LoginForm passed into it
+  return render_template('login.html', form=form)
 
 # Route and method to logout
 @app.route('/logout')
@@ -325,15 +322,79 @@ def logout():
 # =========================  Profile Routes  =========================
 # ====================================================================
 # Route and method to go to a user's profile
-@app.route('/profile')
-def profile():
-	return render_template('profile.html')
+@app.route('/profile/<username>', methods=['GET'])
+@login_required
+def profile(username=None):
+  if username != None:
+    # Finds user in database by username passed into URL
+    user = models.User.select().where(models.User.username==username).get()
+    # Finds all reviews in database where the user id stored with a reciew matches the found user aboves id
+    reviews = models.Review.select().where(models.Review.user == user.id).order_by(models.Review.timestamp)
+# finds all favorited products
+
+    return render_template('profile.html', user=user, reviews=reviews)
+
+  return redirect(url_for('index'))
+
+
+
+
+
+
+@app.route('/edit-profile/<username>', methods=['GET', 'POST'])
+@login_required
+def edit_profile(username=None):
+  # Finds user in database by logged in current user's id
+  user = models.User.get(g.user.id)
+  # Accesses EditUserForm from forms.py
+  form = forms.EditUserForm()
+
+  if form.validate_on_submit():
+    # Set user's info in database to new values entered in form
+    user.username=form.username.data,
+    user.email=form.email.data,
+    user.password=form.password.data,
+    user.about_me=form.about_me.data,
+        # age = form.age.data,
+    user.gender = form.gender.data,
+    user.location = form.location.data,
+    user.fav_snack = form.fav_snack.data,
+    user.fav_toy = form.fav_toy.data,
+    user.breed = form.breed.data
+    # Save changes to user in database
+    user.save()
+    flash('Your changes have been saved.', 'success')
+    # Redirect to user's profile to reflect changes
+    return redirect(url_for('profile', username=user.username))
+  # set the breed field in the edit profile form to show the users breed
+  form.breed.default = user.breed
+  # processes the form with the category populated
+  form.process()
+  # Upon initial visit to route, serves up edit profile form
+  return render_template('edit-profile.html', form=form, user=user)
+
+
+
+
+
+# ====================================================================
+# =========================  Product Routes  =========================
+# ====================================================================
+
+
+
+
+
+
+
 
 
 @app.route('/products')
 def products():
 	return render_template('products.html')
 
+
+# copied to routes
 
 if __name__ == '__main__':
 	models.initialize()

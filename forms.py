@@ -2,7 +2,9 @@ from flask_wtf import FlaskForm as Form
 from wtforms import StringField, PasswordField, TextAreaField, SelectField, BooleanField, SubmitField, IntegerField, FileField
 from wtforms.validators import DataRequired, Regexp, ValidationError, Length, EqualTo, Email
 
+# Imports for file/photo uploader
 # from flask_wtf.file import FileField, FileRequired, FileAllowed
+
 # Imports User model
 from models import User
 
@@ -112,14 +114,14 @@ class EditUserForm(Form):
 		username =  StringField('Username', validators=[name_exists])
 		email = StringField('Email')
 		location =  StringField('Location')
-		about_me = StringField('About Me', validators=DataRequired())
+		about_me = StringField('About Me', validators=[DataRequired()])
 		# age = StringField()('Age', validators=DataRequired())
-		gender = SelectField('Gender', choices=[('male', 'female')])
+		gender = SelectField('Gender', choices=[('male' 'Male'), ('female', 'Female')])
 		location = StringField('Location', validators=[DataRequired()])
 		fav_snack = StringField('Favorite Snack', validators=[DataRequired()])
 		fav_toy = StringField('Favorite Toy', validators=[DataRequired])
 		breed = StringField('Breed', validators=[DataRequired()])
-		profile_image = FileField('Profile Image')
+		# profile_image = FileField('Profile Image')
 
 # Creates an EditRecipeForm class
 class EditReviewForm(Form):
