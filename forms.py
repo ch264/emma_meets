@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm as Form
 from wtforms import StringField, PasswordField, TextAreaField, SelectField, BooleanField, SubmitField, IntegerField, FileField
 from wtforms.validators import DataRequired, Regexp, ValidationError, Length, EqualTo, Email
 
-
+# from flask_wtf.file import FileField, FileRequired, FileAllowed
 # Imports User model
 from models import User
 
@@ -12,9 +12,9 @@ def name_exists(form, field):
         raise ValidationError("User with this username already exists")
 
 # Defines function email_exists to check is user exists in database with same email
-# def email_exists(form, field):
-#     if User.select().where(User.email == field.data).exists():
-#         raise ValidationError("User with this email already exists")
+def email_exists(form, field):
+    if User.select().where(User.email == field.data).exists():
+        raise ValidationError("User with this email already exists")
 
 
 # Creates a SignUpForm inheriting from Form from flask_wtf
@@ -27,19 +27,19 @@ class SignUpForm(Form):
 				# Requires user to enter something
 				DataRequired(),
 				# Limits characters to alphanumeric
-				# Regexp(
-				# 	r'^[a-zA-Z0-9_]+$',
-				# 	message=("Username should be one word, letters, "
-				# 						"numbers, and underscores only.")),
-				# # Calls previously defined function
-				# name_exists
+				Regexp(
+					r'^[a-zA-Z0-9_]+$',
+					message=("Username should be one word, letters, "
+										"numbers, and underscores only.")),
+				# Calls previously defined function
+				name_exists
 			])
 		email = StringField(
 			'Email',
 			validators=[
 				DataRequired(),
 				Email(),
-				# email_exists
+				email_exists
 			])
 		password = PasswordField(
 			'Password',

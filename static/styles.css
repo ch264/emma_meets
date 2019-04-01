@@ -22,7 +22,43 @@
   margin: 0 auto;
 } */
 
-.hero-body {
-  background-image: url('landing_hero.jpg')
-  ')
+
+a.navbar-item {
+  text-transform: uppercase;
 }
+
+.hero-body {
+  /* background-image: url('landing_hero.jpg') */
+
+}
+
+.signupForm {
+  padding-top: 100px;
+}
+
+.loginForm {
+  padding-top: 10em;
+}
+.loginimg img {
+  height: 100%;
+  width: 100%;
+  padding-top: 10em;
+}
+
+
+.productsHeader {
+  padding-top: 100px;
+  height: 100vh;
+  width: 100%;
+}
+
+.productsHeader img {
+  height:100%;
+  width:100%;
+}
+
+.productsHeader h1 {
+  padding-top: 100px;
+}
+
+/* <img src="{{ url_for('static', filename='products.jpg') }}"> */

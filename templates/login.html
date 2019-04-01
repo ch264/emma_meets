@@ -3,30 +3,40 @@
 {% from "macros.html" import render_field %}
 
 {% block content %}
-	<h1>Sign in</h1>
-  <form method="POST" action="">
-    {{ form.hidden_tag() }}
-
-    <!-- Uses macro template to render form inputs with form being passed down in app.py -->
-    <!-- if condition hides CSRF token -->
-    {% for field in form if field.widget.input_type != 'hidden' %}
-      <!-- Passing in iterated field into render_field macro -->
-      {{ render_field(field) }}
-    {% endfor %}
-
-    <div class="has-text-centered">
-      <!-- Cancel button redirects to landing -->
-      <button type="submit" class="button is-dark">Log In</button><a href="{{ url_for('index') }}" class="button is-light">Cancel</a>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-third loginForm">
+          <h1>Sign in to discover more</h1>
+          <form method="POST" action="">
+            {{ form.hidden_tag() }}
+        
+            <!-- Uses macro template to render form inputs with form being passed down in app.py -->
+            <!-- if condition hides CSRF token -->
+            {% for field in form if field.widget.input_type != 'hidden' %}
+              <!-- Passing in iterated field into render_field macro -->
+              {{ render_field(field) }}
+            {% endfor %}
+        
+            <div class="has-text-centered">
+              <!-- Cancel button redirects to landing -->
+              <button type="submit" class="button is-dark">Log In</button><a href="{{ url_for('index') }}" class="button is-light">Cancel</a>
+            </div>
+          </form>
+        
+          <!-- Displays any errors/flash messages to user -->
+          {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="{{category}} has-text-centered">{{ message }}</div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+      </div>
+      <div class="column loginimg">
+        <img src="{{ url_for('static', filename='login.jpeg') }}">
+      </div>
     </div>
-  </form>
-
-  <!-- Displays any errors/flash messages to user -->
-  {% with messages = get_flashed_messages(with_categories=True) %}
-    {% if messages %}
-      {% for category, message in messages %}
-        <div class="{{category}} has-text-centered">{{ message }}</div>
-      {% endfor %}
-    {% endif %}
-  {% endwith %}
+  </div>
+	
 
 {% endblock %}

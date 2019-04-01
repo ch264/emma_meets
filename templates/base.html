@@ -37,15 +37,15 @@
 					<div class="navbar-end">
 						
 							<a href="{{ url_for('about') }}" class="navbar-item nav-links">ABOUT</a>
-							<a href="{{ url_for('contact_us') }}" class="navbar-item nav-links">Contact us</a>
-							<a href="{{ url_for('products) }}" class="navbar-item nav-links">Products</a>
+							<a href="" class="navbar-item nav-links">Contact us</a>
+							<a href="{{ url_for('products') }}" class="navbar-item nav-links">Products</a>
 							<!-- If user is not logged in, show Login/Signup button -->
-							<a href="" class="navbar-item nav-links" title="login">LOGIN</a>
+							<a href="{{ url_for('login') }}" class="navbar-item nav-links" title="login">LOGIN</a>
 
-							<a href="" class="navbar-item nav-links" title="register">SIGN UP</a>
+							<a href="{{ url_for('signup') }}" class="navbar-item nav-links" title="register">SIGN UP</a>
 				
 						<!-- If user is logged in, show other pages -->
-							<a href="{{}}" class="navbar-item nav-links">PROFILE</a>
+							<a href="{{ url_for('profile') }}" class="navbar-item nav-links">PROFILE</a>
 
 							<a href="" class="navbar-item nav-links">LOGOUT</a>
 						
@@ -72,7 +72,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
 		<!-- Our JS file -->
-		<script src="{{ url_for('static', filename='app.js') }}"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
 	</body>
 
 </html>

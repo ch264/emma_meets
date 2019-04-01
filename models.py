@@ -1,10 +1,13 @@
 import os, datetime
+
+from flask_login import UserMixin
+from flask_bcrypt import generate_password_hash
 # from app import db, app
 from peewee import *
 
 # Peewee provides advanced support for SQLite and Postgres via database-specific extension modules.
-from playhouse.postgres_ext import PostgresqlExtDatabase
-db = PostgresqlExtDatabase('app', user='christinahastenrath', register_hstore=True)
+# from playhouse.postgres_ext import PostgresqlExtDatabase
+# db = PostgresqlExtDatabase('app', user='christinahastenrath', register_hstore=True)
 
 
 # DATABASE = PostgresqlDatabase('emma', user='christinahastenrath')
@@ -27,12 +30,12 @@ DATABASE = SqliteDatabase('emma.db')
 # or pg_db = PostgresqlDatabase('my_app', user='postgres', password='secret',
 #                            host='10.1.0.9', port=5432)
 
-class User(Model):
+class User(UserMixin, Model):
 	username = CharField(unique=True)
 	email = CharField(unique=True)
 	password = CharField(max_length=100)
 	about_me = TextField()
-	age = IntegerField()
+	# age = IntegerField()
 	gender = CharField()
 	location = TextField()
 	fav_snack = CharField(255)
@@ -46,22 +49,23 @@ class User(Model):
 		db_table = 'user'
 
 	@classmethod
-	def create_user(cls, username, about_me, age, gender, location, fav_snack, fav_toy, breed, image_filename, image_url):
+	def create_user(cls, username, email, password, about_me, gender, location, fav_snack, fav_toy, breed):
 		try:
 			cls.create(
 				username = username,
+				email = email,
+				password = generate_password_hash(password),
 				about_me = about_me,
 				# age = age,
 				gender = gender,
 				location = location,
 				fav_snack = fav_snack,
 				fav_toy = fav_toy,
-				breed = breed,
+				breed = breed)
 				# image_filename = image_filename,
 				# image_url = image_url
-			)
 		except IntegrityError:
-			raise ValueError('create error')
+			raise ValueError('create user error')
 
 class Category(Model):
 	name = CharField()
@@ -138,7 +142,7 @@ class Review(Model):
 
 
 
-
+# Defines initialize function to connect to database, create empty tables, and close connection
 def initialize():
 	DATABASE.connect()
 	DATABASE.create_tables([User, Product, Review, Category], safe=True)

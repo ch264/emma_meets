@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="container">
+		<div class="column is-full productsHeader">
+			<h1>Product overview</h1>
+			<h2>find the product review you were looking for</h2>
+			<figure>
+			<img src="{{ url_for('static', filename='products.jpg') }}">
+		</figure>
+		</div>
+	</div>
+
+	<div class="containger">
+		<div class="column is-full is-multiline">
+			<div class="productLine">
+				<hr><p> Dog Hotels</p><button>Discover more</button><hr>
+				<p> Dog Insurance</p><hr>
+				<p> Dog magazines</p><hr>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

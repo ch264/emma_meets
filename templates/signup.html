@@ -4,7 +4,12 @@
 
 {% block content %}
 
-  <form method="POST" action="{{ url_for('register') }}" class="field" enctype="multipart/form-data">
+<div class="container">
+  <div class="columns">
+    <div class="column is-half signupForm">
+      
+  <form method="POST" action="{{ url_for('signup') }}" class="field" enctype="multipart/form-data">
+    
     {{ form.hidden_tag() }}
     <!-- "form" was passed into template in app.py in add_recipe method -->
     <!-- if condition hides CSRF token field -->
@@ -20,4 +25,10 @@
     </div>
   </form>
 
+</div>
+<div clas="column is half">
+  <img src="{{ url_for('static', filename='signup.jpeg') }}">
+</div>
+</div>
+</div>
 {% endblock %}
