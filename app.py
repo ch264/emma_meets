@@ -5,7 +5,7 @@ from flask import Flask, g, request, render_template, flash, redirect, url_for, 
 # User login
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from flask_bcrypt import check_password_hash
-import models, forms
+import models, forms, routes
 # Image uploader
 # from flask_uploads import UploadSet, configure_uploads, IMAGES
 
@@ -72,9 +72,6 @@ def load_user(userid):
     return None
 
 
-
-
-
 # copies to routes
 # Connects to database and gets current user who is logged in
 @app.before_request
@@ -88,7 +85,6 @@ def before_request():
 def after_request(response):
   g.db.close()
   return response
-
 
 
 
@@ -161,9 +157,9 @@ def after_request(response):
 def index():
 	return render_template('landing.html')
 
-@app.route('/about')
-def about():
-	return render_template('about.html')
+# @app.route('/about')
+# def about():
+# 	return render_template('about.html')
 
 
 # ====================================================================
@@ -389,6 +385,10 @@ def edit_profile(username=None):
 
 
 
+PORT = 5000
+DEBUG = True
+
+
 
 @app.route('/products')
 def products():
@@ -399,17 +399,15 @@ def products():
 
 if __name__ == '__main__':
 	models.initialize()
+
+app.run(port=PORT, debug=DEBUG)
 	# try:
 	# 	models.Category.create_category(
 	# 		name='name')
 	# 		except ValueError:
 	# 			pass
 
-
-PORT = 5000
-DEBUG = True
-
-# app.config['DEBUG'] = True
-app.run(port=PORT, debug=DEBUG)
+  # app.config['DEBUG'] = True
+  
 
 

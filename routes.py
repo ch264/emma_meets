@@ -10,33 +10,20 @@ from flask_login import LoginManager, login_user, logout_user, current_user, log
 from flask_bcrypt import check_password_hash
 
 
-# # Connects to database and gets current user who is logged in
-# @app.before_request
-# def before_request():
-#   g.db = models.DATABASE
-#   g.db.connect()
-#   g.user = current_user
+# Connects to database and gets current user who is logged in
+@app.before_request
+def before_request():
+  g.db = models.DATABASE
+  g.db.connect()
+  g.user = current_user
 
-# # Closes connection to database after request finishes
-# @app.after_request
-# def after_request(response):
-#   g.db.close()
-#   return response
+# Closes connection to database after request finishes
+@app.after_request
+def after_request(response):
+  g.db.close()
+  return response
 
 
-
-# # Connects to database and gets current user who is logged in
-# @app.before_request
-# def before_request():
-#   g.db = models.DATABASE
-#   g.db.connect()
-#   g.user = current_user
-
-# # Closes connection to database after request finishes
-# @app.after_request
-# def after_request(response):
-#   g.db.close()
-#   return response
 
 # ====================================================================
 # =========================  Initial Routes  =========================
@@ -46,17 +33,13 @@ from flask_bcrypt import check_password_hash
 # @app.route('/', methods=['GET'])
 # def index():
 # 	return render_template('landing.html')
-# # @app.route('/')
-# def index():
-# 	return render_template('landing.html')
 
-# @app.route('/about')
-# def about():
-# 	return render_template('about.html')
 
-# @app.route('/about')
-# def about():
-# 	return render_template('about.html')
+@app.route('/about')
+def about():
+	return render_template('about.html')
+
+
 
 # ====================================================================
 # ========================  User Auth Routes  ========================

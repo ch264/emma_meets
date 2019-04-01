@@ -10,9 +10,9 @@ from peewee import *
 # db = PostgresqlExtDatabase('app', user='christinahastenrath', register_hstore=True)
 
 
-# DATABASE = PostgresqlDatabase('emma', user='christinahastenrath')
-DATABASE = SqliteDatabase('emma.db')
-
+# DATABASE = PostgresqlDatabase('emma')
+# DATABASE = SqliteDatabase('emma.db')
+DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
 
 # initialise a database
 # db = PostgresqlDatabase(
@@ -29,6 +29,8 @@ DATABASE = SqliteDatabase('emma.db')
 
 # or pg_db = PostgresqlDatabase('my_app', user='postgres', password='secret',
 #                            host='10.1.0.9', port=5432)
+
+
 
 class User(UserMixin, Model):
 	username = CharField(unique=True)
