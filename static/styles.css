@@ -78,6 +78,10 @@ a.navbar-item {
   padding-top: 100px;
 }
 
+h1.product {
+  background-color: blue;
+}
+
 
 .four {
   background-image: url(404.jpg);

@@ -415,24 +415,23 @@ def product(product_id=None):
 def add_product():
   # Access the ProductForm from forms.py
   form = forms.ProductForm()
+  # choices accepts an array of tuples which is immtable.
   categories = models.Product.get_categories()
   if len(categories) > 0:
     choices = []
     for category in categories:
+      # turn tuple into list temp
       temp = []
       for k,v in category.items():
         if(k=='id'):
+          # append key value into list
           temp.append(str(v))
         else:
           temp.append(v)
+      # turn list back into tuple and append back into the array choicese
       choices.append(tuple(temp))
     form.category.choices = choices
-  # categories = models.Category.select().dicts().get()
-  # get_dictionary_from_model(categories)
-  # for dct in imap(get_dictionary_from_model,models.Category.select()):
-  #   print(dct)
-  # print(categories)
-  # 
+
   # Set variable user to current logged in user
   user = g.user._get_current_object()
   

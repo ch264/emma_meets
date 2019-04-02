@@ -83,23 +83,7 @@ class Category(Model):
 		except IntegrityError:
 			raise ValueError("create category error")
 		
-	# https://github.com/coleifer/peewee/issues/134
-	@classmethod
-	def get_categories(cls):
-		query = Category.select()
-		cursor = DATABASE.execute(query)
-		
-		ncols = len(cursor.description)
-		colnames = [cursor.description[i][0] for i in range(ncols)]
-		results = []
 
-		for row in cursor.fetchall():
-			res = {}
-			for i in range(ncols):
-				res[colnames[i]] = row[i]
-			results.append(res)
-		
-		return results
 
 
 class Product(Model):
@@ -127,7 +111,23 @@ class Product(Model):
 		except IntegrityError:
 			raise
 
+	# get all categories and put them into a dictionary object. Convert Peewee select objcet to dictionary object. https://github.com/coleifer/peewee/issues/134
+	@classmethod
+	def get_categories(cls):
+		query = Category.select()
+		cursor = DATABASE.execute(query)
+		
+		ncols = len(cursor.description)
+		colnames = [cursor.description[i][0] for i in range(ncols)]
+		results = []
 
+		for row in cursor.fetchall():
+			res = {}
+			for i in range(ncols):
+				res[colnames[i]] = row[i]
+			results.append(res)
+		
+		return results
 
 
 class Review(Model):
