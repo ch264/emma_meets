@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+<!-- Imports macro template for form rendering -->
+{% from "macros.html" import render_field %}
+
+{% block content %}
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <img src="{{ url_for('static', filename='new-product.jpg') }}">
+      </div>
+      
+      <div class="column">
+        <h2 class="subtitle is-2">Add Product</h2>
+        <!-- form tag to enclose the form fields and upon submit, sends whole form as request -->
+        <form method="POST" action="{{ url_for('add_product') }}" class="field" enctype="multipart/form-data">
+          {{ form.hidden_tag() }}
+          
+          <!-- "form" was passed into template in app.py in add_recipe method -->
+          <!-- if condition hides CSRF token field -->
+          {% for field in form if field.widget.input_type != 'hidden' %}
+            <!-- Pass in iterated "field" value from form into macro render_field -->
+            {{ render_field(field) }}
+          {% endfor %}
+
+          <div class="has-text-centered">
+            <!-- Anchor tag makes use of user object passed in from app.py -->
+						<button type="submit" class="button is-danger">Save Product</button>
+						<a href="{{ url_for('profile', username=user.username) }}" class="button is-light">Cancel</a>
+          </div>
+        </form>
+      </div>  <!-- end of .column div-->
+    </div>  <!-- end of .columns div-->
+  </div>
+{% endblock %}

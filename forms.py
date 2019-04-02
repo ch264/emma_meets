@@ -124,15 +124,45 @@ class EditUserForm(Form):
 		# profile_image = FileField('Profile Image')
 
 # Creates an EditRecipeForm class
-class EditReviewForm(Form):
-    # Provides same category options as create review form
-		title = StringField('Title')
-		content = TextAreaField('Content')
-		rating = SelectField(
-			'Rating', 
-			choices=[('5', '5'),('4','4'), ('3','3'), ('2','2'), ('1','1')
-			])
-    
+
+class CategoryForm(Form):
+	name = StringField(
+		'Name',
+		validators=[
+			DataRequired()
+		])
+
+# Create a new Product Form
+class ProductForm(Form):
+	name = StringField(
+        'Name',
+        validators=[
+            DataRequired()
+        ])
+	location = StringField(
+        'Location',
+        validators=[
+            DataRequired()
+        ])
+	website = StringField(
+        'Website',
+        validators=[
+            DataRequired()
+        ])
+	# [] can we make a selectfield for existing category?
+	category = StringField(
+		'Category'
+	)
+	# product_image = FileField('Profile Image')
+	# category = SelectField('Product', choices=[('dog hotel', 'Dog Hotel'), ('pet insurance', 'Pet Insurance'), ('dog magazines', 'Dog Magazines'), ('dog fashion', 'Dog Fashion'), ('vets','Vets'), ('dog beaches','Dog Beaches'), ('other', 'Other')], validators=[DataRequired()])
+
+
+	class EditProductForm(Form):
+		name = StringField('name')
+		location = StringField('Location')
+		website = StringField('Website')
+		product_image = FileField('Profile Image')
+		product = SelectField('Product', choices=[('dog hotel', 'Dog Hotel'), ('pet insurance', 'Pet Insurance'), ('dog magazines', 'Dog Magazines'), ('dog fashion', 'Dog Fashion'), ('vets','Vets'), ('dog beaches','Dog Beaches'), ('other', 'Other')], validators=[DataRequired()])
 
 # Creates a new ReviewForm
 class ReviewForm(Form): 
@@ -151,30 +181,12 @@ class ReviewForm(Form):
 			])
   #  do we need ain image placeholder for the image of who is leaving the rview?
 
-# Create a new Product Form
-class ProductForm(Form):
-	name = StringField(
-        'name',
-        validators=[
-            DataRequired()
-        ])
-	location = StringField(
-        'Location',
-        validators=[
-            DataRequired()
-        ])
-	website = StringField(
-        'Website',
-        validators=[
-            DataRequired()
-        ])
-	product_image = FileField('Profile Image')
-	product = SelectField('Product', choices=[('dog hotel', 'Dog Hotel'), ('pet insurance', 'Pet Insurance'), ('dog magazines', 'Dog Magazines'), ('dog fashion', 'Dog Fashion'), ('vets','Vets'), ('dog beaches','Dog Beaches'), ('other', 'Other')], validators=[DataRequired()])
-
-
-	class EditProductForm(Form):
-		name = StringField('name')
-		location = StringField('Location')
-		website = StringField('Website')
-		product_image = FileField('Profile Image')
-		product = SelectField('Product', choices=[('dog hotel', 'Dog Hotel'), ('pet insurance', 'Pet Insurance'), ('dog magazines', 'Dog Magazines'), ('dog fashion', 'Dog Fashion'), ('vets','Vets'), ('dog beaches','Dog Beaches'), ('other', 'Other')], validators=[DataRequired()])
+class EditReviewForm(Form):
+    # Provides same category options as create review form
+		title = StringField('Title')
+		content = TextAreaField('Content')
+		rating = SelectField(
+			'Rating', 
+			choices=[('5', '5'),('4','4'), ('3','3'), ('2','2'), ('1','1')
+			])
+ 

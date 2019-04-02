@@ -391,8 +391,60 @@ def edit_profile(username=None):
 # =========================  Product Routes  =========================
 # ====================================================================
 
+@app.route('/product', methods=['GET'])
+@app.route('/product/<product_id>', methods=['GET'])
+# @login_required
+def product(product_id=None):
+  # if product_id is provided as a paramter
+  if product_id != None:
+    # find single product in database using that id number
+    product = models.Product.select().where(Product.id == product_id).get()
+    # pass the found product to the individual product template
+    return render_template('product.html', product=product)
+  # if no product_is is provided as a parameter, select all product form the product table, limit 15 results
+  products = models.Product.select().limit(20)
+  # pass those products to the products template
+  return render_template('products.html', products=products)
 
+@app.route('/create-product', methods=['GET', 'POST'])
+# @login_required
+def add_product():
+  # Access the ProductForm from forms.py
+  form = forms.ProductForm()
+  # Set variable user to current logged in user
+  user = g.user._get_current_object()
 
+  if request.method == 'POST':
+    # Call method create_product defined in models.py for the Product model
+    models.Product.create_product(
+      name = form.name.data,
+      location = form.location.data,
+      website = form.website.data,
+      category = form.category.data)
+      # image_filename = filename,
+      # image_url = url
+    
+    # Find new created product in database
+    product = models.Product.get(models.Product == form.name.data)
+    flash('Product Created', 'Success')
+    # Redirect user to individual product page with found products id passed as parameter
+    return redirect(url_for('product', product_id=product.id))
+  # Render the create-product template with the ProductForm
+  # Pass in the current_user in order to redirect user back to their profile if they choose to cancel create a product
+  return render_template('create-product.html', form=form, user=user)
+
+@app.route('/create-category', methods=['GET', 'POST'])
+def add_category():
+  form = forms.CategoryForm()
+  user =g.user._get_current_object()
+  if request.method == 'POST':
+    models.Category.create_category(
+      name = form.name.data
+    )
+    category = models.Category.get(models.Category == form.name.data)
+    flash('Category created', 'Success')
+    return redirect(url_for('product', product_id=product.id))
+  return render_template('create-product.html', form=form, user=user)
 
 
 

@@ -9,7 +9,8 @@ from peewee import *
 # from playhouse.postgres_ext import PostgresqlExtDatabase
 # db = PostgresqlExtDatabase('app', user='christinahastenrath', register_hstore=True)
 
-
+# for Gravatar
+from hashlib import md5
 
 DATABASE = SqliteDatabase('emma.db')
 # DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
@@ -60,6 +61,11 @@ class User(UserMixin, Model):
 				# image_url = image_url
 		except IntegrityError:
 			raise ValueError('create user error')
+	
+	def avatar(self, size):
+		digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+		return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
+	
 
 class Category(Model):
 	name = CharField()
@@ -82,8 +88,8 @@ class Product(Model):
 	name = CharField()
 	location = TextField()
 	website = CharField()
-	image_url = CharField()
-	image_filename = CharField()
+	# image_url = CharField()
+	# image_filename = CharField()
 	category = ForeignKeyField(model=Category, backref='product_category')
 
 	class Meta:
@@ -91,14 +97,14 @@ class Product(Model):
 					db_table = 'product'
 
 	@classmethod
-	def create_product(cls, name, location, website, image_url, image_filename, category):
+	def create_product(cls, name, location, website, category):
 		try:
 			cls.create(
 				name = name,
 				location = location,
 				website = website,
-				image_url = image_url,
-				image_filename = image_filename,
+				# image_url = image_url,
+				# image_filename = image_filename,
 				category = category)
 		except IntegrityError:
 			raise ValueError('create product error')
