@@ -154,7 +154,7 @@ class ProductForm(Form):
 
 	# product_image = FileField('Profile Image')
 	category = SelectField('Product', choices=[], validators=[DataRequired()])
-	submit = SubmitField('Submit')
+	# submit = SubmitField('Submit')
 
 
 	class EditProductForm(Form):

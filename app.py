@@ -8,55 +8,10 @@ from flask_bcrypt import check_password_hash
 import models, forms
 
 
-# from itertools import imap
-# from flask_peewee.utils import get_dictionary_from_model
-# Image uploader
-# from flask_uploads import UploadSet, configure_uploads, IMAGES
-
-# Google Oauth
-# from flask_oauth import OAuth
-
-# import functools
-# import flask
-# from authlib.client import OAuth2Session
-# import google.oauth2.credentials
-# import googleapiclient.discovery
-
-# ACCESS_TOKEN_URI = 'https://www.googleapis.com/oauth2/v4/token'
-# AUTHORIZATION_URL = 'https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=consent'
-
-# AUTHORIZATION_SCOPE ='openid email profile'
-
-# AUTH_REDIRECT_URI = os.environ.get("FN_AUTH_REDIRECT_URI", default=False)
-# BASE_URI = os.environ.get("FN_BASE_URI", default=False)
-# CLIENT_ID = os.environ.get("FN_CLIENT_ID", default=False)
-# CLIENT_SECRET = os.environ.get("FN_CLIENT_SECRET", default=False)
-
-# AUTH_TOKEN_KEY = 'auth_token'
-# AUTH_STATE_KEY = 'auth_state'
-# USER_INFO_KEY = 'user_info'
-
-
-
-
-
-# You must configure these 3 values from Google APIs console
-# https://code.google.com/apis/console
-# GOOGLE_CLIENT_ID = '110906266153-gq3b4tr0daql4h79p4eh9nkegcff3831.apps.googleusercontent.com'
-# GOOGLE_CLIENT_SECRET = '4B7YUAggeupJC36DVbghtach'
-# REDIRECT_URI = '/authorized'  # one of the Redirect URIs from Google APIs console
-
-# SECRET_KEY = 'development key'
-# DEBUG = True
-
 
 
 app = Flask(__name__)
-# app.config.from_object(Config)
 app.secret_key = 'pafajeihguihawiorhgl'
-# app.secret_key = os.environ.get("FN_FLASK_SECRET_KEY", default=False)
-
-# oauth = OAuth()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -92,65 +47,6 @@ def after_request(response):
 
 
 
-# ====================================================================
-# =========================  Google Auth  =========================
-# ====================================================================
-# google = oauth.remote_app('google',
-#                           base_url='https://www.google.com/accounts/',
-#                           authorize_url='https://accounts.google.com/o/oauth2/auth',
-#                           request_token_url=None,
-#                           request_token_params={'scope': 'https://www.googleapis.com/auth/userinfo.email',
-#                                                 'response_type': 'code'},
-#                           access_token_url='https://accounts.google.com/o/oauth2/token',
-#                           access_token_method='POST',
-#                           access_token_params={'grant_type': 'authorization_code'},
-#                           consumer_key=GOOGLE_CLIENT_ID,
-#                           consumer_secret=GOOGLE_CLIENT_SECRET)
-
-# @app.route('/signup')
-# def index():
-#     access_token = session.get('access_token')
-#     if access_token is None:
-#         return redirect(url_for('login'))
-
-#     access_token = access_token[0]
-#     from urllib.request import Request, urlopen, URLError
-
-#     headers = {'Authorization': 'OAuth '+access_token}
-#     req = Request('https://www.googleapis.com/oauth2/v1/userinfo',
-#                   None, headers)
-#     try:
-#         res = urlopen(req)
-#     except URLError or e:
-#         if e.code == 401:
-#             # Unauthorized - bad token
-#             session.pop('access_token', None)
-#             return redirect(url_for('login'))
-#         return res.read()
-
-#     return res.read()
-
-
-# @app.route('/login')
-# def login():
-#     callback=url_for('authorized', _external=True)
-#     return google.authorize(callback=callback)
-
-
-
-# @app.route(REDIRECT_URI)
-# @google.authorized_handler
-# def authorized(resp):
-#     access_token = resp['access_token']
-#     session['access_token'] = access_token, ''
-#     return redirect(url_for('index'))
-
-
-# @google.tokengetter
-# def get_access_token():
-#     return session.get('access_token')
-
-
 
 # ====================================================================
 # =========================  Error handlers  =========================
@@ -180,80 +76,8 @@ def about():
 
 
 # ====================================================================
-# ========================  User Auth Routes  ========================
+# ========================= User Auth Routes  =========================
 # ====================================================================
-
-# @app.route('/')
-# def index():
-#     if is_logged_in():
-#         user_info = get_user_info()
-#         return 'You are currently logged in as ' + user_info['given_name']
-
-#     return 'You are not currently logged in'
-
-# def no_cache(view):
-#     @functools.wraps(view)
-#     def no_cache_impl(*args, **kwargs):
-#         response = flask.make_response(view(*args, **kwargs))
-#         response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
-#         response.headers['Pragma'] = 'no-cache'
-#         response.headers['Expires'] = '-1'
-#         return response
-
-#     return functools.update_wrapper(no_cache_impl, view)
-
-# @app.route('/google/login')
-# @no_cache
-# def login():
-#     session = OAuth2Session(CLIENT_ID, CLIENT_SECRET, scope=AUTHORIZATION_SCOPE, redirect_uri=AUTH_REDIRECT_URI)
-#     uri, state = session.authorization_url(AUTHORIZATION_URL)
-#     flask.session[AUTH_STATE_KEY] = state
-#     flask.session.permanent = True
-#     return flask.redirect(uri, code=302)
-
-
-# @app.route('/google/auth')
-# @no_cache
-# def google_auth_redirect():
-#     state = flask.request.args.get('state', default=None, type=None)
-    
-#     session = OAuth2Session(CLIENT_ID, CLIENT_SECRET, scope=AUTHORIZATION_SCOPE, state=state, redirect_uri=AUTH_REDIRECT_URI)
-#     oauth2_tokens = session.fetch_access_token(ACCESS_TOKEN_URI, authorization_response=flask.request.url)
-#     flask.session[AUTH_TOKEN_KEY] = oauth2_tokens
-
-#     return flask.redirect(BASE_URI, code=302)
-
-# @app.route('/google/logout')
-# @no_cache
-# def logout():
-#     flask.session.pop(AUTH_TOKEN_KEY, None)
-#     flask.session.pop(AUTH_STATE_KEY, None)
-#     flask.session.pop(USER_INFO_KEY, None)
-
-#     return flask.redirect(BASE_URI, code=302)
-
-# def is_logged_in():
-#     return True if AUTH_TOKEN_KEY in flask.session else False
-
-# def build_credentials():
-#     if not is_logged_in():
-#         raise Exception('User must be logged in')
-
-#     oauth2_tokens = flask.session[AUTH_TOKEN_KEY]
-#     return google.oauth2.credentials.Credentials(
-#         oauth2_tokens['access_token'],
-#         refresh_token=oauth2_tokens['refresh_token'],
-#         client_id=CLIENT_ID,
-#         client_secret=CLIENT_SECRET,
-#         token_uri=ACCESS_TOKEN_URI)
-
-# def get_user_info():
-#     credentials = build_credentials()
-#     oauth2_client = googleapiclient.discovery.build('oauth2', 'v2', credentials=credentials)
-#     return oauth2_client.userinfo().get().execute()
-
-
-# Flask sinup
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -292,8 +116,6 @@ def signup():
 
     # Initial visit to this page renders the Sign Up template with the SignUpForm passed into it
     return render_template('signup.html', form=form)
-
-
 
 # Route and method to login
 @app.route('/login', methods=['GET', 'POST'])
@@ -346,12 +168,7 @@ def profile(username=None):
 # finds all favorited products
 
     return render_template('profile.html', user=user, reviews=reviews)
-
   return redirect(url_for('index'))
-
-
-
-
 
 
 @app.route('/edit-profile/<username>', methods=['GET', 'POST'])
@@ -388,12 +205,13 @@ def edit_profile(username=None):
   return render_template('edit-profile.html', form=form, user=user)
 
 
-
-
-
 # ====================================================================
 # =========================  Product Routes  =========================
 # ====================================================================
+
+@app.route('/products')
+def products():
+	return render_template('products.html')
 
 @app.route('/product', methods=['GET'])
 @app.route('/product/<product_id>', methods=['GET'])
@@ -472,7 +290,9 @@ def add_category():
   return render_template('create-category.html', form=form, user=user)
 
 
-
+# ====================================================================
+# =========================  Review Routes  =========================
+# ====================================================================
 
 
 PORT = 5000
@@ -480,9 +300,6 @@ DEBUG = True
 
 
 
-@app.route('/products')
-def products():
-	return render_template('products.html')
 
 
 # copied to routes

@@ -14,9 +14,17 @@
 	<div class="containger">
 		<div class="column is-full is-multiline">
 			<div class="productLine">
-				<hr><p> Dog Hotels</p><button>Discover more</button><hr>
+				<!-- <hr><p> Dog Hotels</p><button>Discover more</button><hr>
 				<p> Dog Insurance</p><hr>
-				<p> Dog magazines</p><hr>
+				<p> Dog magazines</p><hr> -->
+
+				<div class="columns is-multiline"></div>
+				<!-- Iterates through products passed down from app.py -->
+				{% for product in products %}
+				<!-- Uses sub-template _product.html to create product cards -->
+					{% include '_product.html' %}
+				{% endfor %}
+				</div>
 			</div>
 		</div>
 	</div>

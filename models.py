@@ -68,7 +68,7 @@ class User(UserMixin, Model):
 	
 
 class Category(Model):
-	name = CharField()
+	name = CharField(unique=True)
 
 	class Meta:
 		database = DATABASE
@@ -81,7 +81,7 @@ class Category(Model):
 				name = name
 			)
 		except IntegrityError:
-			raise ValueError("create category error")
+			raise 
 		
 
 

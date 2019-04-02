@@ -40,7 +40,7 @@
 							<a href="{{ url_for('about') }}" class="navbar-item nav-links">ABOUT</a>
 							<a href="" class="navbar-item nav-links">Contact us</a>
 							<div class="navbar-item has-dropdown is-hoverable">
-								<a class="navbar-link" href="{{ url_for('products') }}" class="navbar-item nav-links">Products</a>
+								<a class="navbar-link navbar-item" href="{{ url_for('products') }}" class="navbar-item nav-links">Products</a>
 								<div class="navbar-dropdown">
 									<a class="navbar-item has-dropdown is-hoverable">Dog Hotels</a>
 								</div>
@@ -64,6 +64,15 @@
 		</header>
 		<main>
 			<section class="content">
+				 <!-- Show any flash messages to user from logging in or signing up -->
+				 {% with messages = get_flashed_messages(with_categories=True) %}
+				 {% if messages %}
+					 {% for category, message in messages %}
+						 <div class="alert alert -{{category}}">{{ message }}</div>
+					 {% endfor %}
+				 {% endif %}
+			 {% endwith %}
+			 
 				{% block content %}
 					<!-- Where templates will be entered -->
 				{% endblock %}
