@@ -462,13 +462,13 @@ def add_product():
 def add_category():
   form = forms.CategoryForm()
   user = g.user._get_current_object()
-  if request.method == 'POST':
-    models.Category.create_category(
+  if form.validate_on_submit():
+    cat = models.Category.create_category(
       name = form.name.data
     )
-    category = models.Category.get(models.Category == form.name.data)
+    category = models.Category.get(models.Category.name == form.name.data)
     flash('Category created', 'Success')
-    return redirect(url_for('category', product_id=product.id))
+    return redirect(url_for('product'))
   return render_template('create-category.html', form=form, user=user)
 
 

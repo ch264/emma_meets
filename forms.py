@@ -73,7 +73,7 @@ class SignUpForm(Form):
 		gender = SelectField(
 			'Gender', 
 			choices=[(
-				'male', 'female')
+				'male', 'Male'), ('female', 'Female')
 			])
 		location = StringField(
 			'Location', 
@@ -151,10 +151,7 @@ class ProductForm(Form):
         validators=[
             DataRequired()
         ])
-	# [] can we make a selectfield for existing category?
-	# category = StringField(
-	# 	'Category'
-	# )
+
 	# product_image = FileField('Profile Image')
 	category = SelectField('Product', choices=[], validators=[DataRequired()])
 	submit = SubmitField('Submit')
