@@ -1,11 +1,15 @@
 import os
-from flask import Flask, g, request, render_template, flash, redirect, url_for, session, escape
+from flask import Flask, g, request, render_template, flash, redirect, url_for, session, escape, jsonify
 # from config import Config
 
 # User login
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from flask_bcrypt import check_password_hash
 import models, forms
+
+
+# from itertools import imap
+# from flask_peewee.utils import get_dictionary_from_model
 # Image uploader
 # from flask_uploads import UploadSet, configure_uploads, IMAGES
 
@@ -398,7 +402,7 @@ def product(product_id=None):
   # if product_id is provided as a paramter
   if product_id != None:
     # find single product in database using that id number
-    product = models.Product.select().where(Product.id == product_id).get()
+    product = models.Product.select().where(models.Product.id == product_id).get()
     # pass the found product to the individual product template
     return render_template('product.html', product=product)
   # if no product_is is provided as a parameter, select all product form the product table, limit 15 results
@@ -411,40 +415,62 @@ def product(product_id=None):
 def add_product():
   # Access the ProductForm from forms.py
   form = forms.ProductForm()
+  categories = models.Product.get_categories()
+  if len(categories) > 0:
+    choices = []
+    for category in categories:
+      temp = []
+      for k,v in category.items():
+        if(k=='id'):
+          temp.append(str(v))
+        else:
+          temp.append(v)
+      choices.append(tuple(temp))
+    form.category.choices = choices
+  # categories = models.Category.select().dicts().get()
+  # get_dictionary_from_model(categories)
+  # for dct in imap(get_dictionary_from_model,models.Category.select()):
+  #   print(dct)
+  # print(categories)
+  # 
   # Set variable user to current logged in user
   user = g.user._get_current_object()
-
-  if request.method == 'POST':
+  
+  if form.validate_on_submit():
     # Call method create_product defined in models.py for the Product model
-    models.Product.create_product(
+    prod = models.Product.create_product(
       name = form.name.data,
       location = form.location.data,
       website = form.website.data,
       category = form.category.data)
       # image_filename = filename,
       # image_url = url
-    
+    product = models.Product.get(models.Product.website == form.website.data)
+    print(product)
+    # return render_template('create-product.html', form=form, user=user)
     # Find new created product in database
-    product = models.Product.get(models.Product == form.name.data)
+    
     flash('Product Created', 'Success')
     # Redirect user to individual product page with found products id passed as parameter
     return redirect(url_for('product', product_id=product.id))
   # Render the create-product template with the ProductForm
   # Pass in the current_user in order to redirect user back to their profile if they choose to cancel create a product
-  return render_template('create-product.html', form=form, user=user)
+  
+  # print(categories)
+  return render_template('create-product.html', form=form, user=user, categories=categories)
 
 @app.route('/create-category', methods=['GET', 'POST'])
 def add_category():
   form = forms.CategoryForm()
-  user =g.user._get_current_object()
+  user = g.user._get_current_object()
   if request.method == 'POST':
     models.Category.create_category(
       name = form.name.data
     )
     category = models.Category.get(models.Category == form.name.data)
     flash('Category created', 'Success')
-    return redirect(url_for('product', product_id=product.id))
-  return render_template('create-product.html', form=form, user=user)
+    return redirect(url_for('category', product_id=product.id))
+  return render_template('create-category.html', form=form, user=user)
 
 
 

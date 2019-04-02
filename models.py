@@ -82,12 +82,30 @@ class Category(Model):
 			)
 		except IntegrityError:
 			raise ValueError("create category error")
+		
+	# https://github.com/coleifer/peewee/issues/134
+	@classmethod
+	def get_categories(cls):
+		query = Category.select()
+		cursor = DATABASE.execute(query)
+		
+		ncols = len(cursor.description)
+		colnames = [cursor.description[i][0] for i in range(ncols)]
+		results = []
+
+		for row in cursor.fetchall():
+			res = {}
+			for i in range(ncols):
+				res[colnames[i]] = row[i]
+			results.append(res)
+		
+		return results
 
 
 class Product(Model):
 	name = CharField()
 	location = TextField()
-	website = CharField()
+	website = CharField(unique=True)
 	# image_url = CharField()
 	# image_filename = CharField()
 	category = ForeignKeyField(model=Category, backref='product_category')
@@ -107,7 +125,7 @@ class Product(Model):
 				# image_filename = image_filename,
 				category = category)
 		except IntegrityError:
-			raise ValueError('create product error')
+			raise
 
 
 

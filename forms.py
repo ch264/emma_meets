@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm as Form
-from wtforms import StringField, PasswordField, TextAreaField, SelectField, BooleanField, SubmitField, IntegerField, FileField
+from wtforms import StringField, PasswordField, TextAreaField, SelectField, BooleanField, SubmitField, IntegerField, FileField, TextField
 from wtforms.validators import DataRequired, Regexp, ValidationError, Length, EqualTo, Email
 
 # Imports for file/photo uploader
@@ -129,32 +129,35 @@ class CategoryForm(Form):
 	name = StringField(
 		'Name',
 		validators=[
-			DataRequired()
+			DataRequired(),
+			Length(min=1, max=140)
 		])
+	submit = SubmitField('Submit')
 
 # Create a new Product Form
 class ProductForm(Form):
-	name = StringField(
+	name = TextField(
         'Name',
         validators=[
             DataRequired()
         ])
-	location = StringField(
+	location = TextField(
         'Location',
         validators=[
             DataRequired()
         ])
-	website = StringField(
+	website = TextField(
         'Website',
         validators=[
             DataRequired()
         ])
 	# [] can we make a selectfield for existing category?
-	category = StringField(
-		'Category'
-	)
+	# category = StringField(
+	# 	'Category'
+	# )
 	# product_image = FileField('Profile Image')
-	# category = SelectField('Product', choices=[('dog hotel', 'Dog Hotel'), ('pet insurance', 'Pet Insurance'), ('dog magazines', 'Dog Magazines'), ('dog fashion', 'Dog Fashion'), ('vets','Vets'), ('dog beaches','Dog Beaches'), ('other', 'Other')], validators=[DataRequired()])
+	category = SelectField('Product', choices=[], validators=[DataRequired()])
+	submit = SubmitField('Submit')
 
 
 	class EditProductForm(Form):
