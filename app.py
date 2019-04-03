@@ -183,7 +183,7 @@ def edit_profile(username=None):
     # Set user's info in database to new values entered in form
     user.username = form.username.data
     user.email = form.email.data
-    # user.password=form.password.data,
+    user.password = form.password.data,
     user.about_me = form.about_me.data
         # age = form.age.data,
     user.gender = form.gender.data
@@ -209,7 +209,7 @@ def edit_profile(username=None):
 # =========================  Product Routes  =========================
 # ====================================================================
 
-@app.route('/products')
+@app.route('/products', methods=['GET'])
 def products():
 	return render_template('products.html')
 
@@ -224,7 +224,7 @@ def product(product_id=None):
     # pass the found product to the individual product template
     return render_template('product.html', product=product)
   # if no product_is is provided as a parameter, select all product form the product table, limit 15 results
-  products = models.Product.select().limit(20)
+  products = models.Product.select().limit(15)
   # pass those products to the products template
   return render_template('products.html', products=products)
 
@@ -293,6 +293,35 @@ def add_category():
 # ====================================================================
 # =========================  Review Routes  =========================
 # ====================================================================
+
+
+
+@app.route('/review/<product_id>', methods=['GET', 'POST'])
+def add_review(product_id):
+  
+  form = forms.ReviewForm()
+  print('out if')
+  print(request.form)
+  product = models.Product.select().where(models.Product.id == product_id).get()
+  if form.validate_on_submit():
+    # product_id = request.args.get('id')
+   
+    print(form.rating.data)
+    models.Review.create_review(
+      title = form.title.data,
+      user = g.user._get_current_object(),
+      product = product.id,
+      rating = form.rating.data,
+      body = form.body.data
+    )
+    review = models.Review.get(models.Review.title == form.title.data)
+    print(review)
+    print('success')
+    flash('Review created!', 'Success')
+    return redirect(url_for('product', product_id=product.id))
+  return render_template('create-review.html', form=form, user=current_user, product=product)
+
+
 
 
 PORT = 5000

@@ -129,6 +129,9 @@ class Product(Model):
 		
 		return results
 
+	# @classmethod
+	# def edit_product(cls):
+	# 	query = Product.
 
 class Review(Model):
 	title = CharField()
@@ -143,7 +146,7 @@ class Review(Model):
 			db_table = 'review'
 	
 	@classmethod
-	def create_review(cls, title, body, user, product, rating):
+	def create_review(cls, title, user, product, rating, body):
 		try:
 			cls.create(
 				title = title,
@@ -153,9 +156,9 @@ class Review(Model):
 				rating = rating
 			)
 		except IntegrityError:
-			raise ValueError("create review error")
+			raise 
 
-
+	
 
 
 

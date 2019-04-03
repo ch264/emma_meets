@@ -1,7 +1,6 @@
 
 {% extends "base.html" %}
-<!-- Imports macro template for form rendering -->
-{% from "macros.html" import render_field %}
+
 
 {% block content %}
 
@@ -12,7 +11,7 @@
       <p class=""> Location: {{ product.location }}</p>
       <p class=""> Website: {{ product.website }}</p>
       <p class=""> Rating: {{ product.rating }}</p>
-      <a class="button" href="">Leave a Review</a> 
+      <a class="button" href="{{ url_for('add_review', product_id=product.id) }}">Leave a Review</a> 
     </div>
     <div class="column is-three-quarter">
       <img src="{{ url_for('static', filename='dog-hotel.jpg') }}">

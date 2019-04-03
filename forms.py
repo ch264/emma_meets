@@ -151,9 +151,8 @@ class ProductForm(Form):
         validators=[
             DataRequired()
         ])
-
 	# product_image = FileField('Profile Image')
-	category = SelectField('Product', choices=[], validators=[DataRequired()])
+	category = SelectField('Category', choices=[], validators=[DataRequired()])
 	# submit = SubmitField('Submit')
 
 
@@ -162,23 +161,26 @@ class ProductForm(Form):
 		location = StringField('Location')
 		website = StringField('Website')
 		product_image = FileField('Profile Image')
-		product = SelectField('Product', choices=[('dog hotel', 'Dog Hotel'), ('pet insurance', 'Pet Insurance'), ('dog magazines', 'Dog Magazines'), ('dog fashion', 'Dog Fashion'), ('vets','Vets'), ('dog beaches','Dog Beaches'), ('other', 'Other')], validators=[DataRequired()])
+		category = SelectField('Category', choices=[], validators=[DataRequired()])
 
 # Creates a new ReviewForm
 class ReviewForm(Form): 
-		title = StringField(
-				'Title',
-				validators=[DataRequired()]
-				)
-		content = TextAreaField(
-				'Let us konw what you think',
-				validators=[DataRequired()]
-				)
+	
 		rating = SelectField(
 			'Rating', 
 			choices=[('5', '5'),('4','4'), ('3','3'), ('2','2'), ('1','1')], 
-			validators=[DataRequired()
-			])
+			validators=[DataRequired()])
+		title = TextField(
+				'Title',
+				validators=[DataRequired()])
+		body = TextAreaField(
+				'Let us konw what you think',
+				validators=[DataRequired()]
+				)
+		submit = SubmitField('Submit')
+		
+			
+		
   #  do we need ain image placeholder for the image of who is leaving the rview?
 
 class EditReviewForm(Form):
