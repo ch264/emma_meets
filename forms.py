@@ -91,7 +91,7 @@ class SignUpForm(Form):
 			'Breed', 
 			validators=[DataRequired()
 			])
-		# profile_image = FileField('Profile Image')
+		profile_image = FileField('Profile Image')
 
 
 # Creates a LoginForm class. Do not need if use Google 
@@ -121,7 +121,7 @@ class EditUserForm(Form):
 		fav_snack = StringField('Favorite Snack', validators=[DataRequired()])
 		fav_toy = StringField('Favorite Toy', validators=[DataRequired()])
 		breed = StringField('Breed', validators=[DataRequired()])
-		# profile_image = FileField('Profile Image')
+		profile_image = FileField('Profile Image')
 
 # Creates an EditRecipeForm class
 
@@ -151,7 +151,7 @@ class ProductForm(Form):
         validators=[
             DataRequired()
         ])
-	# product_image = FileField('Profile Image')
+	product_image = FileField('Product Image')
 	category = SelectField('Category', choices=[], validators=[DataRequired()])
 	# submit = SubmitField('Submit')
 

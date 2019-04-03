@@ -8,9 +8,13 @@ from flask_bcrypt import check_password_hash
 import models, forms
 
 
+# Image uploader
+from flask_uploads import UploadSet, configure_uploads, IMAGES
 
 
-app = Flask(__name__)
+
+app = Flask(__name__, instance_relative_config=True)
+app.config.from_pyfile('flask.cfg')
 app.secret_key = 'pafajeihguihawiorhgl'
 
 login_manager = LoginManager()
@@ -18,8 +22,8 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 # Sets variable images to uploader
-# images = UploadSet('images', IMAGES)
-# configure_uploads(app, images)
+images = UploadSet('images', IMAGES)
+configure_uploads(app, images)
 
 
 
@@ -85,26 +89,25 @@ def signup():
     form = forms.SignUpForm()
 
     if form.validate_on_submit():
-        # Sets variable filename to image file of uploaded 'profile_image' from form
-        # filename = images.save(request.files['profile_image'])
-        # Sets variable url to change image url to match filename
-        # url = images.url(filename)
-        # Calls method 'create_user' as defined in models.py to create a user in database
+      # Sets variable filename to image file of uploaded 'profile_image' from form
+      filename = images.save(request.files['profile_image'])
+      # Sets variable url to change image url to match filename
+      url = images.url(filename)
+      # Calls method 'create_user' as defined in models.py to create a user in database
 			# print(form.username.data)
       models.User.create_user(
-      	username=form.username.data,
-        email=form.email.data,
-        password=form.password.data,
+        username = form.username.data,
+        email = form.email.data,
+        password = form.password.data,
 				about_me=form.about_me.data,
 						# age = form.age.data,
 				gender = form.gender.data,
 				location = form.location.data,
 				fav_snack = form.fav_snack.data,
 				fav_toy = form.fav_toy.data,
-				breed = form.breed.data
-				)
-            # image_filename=filename,
-            # image_url=url)
+				breed = form.breed.data,
+        image_filename=filename,
+        image_url=url)
         
         # Gets newly created user from the database by matching username in the database to username entered in the form
       user = models.User.get(models.User.username == form.username.data)
@@ -217,16 +220,19 @@ def products():
 @app.route('/product/<product_id>', methods=['GET'])
 # @login_required
 def product(product_id=None):
-  # if product_id is provided as a paramter
+
+  
+    # if product_id is provided as a paramter
   if product_id != None:
     # find single product in database using that id number
     product = models.Product.select().where(models.Product.id == product_id).get()
+    review = models.Review.select().where(models.Review.id == review_id).order_by(-models.Review.timestamp)
     # pass the found product to the individual product template
-    return render_template('product.html', product=product)
+    return render_template('product.html', product=product, review=review)
   # if no product_is is provided as a parameter, select all product form the product table, limit 15 results
   products = models.Product.select().limit(15)
   # pass those products to the products template
-  return render_template('products.html', products=products)
+  return render_template('products.html', products=products, review=review)
 
 @app.route('/create-product', methods=['GET', 'POST'])
 # @login_required
@@ -252,16 +258,19 @@ def add_product():
 
   # Set variable user to current logged in user
   user = g.user._get_current_object()
-  
+  # Sets variable filename to image file of uploaded 'profile_image' from form
+  filename = images.save(request.files['product_image'])
+  # Sets variable url to change image url to match filename
+  url = images.url(filename)
   if form.validate_on_submit():
     # Call method create_product defined in models.py for the Product model
     prod = models.Product.create_product(
       name = form.name.data,
       location = form.location.data,
       website = form.website.data,
-      category = form.category.data)
-      # image_filename = filename,
-      # image_url = url
+      category = form.category.data,
+      image_filename = filename,
+      image_url = url)
     product = models.Product.get(models.Product.website == form.website.data)
     print(product)
     # return render_template('create-product.html', form=form, user=user)
@@ -304,8 +313,6 @@ def add_review(product_id):
   print(request.form)
   product = models.Product.select().where(models.Product.id == product_id).get()
   if form.validate_on_submit():
-    # product_id = request.args.get('id')
-   
     print(form.rating.data)
     models.Review.create_review(
       title = form.title.data,
@@ -318,8 +325,8 @@ def add_review(product_id):
     print(review)
     print('success')
     flash('Review created!', 'Success')
-    return redirect(url_for('product', product_id=product.id))
-  return render_template('create-review.html', form=form, user=current_user, product=product)
+    return redirect(url_for('product', product_id=product.id, review=review))
+  return render_template('create-review.html', form=form, user=current_user, product=product, review=review)
 
 
 

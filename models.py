@@ -10,7 +10,7 @@ from peewee import *
 # db = PostgresqlExtDatabase('app', user='christinahastenrath', register_hstore=True)
 
 # for Gravatar
-from hashlib import md5
+# from hashlib import md5
 
 DATABASE = SqliteDatabase('emma.db')
 # DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
@@ -36,15 +36,15 @@ class User(UserMixin, Model):
 	fav_snack = CharField(255)
 	fav_toy = CharField(255)
 	breed = CharField()
-	# image_filename = CharField()
-	# image_url = CharField()
+	image_filename = CharField()
+	image_url = CharField()
 
 	class Meta:
 		database = DATABASE
 		db_table = 'user'
 
 	@classmethod
-	def create_user(cls, username, email, password, about_me, gender, location, fav_snack, fav_toy, breed):
+	def create_user(cls, username, email, password, about_me, gender, location, fav_snack, fav_toy, breed, image_filename, image_url):
 		try:
 			cls.create(
 				username = username,
@@ -56,15 +56,15 @@ class User(UserMixin, Model):
 				location = location,
 				fav_snack = fav_snack,
 				fav_toy = fav_toy,
-				breed = breed)
-				# image_filename = image_filename,
-				# image_url = image_url
+				breed = breed,
+				image_filename = image_filename,
+				image_url = image_url)
 		except IntegrityError:
 			raise ValueError('create user error')
 	
-	def avatar(self, size):
-		digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-		return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
+	# def avatar(self, size):
+	# 	digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+	# 	return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
 	
 
 class Category(Model):
@@ -90,8 +90,8 @@ class Product(Model):
 	name = CharField()
 	location = TextField()
 	website = CharField(unique=True)
-	# image_url = CharField()
-	# image_filename = CharField()
+	image_url = CharField()
+	image_filename = CharField()
 	category = ForeignKeyField(model=Category, backref='product_category')
 
 	class Meta:
@@ -99,14 +99,14 @@ class Product(Model):
 					db_table = 'product'
 
 	@classmethod
-	def create_product(cls, name, location, website, category):
+	def create_product(cls, name, location, website, image_filename, image_url, category):
 		try:
 			cls.create(
 				name = name,
 				location = location,
 				website = website,
-				# image_url = image_url,
-				# image_filename = image_filename,
+				image_url = image_url,
+				image_filename = image_filename,
 				category = category)
 		except IntegrityError:
 			raise

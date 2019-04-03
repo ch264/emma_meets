@@ -22,7 +22,7 @@
             {{ render_field(field) }}
             
           {% endfor %}
-          <!-- <a href="{{ url_for('add_category', username=user.username) }}" class="button is-light">Add a new Category</a> -->
+          <a href="{{ url_for('add_category', username=user.username) }}" class="button is-light">Add a new Category</a>
           <div class="has-text-centered">
             <!-- Anchor tag makes use of user object passed in from app.py -->
 					  <button type="submit" class="button is-danger">Save Product</button>

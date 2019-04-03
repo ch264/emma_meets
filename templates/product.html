@@ -18,10 +18,26 @@
     </div>
   </div>
   <div class="columns">
-    <div class="container">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia ullam laudantium harum asperiores illum maiores tempora! Eos nisi corrupti repudiandae officia, eligendi mollitia totam fugiat quae nobis illum asperiores eveniet!</p><hr>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis, quae. Ratione, recusandae quidem. Error quos adipisci cum impedit et. Possimus impedit enim ipsa, ipsum magni dolor alias assumenda sit atque.</p>
+
+        <div class="column ">
+          <h4>This pages reviews</h4>
+
+          <!-- is-multiline is a Bulma class to allow columns to wrap -->
+          <div class="column is-multiline">
+            <!-- Iterate through recipes passed down from app.py -->
+            {% for review in reviews %}
+              <!-- Use each single recipe info in sub-template _recipe.html -->
+              {% include '_review.html' %}
+            {% endfor %}	
+          </div>  <!-- end of .columns div -->
+        </div>  <!-- end of .column div -->
+      
+        <div class="column">
+          <p>Review: {{ review.title }}</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia ullam laudantium harum asperiores illum maiores tempora! Eos nisi corrupti repudiandae officia, eligendi mollitia totam fugiat quae nobis illum asperiores eveniet!</p><hr>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis, quae. Ratione, recusandae quidem. Error quos adipisci cum impedit et. Possimus impedit enim ipsa, ipsum magni dolor alias assumenda sit atque.</p>
+        </div>
     </div>
-  </div>
+ 
 </div>
 {% endblock %}
