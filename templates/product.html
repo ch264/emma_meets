@@ -22,15 +22,14 @@
         <div class="column ">
           <h4>This pages reviews</h4>
 
-          <!-- is-multiline is a Bulma class to allow columns to wrap -->
-          <div class="column is-multiline">
+        
+        
             <!-- Iterate through recipes passed down from app.py -->
             {% for review in reviews %}
-              <!-- Use each single recipe info in sub-template _recipe.html -->
+              <!-- Use each single reivew info in sub-template _review.html -->
               {% include '_review.html' %}
             {% endfor %}	
-          </div>  <!-- end of .columns div -->
-        </div>  <!-- end of .column div -->
+        </div>
       
         <div class="column">
           <p>Review: {{ review.title }}</p>

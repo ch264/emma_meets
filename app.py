@@ -221,12 +221,12 @@ def products():
 # @login_required
 def product(product_id=None):
 
-  
     # if product_id is provided as a paramter
   if product_id != None:
     # find single product in database using that id number
     product = models.Product.select().where(models.Product.id == product_id).get()
-    review = models.Review.select().where(models.Review.id == review_id).order_by(-models.Review.timestamp)
+    review = models.Review.select().where(models.Review.id == product_id).get()
+    
     # pass the found product to the individual product template
     return render_template('product.html', product=product, review=review)
   # if no product_is is provided as a parameter, select all product form the product table, limit 15 results
@@ -325,8 +325,8 @@ def add_review(product_id):
     print(review)
     print('success')
     flash('Review created!', 'Success')
-    return redirect(url_for('product', product_id=product.id, review=review))
-  return render_template('create-review.html', form=form, user=current_user, product=product, review=review)
+    return redirect(url_for('product', product_id=product.id))
+  return render_template('create-review.html', form=form, user=current_user, product=product)
 
 
 

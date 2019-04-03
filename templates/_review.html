@@ -9,7 +9,7 @@
 						<div class="media-content is-grouped-centered has-text-centered">
 							<p class="title is-4 ">
 								<!-- Sets anchor tag to 'product' function defined in app.py to redirect to individual product page -->
-								<a href="{{ url_for('products') }}" class="has-text-danger">{{ review.title }}</a>
+								<a href="{{ url_for('product', product_id=product.id)  }}" class="has-text-danger">{{ review.title }}</a>
 							</p>
 							<!-- Uses product info passed in from app.py to dynamically change text content -->
 							<p class="title is-5 no-padding">Content: {{ review.body }}</p>
