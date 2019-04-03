@@ -19,7 +19,7 @@
 							<p class="title is-5 no-padding">Rating: {{ review.rating }}</p>
 							<!-- Sets anchor tag to link to function 'save_to_favorite' defined in app.py -->
 							<a href="" class="button is-light is-small">Edit review</a>
-							<a href="" class="button is-light is-small">Delete review</a>
+							<a href="{{ url_for('delete_review', review_id=review.id) }}" class="button is-light is-small">Delete review</a>
 						</div>
 					</div>
 				</div>  <!-- end of .card-content div -->

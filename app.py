@@ -260,11 +260,12 @@ def add_product():
 
   # Set variable user to current logged in user
   user = g.user._get_current_object()
-  # Sets variable filename to image file of uploaded 'product_image' from form
-  filename = images.save(request.files['product_image'])
-  # Sets variable url to change image url to match filename
-  url = images.url(filename)
+ 
   if form.validate_on_submit():
+    # Sets variable filename to image file of uploaded 'product_image' from form
+    filename = images.save(request.files['product_image'])
+    # Sets variable url to change image url to match filename
+    url = images.url(filename)
     # Call method create_product defined in models.py for the Product model
     prod = models.Product.create_product(
       name = form.name.data,
@@ -308,6 +309,7 @@ def add_category():
 
 
 @app.route('/review/<product_id>', methods=['GET', 'POST'])
+@login_required
 def add_review(product_id):
   
   form = forms.ReviewForm()
@@ -324,12 +326,21 @@ def add_review(product_id):
       body = form.body.data
     )
     review = models.Review.get(models.Review.title == form.title.data)
-    print(review)
-    print('success')
     flash('Review created!', 'Success')
     return redirect(url_for('product', product_id=product.id))
   return render_template('create-review.html', form=form, user=current_user, product=product)
 
+@app.route('/delete-review/<review_id>', methods=['GET', 'DELETE'])
+@login_required
+def delete_review(review_id=None):
+  if review_id != None:
+    deleted_review = models.Review.delete().where(models.Review.id == review_id)
+    deleted_review.execute()
+    return redirect(url_for('profile', user=user.id))
+  return redirect(url_for('profile', user=user.id))
+
+@app.route('/edit-review/<review_id>', methods=['GET', 'PUT'])
+@login_required
 
 
 
