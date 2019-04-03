@@ -21,18 +21,20 @@
 
         <div class="column ">
           <h4>This pages reviews</h4>
-
-        
-        
             <!-- Iterate through recipes passed down from app.py -->
             {% for review in reviews %}
               <!-- Use each single reivew info in sub-template _review.html -->
               {% include '_review.html' %}
             {% endfor %}	
         </div>
+
+        
       
         <div class="column">
-          <p>Review: {{ review.title }}</p>
+          {% for review in reviews%}
+
+          <p>Review: {{ review.title }}</p><hr>
+          {% endfor %}
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia ullam laudantium harum asperiores illum maiores tempora! Eos nisi corrupti repudiandae officia, eligendi mollitia totam fugiat quae nobis illum asperiores eveniet!</p><hr>
           <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis, quae. Ratione, recusandae quidem. Error quos adipisci cum impedit et. Possimus impedit enim ipsa, ipsum magni dolor alias assumenda sit atque.</p>
         </div>

@@ -62,14 +62,11 @@
 		<div class="columns is-center has-text-centered is-grouped-centered">
 			<!-- User created recipes -->
 			<div class="column ">
-				<h4>Your Reviews</h4>
-			
-				
-			
-				<!-- is-multiline is a Bulma class to allow columns to wrap -->
+				<h4>Your Reviews</h4>		
+			<!-- is-multiline is a Bulma class to allow columns to wrap -->
 				<div class="columns is-multiline">
 					<!-- Iterate through recipes passed down from app.py -->
-					{% for review in Reviews  %}
+					{% for review in reviews  %}
 						<!-- Use each single recipe info in sub-template _recipe.html -->
 						{% include '_review.html' %}
 					{% endfor %}	

@@ -167,7 +167,8 @@ def profile(username=None):
     # Finds user in database by username passed into URL
     user = models.User.select().where(models.User.username==username).get()
     # Finds all reviews in database where the user id stored with a reciew matches the found user aboves id
-    reviews = models.Review.select().where(models.Review.user == user.id).order_by(models.Review.timestamp)
+    reviews = models.Review.select().where(models.Review.user == user.id).order_by(-models.Review.timestamp)
+   
 # finds all favorited products
 
     return render_template('profile.html', user=user, reviews=reviews)
@@ -213,8 +214,9 @@ def edit_profile(username=None):
 # ====================================================================
 
 @app.route('/products', methods=['GET'])
-def products():
-	return render_template('products.html')
+def products(product_id=None):
+  products = models.Product.select().where(models.Product.id == product_id)
+  return render_template('products.html', products=products)
 
 @app.route('/product', methods=['GET'])
 @app.route('/product/<product_id>', methods=['GET'])
@@ -225,14 +227,14 @@ def product(product_id=None):
   if product_id != None:
     # find single product in database using that id number
     product = models.Product.select().where(models.Product.id == product_id).get()
-    review = models.Review.select().where(models.Review.id == product_id).get()
+    reviews= models.Review.select().where(models.Review.product == product_id).order_by(-models.Review.timestamp)
     
     # pass the found product to the individual product template
-    return render_template('product.html', product=product, review=review)
+    return render_template('product.html', product=product, reviews=reviews)
   # if no product_is is provided as a parameter, select all product form the product table, limit 15 results
   products = models.Product.select().limit(15)
   # pass those products to the products template
-  return render_template('products.html', products=products, review=review)
+  return render_template('products.html', products=products)
 
 @app.route('/create-product', methods=['GET', 'POST'])
 # @login_required
@@ -258,7 +260,7 @@ def add_product():
 
   # Set variable user to current logged in user
   user = g.user._get_current_object()
-  # Sets variable filename to image file of uploaded 'profile_image' from form
+  # Sets variable filename to image file of uploaded 'product_image' from form
   filename = images.save(request.files['product_image'])
   # Sets variable url to change image url to match filename
   url = images.url(filename)
