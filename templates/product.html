@@ -10,7 +10,7 @@
       <h1 class="is-4">{{ product.name }}</h1>
       <p class=""> Location: {{ product.location }}</p>
       <p class=""> Website: {{ product.website }}</p>
-      <p class=""> Rating: {{ product.rating }}</p>
+      <p class=""> Rating: {{ product.avg_rating }}</p>
       <a class="button" href="{{ url_for('add_review', product_id=product.id) }}">Leave a Review</a> 
     </div>
     <div class="column is-three-quarter">

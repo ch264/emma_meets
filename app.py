@@ -229,8 +229,10 @@ def product(product_id=None):
     product = models.Product.select().where(models.Product.id == product_id).get()
     reviews= models.Review.select().where(models.Review.product == product_id).order_by(-models.Review.timestamp)
     
-    # pass the found product to the individual product template
-    return render_template('product.html', product=product, reviews=reviews)
+  
+    rating = product.average_rating()
+    # # pass the found product to the individual product template
+    return render_template('product.html', product=product, reviews=reviews, rating=rating)
   # if no product_is is provided as a parameter, select all product form the product table, limit 15 results
   products = models.Product.select().limit(15)
   # pass those products to the products template
@@ -347,25 +349,21 @@ def edit_review(review_id=None):
   form = forms.EditReviewForm()
   review = models.Review.select().where(models.Review.id == review_id).get()
   user = g.user._get_current_object()
-  # user = models.User.get(g.user.id)
-  print(review_id)
-  print('out if')
   if review_id != None:
     review = models.Review.select().where(models.Review.id == review_id).get()
-    print('in if 1')
-    print(request.form)
     if form.validate_on_submit():
       review = models.Review.select().where(models.Review.id == review_id).get()
-      print('in if 2')
       review.title = form.title.data
       review.body = form.body.data
       review.rating = form.rating.data
       review.save()
       flash('Your edited your review', 'success')
       return redirect(url_for('profile', username=user.username))
-    # form.process()
-    # return redirect(url_for('edit_review', review_id=review.id, form=form))
+    form.process()
     return render_template('edit-review.html', review=review, form=form)
+
+
+
 
 PORT = 5000
 DEBUG = True

@@ -93,7 +93,7 @@ class Product(Model):
 	image_url = CharField()
 	image_filename = CharField()
 	category = ForeignKeyField(model=Category, backref='product_category')
-
+	avg_rating = FloatField(default=None, null=True)
 	class Meta:
 					database = DATABASE
 					db_table = 'product'
@@ -107,7 +107,8 @@ class Product(Model):
 				website = website,
 				image_url = image_url,
 				image_filename = image_filename,
-				category = category)
+				category = category
+				)
 		except IntegrityError:
 			raise
 
@@ -129,9 +130,16 @@ class Product(Model):
 		
 		return results
 
-	# @classmethod
-	# def edit_product(cls):
-	# 	query = Product.
+
+	def average_rating(self):
+		query = Review.select().where(Review.product_id == self.id)
+		review_list = []
+		for review in query:
+			review_list.append(review.rating)
+		print(sum(review_list) / len(review_list))
+		return sum(review_list) / len(review_list)
+	
+
 
 class Review(Model):
 	title = CharField()
@@ -159,6 +167,7 @@ class Review(Model):
 			raise 
 
 	
+		
 
 
 
