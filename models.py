@@ -136,12 +136,15 @@ class Product(Model):
 		review_list = []
 		for review in query:
 			review_list.append(review.rating)
+			print(review.rating)
 		# print(sum(review_list) / len(review_list))
+		if len(review_list) == 0: 
+			return 0
 		self.avg_rating = sum(review_list) / len(review_list)
 		# return sum(review_list) / len(review_list)
 		# self.avg_rating.save()
 		self.save()
-		print(self, self.avg_rating)
+		# print(self, self.avg_rating)
 		return self.avg_rating
 		
 

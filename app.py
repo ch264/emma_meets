@@ -220,18 +220,13 @@ def products(product_id=None):
 
 @app.route('/product', methods=['GET'])
 @app.route('/product/<product_id>', methods=['GET'])
-# @login_required
+@login_required
 def product(product_id=None):
-
-    # if product_id is provided as a paramter
   if product_id != None:
-    # find single product in database using that id number
     product = models.Product.select().where(models.Product.id == product_id).get()
     reviews= models.Review.select().where(models.Review.product == product_id).order_by(-models.Review.timestamp)
-    
-  
+    # call average rating function that calculates reviews average rating
     rating = product.average_rating()
-    # # pass the found product to the individual product template
     return render_template('product.html', product=product, reviews=reviews, rating=rating)
   # if no product_is is provided as a parameter, select all product form the product table, limit 15 results
   products = models.Product.select().limit(15)
