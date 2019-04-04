@@ -330,6 +330,7 @@ def add_review(product_id):
     return redirect(url_for('product', product_id=product.id))
   return render_template('create-review.html', form=form, user=current_user, product=product)
 
+
 @app.route('/delete-review/<review_id>', methods=['GET', 'DELETE'])
 @login_required
 def delete_review(review_id=None):
@@ -339,10 +340,26 @@ def delete_review(review_id=None):
     return redirect(url_for('profile', user=user.id))
   return redirect(url_for('profile', user=user.id))
 
-@app.route('/edit-review/<review_id>', methods=['GET', 'PUT'])
+
+@app.route('/edit-review/<review_id>', methods=['GET', 'POST'])
 @login_required
-
-
+def edit_review(review_id=None):
+  review = models.Review.select().where(models.Review.id == review_id)
+  print(review_id)
+  form = forms.EditReviewForm()
+  print('out if')
+  if review_id != None:
+    print('in if 1')
+    if form.validate_on_submit():
+      print('in if 2')
+      review.title = form.title.data
+      review.body = form.body.data
+      review.rating = form.rating.data
+      # save changes in database
+      review.save()
+      flash('Your changes have been saved', 'success')
+      return redirect(url_for('edit_review', review_id=review.id))
+    return render_template('edit-profile.html', form=form, review=review)
 
 PORT = 5000
 DEBUG = True
