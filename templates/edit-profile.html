@@ -80,7 +80,8 @@
 
           <div class="has-text-centered">
             <!-- Cancel link redirects to 'profile' function as defined in app.py -->
-            <button type="submit" class="button is-danger">Save my changes</button><a href="{{ url_for('profile', username=user.username) }}" class="button is-light">Cancel</a>
+            <button type="submit" class="button is-danger">Save my changes</button>
+            <a href="{{ url_for('profile', username=user.username) }}" class="button is-light">Cancel</a>
           </div>
         </form>
       </div>  <!-- end of .column div-->

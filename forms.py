@@ -114,6 +114,7 @@ class EditUserForm(Form):
 		# username =  StringField('Username', validators=[name_exists])
 		username =  StringField('Username')
 		email = StringField('Email')
+		# password = PasswordField('Password', validators=[DataRequired()])
 		about_me = StringField('About Me', validators=[DataRequired()])
 		# age = StringField()('Age', validators=DataRequired())
 		gender = SelectField('Gender', choices=[('male', 'female')])
@@ -191,4 +192,4 @@ class EditReviewForm(Form):
 			'Rating', 
 			choices=[('5', '5'),('4','4'), ('3','3'), ('2','2'), ('1','1')
 			])
- 
+		# submit = SubmitField('Submit')

@@ -187,7 +187,7 @@ def edit_profile(username=None):
     # Set user's info in database to new values entered in form
     user.username = form.username.data
     user.email = form.email.data
-    user.password = form.password.data,
+    # user.password = form.password.data,
     user.about_me = form.about_me.data
         # age = form.age.data,
     user.gender = form.gender.data
@@ -337,29 +337,35 @@ def delete_review(review_id=None):
   if review_id != None:
     deleted_review = models.Review.delete().where(models.Review.id == review_id)
     deleted_review.execute()
-    return redirect(url_for('profile', user=user.id))
-  return redirect(url_for('profile', user=user.id))
+    return redirect(url_for('profile'))
+  return redirect(url_for('profile'))
 
 
 @app.route('/edit-review/<review_id>', methods=['GET', 'POST'])
 @login_required
 def edit_review(review_id=None):
-  review = models.Review.select().where(models.Review.id == review_id)
-  print(review_id)
   form = forms.EditReviewForm()
+  review = models.Review.select().where(models.Review.id == review_id).get()
+  user = g.user._get_current_object()
+  # user = models.User.get(g.user.id)
+  print(review_id)
   print('out if')
   if review_id != None:
+    review = models.Review.select().where(models.Review.id == review_id).get()
     print('in if 1')
+    print(request.form)
     if form.validate_on_submit():
+      review = models.Review.select().where(models.Review.id == review_id).get()
       print('in if 2')
       review.title = form.title.data
       review.body = form.body.data
       review.rating = form.rating.data
-      # save changes in database
       review.save()
-      flash('Your changes have been saved', 'success')
-      return redirect(url_for('edit_review', review_id=review.id))
-    return render_template('edit-profile.html', form=form, review=review)
+      flash('Your edited your review', 'success')
+      return redirect(url_for('profile', username=user.username))
+    # form.process()
+    # return redirect(url_for('edit_review', review_id=review.id, form=form))
+    return render_template('edit-review.html', review=review, form=form)
 
 PORT = 5000
 DEBUG = True

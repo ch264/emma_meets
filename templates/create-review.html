@@ -15,7 +15,7 @@
         <form method="POST" action="{{ url_for('add_review', product_id=product.id) }}" class="field" enctype="multipart/form-data">
           {{ form.hidden_tag() }}
           
-          <!-- "form" was passed into template in app.py in add_recipe method -->
+          <!-- "form" was passed into template in app.py in add_review method -->
           <!-- if condition hides CSRF token field -->
 					{{form.rating.label}}
 					{{form.rating}}
