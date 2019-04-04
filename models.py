@@ -9,8 +9,6 @@ from peewee import *
 # from playhouse.postgres_ext import PostgresqlExtDatabase
 # db = PostgresqlExtDatabase('app', user='christinahastenrath', register_hstore=True)
 
-# for Gravatar
-# from hashlib import md5
 
 DATABASE = SqliteDatabase('emma.db')
 # DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
@@ -23,7 +21,9 @@ DATABASE = SqliteDatabase('emma.db')
 #     host='db.mysite.com')  # Ditto.
 # or pg_db = PostgresqlDatabase('my_app', user='postgres', password='secret', host='10.1.0.9', port=5432)
 
-
+# ====================================================================
+# =========================  User Model  =============================
+# ====================================================================
 
 class User(UserMixin, Model):
 	username = CharField(unique=True)
@@ -38,7 +38,7 @@ class User(UserMixin, Model):
 	breed = CharField()
 	image_filename = CharField()
 	image_url = CharField()
-
+        
 	class Meta:
 		database = DATABASE
 		db_table = 'user'
@@ -62,10 +62,51 @@ class User(UserMixin, Model):
 		except IntegrityError:
 			raise ValueError('create user error')
 	
-	# def avatar(self, size):
-	# 	digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-	# 	return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
 	
+# ====================================================================
+# ========================= Follow Model  ============================
+# ====================================================================
+
+class Follow(Model):
+	follower = ForeignKeyField(User, backref="user_follower")
+	followed = ForeignKeyField(User, backref="user_followed")
+	class Meta:
+		database = DATABASE
+		db_table = 'follow'
+		# indexes = (
+    #         # Specify a unique multi-column index on follower/followed.
+    #         (('follower', 'followed'), True),
+    #     )
+
+	def follower(self):
+		User.select().join(Follow, on=Follow.followed).where(Follow.follower == user.id)
+		for follower in Follow:
+			print(follower)
+
+	def following(self): 
+		User.select().join(Follow, on=Follow.follower).where(Follower.followed == user.id)
+		for followed in Follow:
+			print(followed)
+
+		# =================== 
+
+	def follow(self, user):
+		if not self.is_following(user):
+			self.followed.append(user)
+
+	def unfollow(self, user):
+		if self.is_following(user):
+			self.followed.remove(user)
+
+	def is_following(self, user):
+		return self.followed.filter(
+			followers.c.followed_id == user.id).count() > 0
+
+
+# ====================================================================
+# =========================  Category Model  =========================
+# ====================================================================
+
 
 class Category(Model):
 	name = CharField(unique=True)
@@ -84,7 +125,9 @@ class Category(Model):
 			raise 
 		
 
-
+# ====================================================================
+# =========================  Product Model  =========================
+# ====================================================================
 
 class Product(Model):
 	name = CharField()
@@ -147,7 +190,9 @@ class Product(Model):
 		# print(self, self.avg_rating)
 		return self.avg_rating
 		
-
+# ====================================================================
+# =========================  Review Model  ===========================
+# ====================================================================
 
 class Review(Model):
 	title = CharField()
@@ -175,7 +220,10 @@ class Review(Model):
 			raise 
 
 	
-		
+
+
+
+
 
 
 
@@ -183,5 +231,5 @@ class Review(Model):
 # Defines initialize function to connect to database, create empty tables, and close connection
 def initialize():
 	DATABASE.connect()
-	DATABASE.create_tables([User, Product, Review, Category], safe=True)
+	DATABASE.create_tables([User, Product, Review, Category, Follow], safe=True)
 	DATABASE.close()

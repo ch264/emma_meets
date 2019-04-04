@@ -94,7 +94,6 @@ def signup():
       # Sets variable url to change image url to match filename
       url = images.url(filename)
       # Calls method 'create_user' as defined in models.py to create a user in database
-			# print(form.username.data)
       models.User.create_user(
         username = form.username.data,
         email = form.email.data,
@@ -109,21 +108,18 @@ def signup():
         image_filename=filename,
         image_url=url)
         
-        # Gets newly created user from the database by matching username in the database to username entered in the form
+      # Gets newly created user from the database by matching username in the database to username entered in the form
       user = models.User.get(models.User.username == form.username.data)
         # Creates logged in session
       login_user(user)
       flash('Thank you for signing up', 'success')
         # Pass in current/logged in user as parameter to method 'profile' in order to redirect user to profile after signing up
       return redirect(url_for('profile', username=user.username))
-
-    # Initial visit to this page renders the Sign Up template with the SignUpForm passed into it
     return render_template('signup.html', form=form)
 
 # Route and method to login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-  # Access LoginForm from forms.py
   form = forms.LoginForm()
   if form.validate_on_submit():
     try:
@@ -137,7 +133,6 @@ def login():
         # Creates logged in session
         login_user(user)
         flash("You successfully logged in", "success")
-
         # Upon successful login, redirect to user's profile page with user passed in as a parameter to the method 'profile'
         return redirect(url_for('profile', username=user.username))
       else:
@@ -159,7 +154,7 @@ def logout():
 # ====================================================================
 # =========================  Profile Routes  =========================
 # ====================================================================
-# Route and method to go to a user's profile
+
 @app.route('/profile/<username>', methods=['GET'])
 @login_required
 def profile(username=None):
@@ -168,10 +163,12 @@ def profile(username=None):
     user = models.User.select().where(models.User.username==username).get()
     # Finds all reviews in database where the user id stored with a reciew matches the found user aboves id
     reviews = models.Review.select().where(models.Review.user == user.id).order_by(-models.Review.timestamp)
-   
 # finds all favorited products
 
-    return render_template('profile.html', user=user, reviews=reviews)
+    # finds all followers and followed
+    follow = models.Follow.select().where(models.Follow)
+
+    return render_template('profile.html', user=user, reviews=reviews, follow=follow)
   return redirect(url_for('index'))
 
 
@@ -196,7 +193,6 @@ def edit_profile(username=None):
     user.fav_toy = form.fav_toy.data
     user.breed = form.breed.data
     
-    # Save changes to user in database
     user.save()
     flash('Your changes have been saved.', 'success')
     # Redirect to user's profile to reflect changes
@@ -205,8 +201,40 @@ def edit_profile(username=None):
   form.breed.default = user.breed
   # processes the form with the category populated
   form.process()
-  # Upon initial visit to route, serves up edit profile form
   return render_template('edit-profile.html', form=form, user=user)
+
+# ====================================================================
+# =========================  Follow Routes  =========================
+# ====================================================================
+@app.route('/follow/<username>')
+@login_required
+def follow(username):
+  user = User.query.filter_by(username=username).first()
+  if user is None:
+    return redirect(url_for('index'))
+  if user == current_user:
+    flash('You cannot follow yourself!')
+    return redirect(url_for('profile', username=username))
+  current_user.follow(user)
+  flash('You are following {}!'.format(username))
+  return redirect(url_for('profile', username=username))
+
+@app.route('/unfollow/<username>')
+@login_required
+def unfollow(username):
+  user = User.query.filter_by(username=username).first()
+  if user is None:
+    flash('User {} not found.'.format(username))
+    return redirect(url_for('index'))
+  if user == current_user:
+    flash('You cannot unfollow yourself!')
+    return redirect(url_for('user', username=username))
+  current_user.unfollow(user)
+  db.session.commit()
+  flash('You are not following {}.'.format(username))
+  return redirect(url_for('user', username=username))
+
+
 
 
 # ====================================================================
@@ -234,9 +262,8 @@ def product(product_id=None):
   return render_template('products.html', products=products)
 
 @app.route('/create-product', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def add_product():
-  # Access the ProductForm from forms.py
   form = forms.ProductForm()
   # choices accepts an array of tuples which is immtable.
   categories = models.Product.get_categories()
@@ -257,7 +284,7 @@ def add_product():
 
   # Set variable user to current logged in user
   user = g.user._get_current_object()
- 
+
   if form.validate_on_submit():
     # Sets variable filename to image file of uploaded 'product_image' from form
     filename = images.save(request.files['product_image'])
@@ -281,8 +308,7 @@ def add_product():
     return redirect(url_for('product', product_id=product.id))
   # Render the create-product template with the ProductForm
   # Pass in the current_user in order to redirect user back to their profile if they choose to cancel create a product
-  
-  # print(categories)
+ 
   return render_template('create-product.html', form=form, user=user, categories=categories)
 
 @app.route('/create-category', methods=['GET', 'POST'])
@@ -358,6 +384,9 @@ def edit_review(review_id=None):
     return render_template('edit-review.html', review=review, form=form)
 
 
+# ====================================================================
+# =========================  Favorite Product Routes  =========================
+# ====================================================================
 
 
 PORT = 5000

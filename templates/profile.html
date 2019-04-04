@@ -84,6 +84,18 @@
 					{% endfor %}	
 				</div>  <!-- end of .columns div -->
 			</div>  <!-- end of .column div -->
+
+			<div class="column follow">
+					<p> .. followers, ... following.</p>
+					{% if user == current_user %}
+					<p><a href="#"></a></p>
+					{% elif not current_user.is_following(user) %}
+					<p><a href="{{ url_for('follow', username=user.username) }}">Follow</a></p>
+					{% else %}
+					<p><a href="{{ url_for('unfollow', username=user.username) }}">Unfollow</a></p>
+					{% endif %}
+			</div>
+
 		</div>  <!-- end of .columns div -->
 	</div>  <!-- end of .container div -->
 {% endblock %}

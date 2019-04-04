@@ -15,5 +15,5 @@
 pyvenv.cfg
 .venv
 pip-selfcheck.json
-*.sqlite3
+
 # End of https://www.gitignore.io/api/venv
