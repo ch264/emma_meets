@@ -358,6 +358,24 @@ def edit_review(review_id=None):
     return render_template('edit-review.html', review=review, form=form)
 
 
+# ====================================================================
+# ========================= Saved Routes  =========================
+# ====================================================================
+
+
+@app.route('/save/<product_id>')
+@login_required
+def save_to_profile(product_id=None):
+  user = g.user._get_current_object()
+  product = models.Product.get(models.Product.id == product_id)
+  
+  models.Save.create(product=product_id)
+
+  return redirect(url_for('product'))
+
+
+
+
 
 
 PORT = 5000

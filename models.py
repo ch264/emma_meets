@@ -175,8 +175,13 @@ class Review(Model):
 			raise 
 
 	
-		
+class Saved(Model):
+	product = ForeignKeyField(Product)
+	timestamp = DateTimeField(default=datetime.datetime.now())
 
+	class Meta:
+		database = DATABASE
+		db_table = 'saved'
 
 
 
