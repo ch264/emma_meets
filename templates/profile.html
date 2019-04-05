@@ -78,9 +78,9 @@
 				<h4>Favorite Prodcuts</h4>
 				<div class="columns is-multiline">
 					<!-- Iterate through saved_recipes passed down from app.py -->
-					{% for fave in favorite_product %}
-						<!-- Use each single fave recipe info in sub-template _recipe.html -->
-						{% include '_favorite_product.html' %}
+					{% for save in saved_product %}
+						<!-- Use each single save product info in sub-template _saved_product.html -->
+						{% include '_saved_product.html' %}
 					{% endfor %}	
 				</div>  <!-- end of .columns div -->
 			</div>  <!-- end of .column div -->

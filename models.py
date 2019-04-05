@@ -176,6 +176,8 @@ class Review(Model):
 
 	
 class Saved(Model):
+	# Sets user column to expect a foreign key (product Id)
+	user = ForeignKeyField(User)
 	product = ForeignKeyField(Product)
 	timestamp = DateTimeField(default=datetime.datetime.now())
 
@@ -188,5 +190,5 @@ class Saved(Model):
 # Defines initialize function to connect to database, create empty tables, and close connection
 def initialize():
 	DATABASE.connect()
-	DATABASE.create_tables([User, Product, Review, Category], safe=True)
+	DATABASE.create_tables([User, Product, Review, Category, Saved], safe=True)
 	DATABASE.close()

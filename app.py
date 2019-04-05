@@ -160,7 +160,7 @@ def logout():
 # =========================  Profile Routes  =========================
 # ====================================================================
 # Route and method to go to a user's profile
-@app.route('/profile/<username>', methods=['GET'])
+@app.route('/profile/<username>', methods=['GET', 'DELETE'])
 @login_required
 def profile(username=None):
   if username != None:
@@ -168,10 +168,10 @@ def profile(username=None):
     user = models.User.select().where(models.User.username==username).get()
     # Finds all reviews in database where the user id stored with a reciew matches the found user aboves id
     reviews = models.Review.select().where(models.Review.user == user.id).order_by(-models.Review.timestamp)
-   
-# finds all favorited products
 
-    return render_template('profile.html', user=user, reviews=reviews)
+    # finds all favorited products
+    saved_product = (models.Saved.select(models.Saved, models.Product.name, models.Product.id, models.User.username).join(models.User).switch(models.Saved).join(models.Product))
+    return render_template('profile.html', user=user, reviews=reviews, saved_product=saved_product)
   return redirect(url_for('index'))
 
 
@@ -362,19 +362,26 @@ def edit_review(review_id=None):
 # ========================= Saved Routes  =========================
 # ====================================================================
 
-
+# create route to add data to join table
 @app.route('/save/<product_id>')
 @login_required
 def save_to_profile(product_id=None):
   user = g.user._get_current_object()
   product = models.Product.get(models.Product.id == product_id)
   
-  models.Save.create(product=product_id)
-
-  return redirect(url_for('product'))
-
+  models.Saved.create(user=user.id, product=product_id)
+  return redirect(url_for('profile', username=user.username))
 
 
+@app.route('/remove/<product_id>', methods=['GET', 'DELETE'])
+@login_required
+def remove_saved(product_id=None):
+  user = g.user._get_current_object()
+  if product_id != None:
+    remove_saved = models.Saved.delete().where(models.Saved.user == user.id and models.Saved.product == product_id)
+    remove_saved.execute()
+    return redirect(url_for('profile', username=username))
+  return redirect(url_for('profile', username=username))
 
 
 
