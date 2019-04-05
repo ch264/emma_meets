@@ -185,7 +185,7 @@ def profile(username=None):
     # .join(models.Product) 
     # .join(models.User))
     Owner = user.alias()
-    saved_product = (models.Saved.select(models.Saved, models.Product.name, models.Product.id, Owner.username)
+    saved_product = (models.Saved.select(models.Saved, models.Product.name, models.Product.avg_rating, models.Product.website,models.Product.id, models.Product.image_filename, Owner.username)
     .join(Owner) 
     # .join(models.User)
     .switch(models.Saved)
