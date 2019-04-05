@@ -177,8 +177,8 @@ class Review(Model):
 	
 class Saved(Model):
 	# Sets user column to expect a foreign key (product Id)
-	user = ForeignKeyField(User)
-	product = ForeignKeyField(Product)
+	user = ForeignKeyField(User, backref='favorites')
+	product = ForeignKeyField(Product, backref="favorites")
 	timestamp = DateTimeField(default=datetime.datetime.now())
 
 	class Meta:

@@ -1,17 +1,20 @@
 import os
-from flask import Flask, g, request, render_template, flash, redirect, url_for, session, escape, jsonify
+from flask import Flask, g, request, render_template, flash, redirect, url_for, session, escape
 # from config import Config
 
 # User login
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from flask_bcrypt import check_password_hash
 import models, forms
+# Redirect user when not logged in
+from werkzeug.urls import url_parse
 
 
 # Image uploader
 from flask_uploads import UploadSet, configure_uploads, IMAGES
-
-
+from flask_wtf import Form
+from flask_wtf.file import FileField
+from werkzeug import secure_filename
 
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_pyfile('flask.cfg')
@@ -170,7 +173,24 @@ def profile(username=None):
     reviews = models.Review.select().where(models.Review.user == user.id).order_by(-models.Review.timestamp)
 
     # finds all favorited products
-    saved_product = (models.Saved.select(models.Saved, models.Product.name, models.Product.id, models.User.username).join(models.User).switch(models.Saved).join(models.Product))
+    # Owner = user.alias()
+
+    # saved_product = models.Saved.select(models.User, models.Product).join(models.Saved, on=models.Saved.product).where(models.User.username == current_user.userame)
+
+    # query = models.Product.select().join(models.User).where(User.username == current_user)
+    # print(current_user)
+  
+    # saved_product = (models.Saved.select(models.Saved, models.Product.name, models.Product.id, models.User.username)
+    # .join(models.Saved)
+    # .join(models.Product) 
+    # .join(models.User))
+    Owner = user.alias()
+    saved_product = (models.Saved.select(models.Saved, models.Product.name, models.Product.id, Owner.username)
+    .join(Owner) 
+    # .join(models.User)
+    .switch(models.Saved)
+    .join(models.Product))
+    # .join(models.User))
     return render_template('profile.html', user=user, reviews=reviews, saved_product=saved_product)
   return redirect(url_for('index'))
 
@@ -364,24 +384,28 @@ def edit_review(review_id=None):
 
 # create route to add data to join table
 @app.route('/save/<product_id>')
-@login_required
 def save_to_profile(product_id=None):
   user = g.user._get_current_object()
   product = models.Product.get(models.Product.id == product_id)
   
-  models.Saved.create(user=user.id, product=product_id)
+  models.Saved.create(
+    user=user.id, 
+    product=product_id)
   return redirect(url_for('profile', username=user.username))
+  # return redirect(url_for('product'))
 
 
 @app.route('/remove/<product_id>', methods=['GET', 'DELETE'])
 @login_required
 def remove_saved(product_id=None):
   user = g.user._get_current_object()
+  print('out if')
   if product_id != None:
+    print('in if')
     remove_saved = models.Saved.delete().where(models.Saved.user == user.id and models.Saved.product == product_id)
     remove_saved.execute()
-    return redirect(url_for('profile', username=username))
-  return redirect(url_for('profile', username=username))
+    return redirect(url_for('profile', username=user.username))
+  return redirect(url_for('profile', username=user.username))
 
 
 

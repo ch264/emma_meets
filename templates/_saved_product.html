@@ -4,12 +4,10 @@
 		<div class="card">
 			<div class="card-image">
 				<figure class="image">
-		
 					<!-- Because this accesses a referenced product from the join table, call values with an additional dot notation -->
 					<a href="{{ url_for('product', product_id=save.product.id) }}"><img src="../static/uploads/{{ save.product.image_filename}}" alt="{{ save.product.image_filename }}"></a>
 				</figure>
 			</div>
-
 			<div class="card-content">
 				<div class="content">
 					<div class="media-content">
@@ -17,12 +15,12 @@
 							<!-- Sets anchor tag to 'product' function defined in app.py to redirect to individual product page -->
 							<a href="{{ url_for('product', product_id=save.product) }}" class="has-text-dark">{{ save.product.name }}</a>
 						</p>
-						<p>{{ save.user.product.avg_rating }}</p>
-						<p>{{ save.user.product.website }}</p>
-							
-						<!-- Sets anchor tag to link to function 'remove_favorite' defined in app.py -->
+						<p>{{ save.product.avg_rating }}</p>
+						<p>{{ save.product.website }}</p>
+						<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button is-dark is-small">Remove</a>
+						<!-- Sets anchor tag to link to function 'remove_saved' defined in app.py -->
 						{% if current_user.id == save.user.id %}
-							<a href="{{ url_for('remove_favorite', product_id=save.product) }}" class="button is-dark is-small">Remove</a>
+							<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button is-dark is-small">Remove</a>
 						{% endif %}
 					</div>
 				</div>
