@@ -62,7 +62,31 @@ class User(UserMixin, Model):
 		except IntegrityError:
 			raise ValueError('create user error')
 	
-	
+	# example, "give me all the users this user is following":
+	def following(self):
+		# query other users through the "relationship" table
+		return (User
+						.select()
+						.join(Follow, on=Follow.to_user)
+						.where(Follow.from_user == self)
+						.order_by(User.username))
+
+	def followers(self):
+		return (User
+						.select()
+						.join(Follow, on=Follow.from_user)
+						.where(Follow.to_user == self)
+						.order_by(User.username))
+
+	def is_following(self, user):
+		return (Follow
+						.select()
+						.where(
+								(Follow.from_user == self) &
+								(Follow.to_user == user))
+						.exists())
+
+
 # ====================================================================
 # ========================= Follow Model  ============================
 # ====================================================================
@@ -88,19 +112,19 @@ class Follow(Model):
 		for followed in Follow:
 			print(followed)
 
-		# =================== 
+# 		# =================== 
 
-	def follow(self, user):
-		if not self.is_following(user):
-			self.followed.append(user)
+# 	def follow(self, user):
+# 		if not self.is_following(user):
+# 			self.followed.append(user)
 
-	def unfollow(self, user):
-		if self.is_following(user):
-			self.followed.remove(user)
+# 	def unfollow(self, user):
+# 		if self.is_following(user):
+# 			self.followed.remove(user)
 
-	def is_following(self, user):
-		return self.followed.filter(
-			followers.c.followed_id == user.id).count() > 0
+# 	def is_following(self, user):
+# 		return self.followed.filter(
+# 			followers.c.followed_id == user.id).count() > 0
 
 
 # ====================================================================
