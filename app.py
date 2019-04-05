@@ -184,13 +184,16 @@ def profile(username=None):
     # .join(models.Saved)
     # .join(models.Product) 
     # .join(models.User))
-    Owner = user.alias()
-    saved_product = (models.Saved.select(models.Saved, models.Product.name, models.Product.avg_rating, models.Product.website,models.Product.id, models.Product.image_filename, Owner.username)
-    .join(Owner) 
-    # .join(models.User)
-    .switch(models.Saved)
-    .join(models.Product))
-    # .join(models.User))
+    # ////////////////////////////////////////////
+    # Owner = user.alias()
+    # saved_product = (models.Saved.select(models.Saved, models.Product.name, models.Product.avg_rating, models.Product.website,models.Product.id, models.Product.image_filename, Owner.username)
+    # .join(Owner) 
+    # # .join(models.User)
+    # .switch(models.Saved)
+    # .join(models.Product))
+    # # .join(models.User))
+    # /////////////////////////////////////////////////
+    saved_product = models.Saved.select(models.Saved, models.User, models.Product).join(models.User).switch(models.Saved).join(models.Product)
     return render_template('profile.html', user=user, reviews=reviews, saved_product=saved_product)
   return redirect(url_for('index'))
 
@@ -386,8 +389,9 @@ def edit_review(review_id=None):
 @app.route('/save/<product_id>')
 def save_to_profile(product_id=None):
   user = g.user._get_current_object()
+  # user = models.User.get(g.user.id)
   product = models.Product.get(models.Product.id == product_id)
-  
+  print(user.id)
   models.Saved.create(
     user=user.id, 
     product=product_id)
@@ -398,10 +402,9 @@ def save_to_profile(product_id=None):
 @app.route('/remove/<product_id>', methods=['GET', 'DELETE'])
 @login_required
 def remove_saved(product_id=None):
+  # user = models.User.get(g.user.id)
   user = g.user._get_current_object()
-  print('out if')
   if product_id != None:
-    print('in if')
     remove_saved = models.Saved.delete().where(models.Saved.user == user.id and models.Saved.product == product_id)
     remove_saved.execute()
     return redirect(url_for('profile', username=user.username))

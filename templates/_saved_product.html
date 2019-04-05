@@ -1,5 +1,6 @@
 
 <!-- pass in subtemplate of saved favorite to profile page -->
+{% if current_user.id == save.user.id %}
 <div class="column is-one-third-desktop is-half-tablet">
 		<div class="card">
 			<div class="card-image">
@@ -20,7 +21,7 @@
 						<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button is-dark is-small">Remove</a>
 						<!-- Sets anchor tag to link to function 'remove_saved' defined in app.py -->
 						{% if current_user.id == save.user.id %}
-							<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button is-dark is-small">Remove</a>
+							<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button is-danger is-small">logged in user remove</a>
 						{% endif %}
 					</div>
 				</div>
@@ -28,3 +29,4 @@
 
 		</div>
 	</div>
+	{% endif %}
