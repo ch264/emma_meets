@@ -13,6 +13,7 @@
       <p class=""> Rating: {{ product.avg_rating }}</p>
       <a class="button" href="{{ url_for('add_review', product_id=product.id) }}">Leave a Review</a> 
       <a href="{{ url_for('save_to_profile', product_id=product.id) }}" class="button is-light is-small">Save to Favorites</a>
+      <a href="{{ url_for('edit_product', product_id=product.id) }}" class="button is-light is-small">Edit Information</a>
     </div>
     <div class="column is-three-quarter">
       <img src="{{ url_for('static', filename='dog-hotel.jpg') }}">

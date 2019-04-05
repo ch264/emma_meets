@@ -1,3 +1,6 @@
+
+
+
 {% extends "base.html" %}
 <!-- Imports macro template for error rendering -->
 {% from "macros.html" import field_error %}
@@ -13,28 +16,28 @@
         <form method="POST" action="">
 					{{ form.hidden_tag() }}
 					
-          <!-- title field -->
+          <!-- name field -->
           <div class="form-input">
-            {{ field_error(form.title) }}
+            {{ field_error(form.name) }}
 
-            {{ form.title.label(class="label") }}
-            {{ form.title(class="control", placeholder=product.title, cols="35", rows="20") }}
+            {{ form.name.label(class="label") }}
+            {{ form.name(class="control", placeholder=product.name, cols="35", rows="20") }}
           </div>
 
           <!-- body field -->
           <div class="form-input">
-            {{ field_error(form.body) }}
+            {{ field_error(form.location) }}
 
-            {{ form.body.label(class="label") }}
-            {{ form.body(class="control", placeholder=product.body, cols="35", rows="20") }}
+            {{ form.location.label(class="label") }}
+            {{ form.location(class="control", placeholder=product.location, cols="35", rows="20") }}
           </div>
 
 					<!-- rating field -->
 					<div class="form-input">
-						{{ field_error(form.rating) }}
+						{{ field_error(form.website) }}
 
-						{{ form.rating.label(class="label") }}
-						{{ form.rating(class="control", placeholder=product.rating, cols="35", rows="20") }}
+						{{ form.website.label(class="label") }}
+						{{ form.website(class="control", placeholder=product.website, cols="35", rows="20") }}
 					</div>
 					
           <div class="has-text-centered">

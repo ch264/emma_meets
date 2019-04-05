@@ -63,29 +63,56 @@ class User(UserMixin, Model):
 			raise ValueError('create user error')
 	
 	# example, "give me all the users this user is following":
-	def following(self):
-		# query other users through the "relationship" table
-		return (User
-						.select()
-						.join(Follow, on=Follow.to_user)
-						.where(Follow.from_user == self)
-						.order_by(User.username))
+	# def following(self):
+	# 	# query other users through the "relationship" table
+	# 	return (User
+	# 					.select()
+	# 					.join(Follow, on=Follow.to_user)
+	# 					.where(Follow.from_user == self)
+	# 					.order_by(User.username))
 
-	def followers(self):
-		return (User
-						.select()
-						.join(Follow, on=Follow.from_user)
-						.where(Follow.to_user == self)
-						.order_by(User.username))
+	# def followers(self):
+	# 	return (User
+	# 					.select()
+	# 					.join(Follow, on=Follow.from_user)
+	# 					.where(Follow.to_user == self)
+	# 					.order_by(User.username))
 
-	def is_following(self, user):
-		return (Follow
-						.select()
-						.where(
-								(Follow.from_user == self) &
-								(Follow.to_user == user))
-						.exists())
+	# def is_following(self, user):
+	# 	return (Follow
+	# 					.select()
+	# 					.where(
+	# 							(Follow.from_user == self) &
+	# 							(Follow.to_user == user))
+	# 					.exists())
 
+# =================== Mega Tutorial ==================================
+
+	#  join Two Users into  the Model
+	# followed = models.Saved.select(models.Saved, models.User, models.User).join(models.User).switch(models.Saved).join(models.User)
+
+
+	# def follow(self, user):
+	# 	if not self.is_following(user):
+	# 		self.followed.append(user)
+
+	# def unfollow(self, user):
+	# 	if self.is_following(user):
+	# 		self.followed.remove(user)
+
+	# def is_following(self, user):
+	# 	return self.followed.filter(
+	# 		followers.c.followed_id == user.id).count() > 0
+
+
+	# //////////////// treehouse ////////////////
+	# @property
+	# def following(self):
+	# 	return (User.select().join(Follow, on=Follow.followed).where(Follow.follower == self))
+	
+	# @property
+	# def followers(self):
+	# 	return (User.select().join(Follow, on=Follow.follower).where(Follow.followed == self))
 
 # ====================================================================
 # ========================= Follow Model  ============================
@@ -96,35 +123,23 @@ class Follow(Model):
 	followed = ForeignKeyField(User, backref="user_followed")
 	class Meta:
 		database = DATABASE
-		db_table = 'follow'
-		# indexes = (
-    #         # Specify a unique multi-column index on follower/followed.
-    #         (('follower', 'followed'), True),
-    #     )
+		# db_table = 'follow'
+		# Specify a unique multi-column index on follower/followed.
+		indexes = (
+            (('follower', 'followed'), True),
+        )
 
-	def follower(self):
-		User.select().join(Follow, on=Follow.followed).where(Follow.follower == user.id)
-		for follower in Follow:
-			print(follower)
+	# def follower(self):
+	# 	User.select().join(Follow, on=Follow.followed).where(Follow.follower == user.id)
+	# 	for follower in Follow:
+	# 		print(follower)
 
-	def following(self): 
-		User.select().join(Follow, on=Follow.follower).where(Follower.followed == user.id)
-		for followed in Follow:
-			print(followed)
+	# def following(self): 
+	# 	User.select().join(Follow, on=Follow.follower).where(Follower.followed == user.id)
+	# 	for followed in Follow:
+	# 		print(followed)
 
-# 		# =================== 
 
-# 	def follow(self, user):
-# 		if not self.is_following(user):
-# 			self.followed.append(user)
-
-# 	def unfollow(self, user):
-# 		if self.is_following(user):
-# 			self.followed.remove(user)
-
-# 	def is_following(self, user):
-# 		return self.followed.filter(
-# 			followers.c.followed_id == user.id).count() > 0
 
 
 # ====================================================================
@@ -200,15 +215,10 @@ class Product(Model):
 		review_list = []
 		for review in query:
 			review_list.append(review.rating)
-			print(review.rating)
-		# print(sum(review_list) / len(review_list))
 		if len(review_list) == 0: 
 			return 0
 		self.avg_rating = sum(review_list) / len(review_list)
-		# return sum(review_list) / len(review_list)
-		# self.avg_rating.save()
 		self.save()
-		# print(self, self.avg_rating)
 		return self.avg_rating
 		
 # ====================================================================

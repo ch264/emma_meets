@@ -166,28 +166,14 @@ def profile(username=None):
     user = models.User.select().where(models.User.username==username).get()
     # Finds all reviews in database where the user id stored with a reciew matches the found user aboves id
     reviews = models.Review.select().where(models.Review.user == user.id).order_by(-models.Review.timestamp)
-# finds all favorited products
-
-    # finds all followers and followed
-    follow = models.Follow.select().where(models.Follow)
-
-    return render_template('profile.html', user=user, reviews=reviews, follow=follow)
-
-    # saved_product = models.Saved.select(models.User, models.Product).join(models.Saved, on=models.Saved.product).where(models.User.username == current_user.userame)
-
-    # query = models.Product.select().join(models.User).where(User.username == current_user)
-    # print(current_user)
-  
-    # ////////////////////////////////////////////
-    # Owner = user.alias()
-    # saved_product = (models.Saved.select(models.Saved, models.Product.name, models.Product.avg_rating, models.Product.website,models.Product.id, models.Product.image_filename, Owner.username)
-    # .join(Owner) 
-    # # .join(models.User)
-    # .switch(models.Saved)
-    # .join(models.Product))
-    # # .join(models.User))
-    # /////////////////////////////////////////////////
+    
     saved_product = models.Saved.select(models.Saved, models.User, models.Product).join(models.User).switch(models.Saved).join(models.Product)
+
+    # //////////////treehouse ///////////
+    # finds all followers and followed
+    # following = models.Follow.select().where(models.Follow)
+
+
     return render_template('profile.html', user=user, reviews=reviews, saved_product=saved_product)
   return redirect(url_for('index'))
 
@@ -226,6 +212,9 @@ def edit_profile(username=None):
 # ====================================================================
 # =========================  Follow Routes  =========================
 # ====================================================================
+
+# //////////////// MegaFlask Tutorial //////////////////
+
 @app.route('/follow/<username>')
 @login_required
 def follow(username):
@@ -254,6 +243,34 @@ def unfollow(username):
   flash('You are not following {}.'.format(username))
   return redirect(url_for('user', username=username))
 
+# //////////////// Treehouse tutorial ////////////////////////////
+# @app.route('/follow/<username>')
+# @login_required
+# def follow(username):
+#   try:
+#     user = models.User.get(models.User.username == current_user.username)
+#     models.Follow.create(
+#         follower = g.user._get_current_object(),
+#         followed = user
+#     )
+#   except models.DoesNotExist:
+#     pass
+#   return redirect(url_for('index'))
+
+# @app.route('/unfollow/<username>')
+# @login_required
+# def unfollow(username):
+#     try:
+#       user = models.User.get(models.User.id == username)
+      
+#       models.Follow.get(
+#         models.Follow.follower == g.user._get_current_object(),
+#         models.Follow.followed == user
+#       ).delete_instance()
+#     except models.DoesNotExist:
+#       pass
+#     return render_template('profile.html', user=user.username)
+  
 
 # ====================================================================
 # =========================  Product Routes  =========================
@@ -342,7 +359,27 @@ def add_category():
     return redirect(url_for('product'))
   return render_template('create-category.html', form=form, user=user)
 
-
+@app.route('/edit-product/<product_id>', methods=['GET', 'POST'])
+@login_required
+def edit_product(product_id=None):
+  form = forms.EditProductForm()
+  user = g.user._get_current_object()
+  product = models.Product.select().where(models.Product.id == product_id).get()
+  print('out if')
+  if product_id != None:
+    print('in if 1')
+    product = models.Product.select().where(models.Product.id == product_id).get()
+    if form.validate_on_submit():
+      print('in if 2')
+      product = models.Product.select().where(models.Product.id == product_id).get()
+      product.name = form.name.data
+      product.location = form.location.data
+      product.website = form.website.data
+      product.save()
+      flash('Your edited Product is now online', 'success')
+      return redirect(url_for('product', product=product_id))
+    form.process()
+    return render_template('edit-product.html', product=product, form=form, user=user)
 # ====================================================================
 # =========================  Review Routes  =========================
 # ====================================================================
@@ -400,7 +437,7 @@ def edit_review(review_id=None):
     return render_template('edit-review.html', review=review, form=form)
 
 # ====================================================================
-# ========================= Saved Routes  =========================
+# ========================= Saved favorite Routes  =========================
 # ====================================================================
 
 # create route to add data to join table

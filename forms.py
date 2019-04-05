@@ -157,12 +157,13 @@ class ProductForm(Form):
 	# submit = SubmitField('Submit')
 
 
-	class EditProductForm(Form):
-		name = StringField('name')
-		location = StringField('Location')
-		website = StringField('Website')
-		product_image = FileField('Profile Image')
-		category = SelectField('Category', choices=[], validators=[DataRequired()])
+class EditProductForm(Form):
+	name = TextField('name')
+	location = TextField('Location')
+	website = TextField('Website')
+	# product_image = FileField('Profile Image')
+	# category = SelectField('Category', choices=[], validators=[DataRequired()])
+	submit = SubmitField('Submit')
 
 # Creates a new ReviewForm
 class ReviewForm(Form): 
@@ -179,8 +180,6 @@ class ReviewForm(Form):
 				validators=[DataRequired()]
 				)
 		submit = SubmitField('Submit')
-		
-			
 		
   #  do we need ain image placeholder for the image of who is leaving the rview?
 
