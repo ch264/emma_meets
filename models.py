@@ -130,8 +130,6 @@ class Follow(Model):
 # ====================================================================
 # =========================  Category Model  =========================
 # ====================================================================
-
-
 class Category(Model):
 	name = CharField(unique=True)
 
@@ -152,7 +150,6 @@ class Category(Model):
 # ====================================================================
 # =========================  Product Model  =========================
 # ====================================================================
-
 class Product(Model):
 	name = CharField()
 	location = TextField()
@@ -217,7 +214,6 @@ class Product(Model):
 # ====================================================================
 # =========================  Review Model  ===========================
 # ====================================================================
-
 class Review(Model):
 	title = CharField()
 	body = TextField()
@@ -244,16 +240,20 @@ class Review(Model):
 			raise 
 
 	
+class Saved(Model):
+	# Sets user column to expect a foreign key (product Id)
+	user = ForeignKeyField(User, backref='favorites')
+	product = ForeignKeyField(Product, backref="favorites")
+	timestamp = DateTimeField(default=datetime.datetime.now())
 
-
-
-
-
+	class Meta:
+		database = DATABASE
+		db_table = 'saved'
 
 
 
 # Defines initialize function to connect to database, create empty tables, and close connection
 def initialize():
 	DATABASE.connect()
-	DATABASE.create_tables([User, Product, Review, Category, Follow], safe=True)
+	DATABASE.create_tables([User, Product, Review, Category, Saved, Follow], safe=True)
 	DATABASE.close()
