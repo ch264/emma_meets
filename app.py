@@ -4,7 +4,7 @@ from flask import Flask, g, request, render_template, flash, redirect, url_for, 
 
 # User login
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
-from flask_bcrypt import check_password_hash
+from flask_bcrypt import check_password_hash, Bcrypt, generate_password_hash
 import models, forms
 # Redirect user when not logged in
 from werkzeug.urls import url_parse
@@ -31,6 +31,8 @@ app.config['MAIL_USERNAME'] = 'lalatestingemma@gmail.com'
 app.config['MAIL_PASSWORD'] = 'Mysanfran3'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
+
+bcrypt = Bcrypt(app)
 
 # intialise extension
 mail = Mail(app)
@@ -532,15 +534,18 @@ def reset_token(token):
     return redirect(url_for('index'))
   user = models.User.verify_reset_token(token)
   if not user:
+    print('invalid token')
   # if user is None:
     # pass in class warningk, can be used by css
     flash('That is an invalid or expired token', 'warning')
     return redirect(url_for('reset_request'))
   form = forms.ResetPasswordForm()
+  print('show form reset password')
   if form.validate_on_submit():
-    hashed_password =  bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+    print('in hashed password')
+    hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
     user.password = hashed_password
-    save()
+    user.save()
     flash('Your password has been updated!, please log in')
     return redirect(url_for('login'))
   return render_template('reset_token.html', title='Reset Password',form=form)
