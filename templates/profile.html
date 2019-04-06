@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<div class="container profile-container ">
+	<div class="container is-widescreen profile-container ">
 		<div class="columns profileTitle">
 			<!-- User photo -->
 			<div class="column">
-				<div class="image is-pulled-right">
+				<div class="image">
 					<img class="image is-rounded" src=" ../static/uploads/{{ user.image_filename }}" alt="User profile image">
 					<p><span class="about_me"><small>About me: {{ user.about_me }} </small></span></p>
 				</div>
@@ -19,16 +19,22 @@
 
 				<div class="columns">
 					<div class="column">
+						<i class="fas fa-couch"></i>
 						<p><span class="location"><small>I live in: {{ user.location }} </small></span></p>
+						<i class="fas fa-hotdog"></i>
 						<p><span class="fav_snack"><small>fav_snack: {{ user.fav_snack }}</small></span></p>
 						
 					</div>
 					<div class="column">
+						<i class="fas fa-venus-mars"></i>
 						<p><span class="gender"><small>gender: {{ user.gender }}</small><nder/span></p>
+						<i class="fas fa-hotdog"></i>
 						<p><span class="breed"><small>breed: {{ user.breed }}</small></span></p>
 					</div>
 					<div class="column">
+							<i class="fas fa-birthday-cake"></i>
 						<p><span class="age"><small>I am: age</small></span></p>
+						<i class="fas fa-baseball-ball"></i>
 						<p><span class="fav_toy"><small>fav_toy: {{ user.fav_toy }}</small></span></p>
 					</div>
 				</div>
@@ -96,7 +102,7 @@
 					
 				
 			</div>
-
+			
 		</div>  <!-- end of .columns div -->
 	</div>  <!-- end of .container div -->
 {% endblock %}

@@ -7,7 +7,8 @@
 
 		<title>EmmaMeets | Woof</title>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-	</head>
+		
+
 
 	<!-- Bulma CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
@@ -17,13 +18,16 @@
 	<!-- Our CSS -->
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
 
 	<body>
 		<header>
 			<nav class="navbar is-transparent is-fixed-top" role="navigation" aria-label="main navigation">
 				<div class="navbar-brand ">
 					<!-- Logo -->
-					<a href="{{ url_for('index') }}" class="navbar-item center"><img src="#" alt="Logo" width="112" height="28"></a>
+					<a href="{{ url_for('index') }}" class="navbar-item center"><img src="{{ url_for('static', filename='dog.png')}}" alt="Logo"></a>
 
 					<!-- Hamburger icon for responsive nav -->
 					<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" >

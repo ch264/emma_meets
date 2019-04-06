@@ -45,7 +45,7 @@ class User(UserMixin, Model):
 	class Meta:
 		database = DATABASE
 		db_table = 'user'
-
+		only_save_dirty = True
 	@classmethod
 	def create_user(cls, username, email, password, about_me, gender, location, fav_snack, fav_toy, breed, image_filename, image_url):
 		try:
@@ -194,8 +194,9 @@ class Product(Model):
 	category = ForeignKeyField(model=Category, backref='product_category')
 	avg_rating = FloatField(default=None, null=True)
 	class Meta:
-					database = DATABASE
-					db_table = 'product'
+		database = DATABASE
+		db_table = 'product'
+		only_save_dirty = True
 
 	@classmethod
 	def create_product(cls, name, location, website, image_filename, image_url, category):
@@ -255,6 +256,7 @@ class Review(Model):
 	class Meta:
 			database = DATABASE
 			db_table = 'review'
+			only_save_dirty = True
 	
 	@classmethod
 	def create_review(cls, title, user, product, rating, body):

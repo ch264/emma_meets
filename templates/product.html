@@ -11,9 +11,9 @@
       <p class=""> Location: {{ product.location }}</p>
       <p class=""> Website: {{ product.website }}</p>
       <p class=""> Rating: {{ product.avg_rating }}</p>
-      <a class="button" href="{{ url_for('add_review', product_id=product.id) }}">Leave a Review</a> 
-      <a href="{{ url_for('save_to_profile', product_id=product.id) }}" class="button is-light is-small">Save to Favorites</a>
-      <a href="{{ url_for('edit_product', product_id=product.id) }}" class="button is-light is-small">Edit Information</a>
+      <a class="button" href="{{ url_for('add_review', product_id=product.id) }}">Leave a Review</a><hr>
+      <a class="button" href="{{ url_for('save_to_profile', product_id=product.id) }}" class="button is-light is-small">Save to Favorites</a><hr>
+      <a class="button" href="{{ url_for('edit_product', product_id=product.id) }}" class="button is-light is-small">Edit Information</a>
     </div>
     <div class="column is-three-quarter">
       <img src="{{ url_for('static', filename='dog-hotel.jpg') }}">
@@ -29,18 +29,6 @@
               {% include '_review.html' %}
             {% endfor %}	
         </div>
-
-        
-      
-        <div class="column">
-          {% for review in reviews%}
-
-          <p>Review: {{ review.title }}</p><hr>
-          {% endfor %}
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia ullam laudantium harum asperiores illum maiores tempora! Eos nisi corrupti repudiandae officia, eligendi mollitia totam fugiat quae nobis illum asperiores eveniet!</p><hr>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis, quae. Ratione, recusandae quidem. Error quos adipisci cum impedit et. Possimus impedit enim ipsa, ipsum magni dolor alias assumenda sit atque.</p>
-        </div>
     </div>
- 
 </div>
 {% endblock %}

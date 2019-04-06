@@ -17,16 +17,11 @@
           
           <!-- "form" was passed into template in app.py in add_review method -->
           <!-- if condition hides CSRF token field -->
-					{{form.rating.label}}
-					{{form.rating}}
-					
-					{{form.title.label}}
-					{{form.title}}
-
-					{{form.body.label}}
-					{{form.body}}
-
-					{{form.submit}}
+					{% for field in form if field.widget.input_type != 'hidden' %}
+            <!-- Pass in iterated "field" value from form into macro render_field -->
+            {{ render_field(field) }}
+            
+          {% endfor %}
           
           </div>
 				</form>

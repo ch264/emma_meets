@@ -22,6 +22,32 @@ body {
 /* .field {
   margin: 0 auto;
 } */
+/* figure.image {
+  margin: 0px;
+}
+
+div.container.about-team { 
+  margin-left: 0px;
+  margin-right: 0px;
+  max-width: 100%;
+  
+}
+.about-team {
+  margin-top: 100px;
+} */
+
+
+.review {
+  padding-top: 100px;
+}
+
+.box {
+  width: 80vw;
+}
+
+h1.subtitle {
+  padding-top: 100px;
+}
 
 .request {
   padding-top: 100px;
@@ -85,6 +111,10 @@ a.navbar-item {
   padding-top: 5em;
 }
 
+
+.edit-product {
+  padding-top: 100px;
+}
 
 .four {
   background-image: url(404.jpg);

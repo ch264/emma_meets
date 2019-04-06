@@ -12,7 +12,7 @@ from werkzeug.urls import url_parse
 # email confirmation
 from itsdangerous import URLSafeTimedSerializer
 # ts = URLSafeTimedSerializer(app.secret_key)
-from flask_mail import Mail
+from flask_mail import Mail, Message
 
 # Image uploader
 from flask_uploads import UploadSet, configure_uploads, IMAGES
@@ -25,10 +25,13 @@ app.config.from_pyfile('flask.cfg')
 app.secret_key = 'pafajeihguihawiorhgl'
 # config for email sending
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
-app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_PASS')
+app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'lalatestingemma@gmail.com'
+app.config['MAIL_PASSWORD'] = 'Mysanfran3'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
 # intialise extension
 mail = Mail(app)
 
@@ -90,7 +93,11 @@ def internal_error(error):
 		# copied to routes
 @app.route('/')
 def index():
-	return render_template('landing.html')
+  msg = Message('Hello', sender = 'lalatestingemma@gmail.com', recipients = ['id1@gmail.com'])
+  msg.body = "This is the email body"
+  mail.send(msg)
+  return "Sent"
+  return render_template('landing.html')
 
 @app.route('/about')
 def about():
@@ -449,7 +456,7 @@ def edit_review(review_id=None):
       flash('Your edited your review', 'success')
       return redirect(url_for('profile', username=user.username))
     form.process()
-    return render_template('edit-review.html', review=review, form=form)
+    return render_template('edit-review.html', review=review, form=form, product=product)
 
 # ====================================================================
 # ========================= Saved favorite Routes  =========================
@@ -498,8 +505,9 @@ def reset_request():
     return redirect(url_for('index'))
   form = forms.RequestResetForm()
   if form.validate_on_submit():
-    user = User.query.filter_by(email=form.email.data).first()
-    send_reset_email(user)
+    # user = models.User.query.filter_by(email=form.email.data).first()
+    # send_reset_email(user)
+    user = models.User.select().where(user.email == form.email.data)
     flash('An email has been sent to reset password', 'info')
     return redirect(url_for('login'))
   return render_template('reset_request.html', title='Reset Password', form=form)

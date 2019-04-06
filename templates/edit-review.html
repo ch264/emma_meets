@@ -6,7 +6,7 @@
 {% block content %}
   <div class="container edit-review">
     <div class="columns">
-      <div class="column">
+      <div class="column review">
 				<h2 class="subtitle is-2">Edit My Review</h2>
 				
         <!-- form tag to enclose the form fields and upon submit, sends whole form as request -->
@@ -18,7 +18,7 @@
             {{ field_error(form.title) }}
 
             {{ form.title.label(class="label") }}
-            {{ form.title(class="control", placeholder=product.title, cols="35", rows="20") }}
+            {{ form.title(class="control", placeholder=review.title, cols="35", rows="20") }}
           </div>
 
           <!-- body field -->
@@ -26,7 +26,7 @@
             {{ field_error(form.body) }}
 
             {{ form.body.label(class="label") }}
-            {{ form.body(class="control", placeholder=product.body, cols="35", rows="20") }}
+            {{ form.body(class="control", placeholder=review.body, cols="35", rows="20") }}
           </div>
 
 					<!-- rating field -->
@@ -34,20 +34,19 @@
 						{{ field_error(form.rating) }}
 
 						{{ form.rating.label(class="label") }}
-						{{ form.rating(class="control", placeholder=product.rating, cols="35", rows="20") }}
-					</div>
+						{{ form.rating(class="control", placeholder=review.rating, cols="35", rows="20") }}
+					</div> <hr>
 					
-          <div class="has-text-centered">
-							
+          <div class="">
             <!-- Cancel link redirects to 'profile' function as defined in app.py -->
-						<button type="submit" class="button is-danger">Save my changes</button>
+						<button type="submit" class="button">Save my changes</button>
 						<a href="{{ url_for('product') }}" class="button is-light">Cancel</a>
           </div>
-        </form>
+        </form><hr>
       </div>  <!-- end of .column div-->
 
       <div class="column">
-        <img src="#">
+        <img src="{{ url_for('static', filename='dog-hotel.jpg') }}">
       </div>
     </div>  <!-- end of .columns div -->
   </div>
