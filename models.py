@@ -46,6 +46,7 @@ class User(UserMixin, Model):
 		database = DATABASE
 		db_table = 'user'
 		only_save_dirty = True
+
 	@classmethod
 	def create_user(cls, username, email, password, about_me, gender, location, fav_snack, fav_toy, breed, image_filename, image_url):
 		try:
@@ -68,17 +69,21 @@ class User(UserMixin, Model):
 	# ///////// reset token for email reset of password ////////////////
 	# by default token expires after 30 min
 	def get_reset_token(self, expires_sec=1800):
-		s = Serializer(app.secret_key, expires_sec)
-		return s.dumps({'user_id: self.id'}).decode('utf-8')
+		s = Serializer('secret_key', expires_sec)
+		return s.dumps({'user_id': self.id}).decode('utf-8')
 	# do not expect self as arguement, only use token
 	@staticmethod
 	def verify_reset_token(token):
-		s = Serializer(app.secret_key)
+		s = Serializer('secret_key')
 		try:
 			user_id = s.loads(token)['user_id']
 		except:
 			return None
-		return User.query.get(user_id)
+		return User.get(user_id)
+
+	# do we need this or is this for sql alquemy only?
+	def __repr__(self):
+		return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 
 # //////////////////////////////////////
 

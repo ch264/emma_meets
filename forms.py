@@ -198,11 +198,11 @@ class RequestResetForm(Form):
 	email = StringField('Email', validators=[DataRequired(), Email()])
 	submit = SubmitField('Request Password Reset')
 
-	# def validate_email(self, email):
-	# 	user = User.query.filter_by(email=email.data).first()
-	# 	query = user.email
-	# 	if user is None:
-	# 		raise ValidationError('There is no accoutn with that email. Please register')
+	def validate_email(self, email):
+		user = User.get(email = email.data)
+		# user = User.query.filter_by(email=email.data).first()
+		if user is None:
+			raise ValidationError('There is no accoutn with that email. Please register')
 
 class ResetPasswordForm(Form):
 	password = PasswordField('Password', validators=[DataRequired()])

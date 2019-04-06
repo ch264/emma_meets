@@ -93,10 +93,16 @@ def internal_error(error):
 		# copied to routes
 @app.route('/')
 def index():
-  msg = Message('Hello', sender = 'lalatestingemma@gmail.com', recipients = ['id1@gmail.com'])
-  msg.body = "This is the email body"
-  mail.send(msg)
-  return "Sent"
+  def send_reset_email(user):
+    token = user.get_reset_token()
+    # msg = Message('Hello', sender = 'lalatestingemma@gmail.com', recipients = ['id1@gmail.com'])
+    # msg.body = "This is the email body"
+    # mail.send(msg)
+    # return "Sent"
+    msg = Message('Password Reset Request', sender='lalatestingemma@gmail.com', recipients =[user.email])
+    msg.body = f''' To reset your password, visit the following link: {url_for('reset_token', token=token, _external=True)} If you did not make this request then simply ignore this email'''
+    mail.send(msg)
+    return "Sent"
   return render_template('landing.html')
 
 @app.route('/about')
@@ -198,6 +204,18 @@ def profile(username=None):
 
     return render_template('profile.html', user=user, reviews=reviews, saved_product=saved_product)
   return redirect(url_for('index'))
+
+def send_reset_email(user):
+  token = user.get_reset_token()
+  # msg = Message('Hello', sender = 'lalatestingemma@gmail.com', recipients = ['id1@gmail.com'])
+  # msg.body = "This is the email body"
+  # mail.send(msg)
+  # return "Sent"
+  msg = Message('Password Reset Request', sender='lalatestingemma@gmail.com', recipients =[user.email])
+  msg.body = f''' To reset your password, visit the following link: {url_for('reset_token', token=token, _external=True)} If you did not make this request then simply ignore this email'''
+  mail.send(msg)
+  return "Sent"
+
 
 
 @app.route('/edit-profile/<username>', methods=['GET', 'POST'])
@@ -387,12 +405,9 @@ def edit_product(product_id=None):
   form = forms.EditProductForm()
   user = g.user._get_current_object()
   product = models.Product.select().where(models.Product.id == product_id).get()
-  print('out if')
   if product_id != None:
-    print('in if 1')
     product = models.Product.select().where(models.Product.id == product_id).get()
     if form.validate_on_submit():
-      print('in if 2')
       product = models.Product.select().where(models.Product.id == product_id).get()
       product.name = form.name.data
       product.location = form.location.data
@@ -492,48 +507,41 @@ def remove_saved(product_id=None):
 # ========================= Email Routes  =========================
 # ====================================================================
 
-def send_reset_email(user):
-  token = user.get_reset_token()
-  msg = Message('Password Reset Request', sender='noreply@demo.com', recipients =[user.email])
-
-  msg.body = f''' To reset your password, visit the following link: {url_for('reset_token', token=token, _external=True)} If you did not make this request then simply ignore this email'''
-
-# request to reset password
+# request to reset password, shows form to input email address
 @app.route('/reset_password', methods=['GET', 'POST'])
 def reset_request():
   if current_user.is_authenticated:
     return redirect(url_for('index'))
   form = forms.RequestResetForm()
+
   if form.validate_on_submit():
+    print('in if')
     # user = models.User.query.filter_by(email=form.email.data).first()
-    # send_reset_email(user)
-    user = models.User.select().where(user.email == form.email.data)
+    user = models.User.get(models.User.email == form.email.data)
+    # if user:
+    send_reset_email(user)
     flash('An email has been sent to reset password', 'info')
     return redirect(url_for('login'))
   return render_template('reset_request.html', title='Reset Password', form=form)
 
-# copied from forms.py reset_request
-def validate_email(self, email):
-  # user = User.query.filter_by(email=email.data).first()
-  user = models.User.select().where(models.User.email == user.email).get()
-  query = user.email
-  if user is None:
-    raise ValidationError('There is no accoutn with that email. Please register')
 
 # reset password route
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
-def reset_reset(token):
+def reset_token(token):
   if current_user.is_authenticated:
     return redirect(url_for('index'))
-  user = User.verify_reset_token(token)
-  if user is None:
+  user = models.User.verify_reset_token(token)
+  if not user:
+  # if user is None:
     # pass in class warningk, can be used by css
     flash('That is an invalid or expired token', 'warning')
     return redirect(url_for('reset_request'))
-  form = ResetPasswordForm()
+  form = forms.ResetPasswordForm()
   if form.validate_on_submit():
-    user.password = form.password.data
+    hashed_password =  bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+    user.password = hashed_password
     save()
+    flash('Your password has been updated!, please log in')
     return redirect(url_for('login'))
   return render_template('reset_token.html', title='Reset Password',form=form)
 

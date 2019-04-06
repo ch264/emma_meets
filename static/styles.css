@@ -86,6 +86,10 @@ a.navbar-item {
   padding-top: 10em;
 }
 
+/* reset password */
+.reset-token {
+  padding-top: 100px;
+}
 
 .profileTitle {
   padding-top: 100px;
