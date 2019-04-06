@@ -5,6 +5,9 @@ from flask_bcrypt import generate_password_hash
 # from app import db, app
 from peewee import *
 
+# for reset email
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+
 # Peewee provides advanced support for SQLite and Postgres via database-specific extension modules.
 # from playhouse.postgres_ext import PostgresqlExtDatabase
 # db = PostgresqlExtDatabase('app', user='christinahastenrath', register_hstore=True)
@@ -61,7 +64,24 @@ class User(UserMixin, Model):
 				image_url = image_url)
 		except IntegrityError:
 			raise ValueError('create user error')
-	
+
+	# ///////// reset token for email reset of password ////////////////
+	# by default token expires after 30 min
+	def get_reset_token(self, expires_sec=1800):
+		s = Serializer(app.secret_key, expires_sec)
+		return s.dumps({'user_id: self.id'}).decode('utf-8')
+	# do not expect self as arguement, only use token
+	@staticmethod
+	def verify_reset_token(token):
+		s = Serializer(app.secret_key)
+		try:
+			user_id = s.loads(token)['user_id']
+		except:
+			return None
+		return User.query.get(user_id)
+
+# //////////////////////////////////////
+
 	# example, "give me all the users this user is following":
 	# def following(self):
 	# 	# query other users through the "relationship" table

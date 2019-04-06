@@ -9,6 +9,10 @@ import models, forms
 # Redirect user when not logged in
 from werkzeug.urls import url_parse
 
+# email confirmation
+from itsdangerous import URLSafeTimedSerializer
+# ts = URLSafeTimedSerializer(app.secret_key)
+from flask_mail import Mail
 
 # Image uploader
 from flask_uploads import UploadSet, configure_uploads, IMAGES
@@ -19,14 +23,25 @@ from werkzeug import secure_filename
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_pyfile('flask.cfg')
 app.secret_key = 'pafajeihguihawiorhgl'
+# config for email sending
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
+app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_PASS')
+# intialise extension
+mail = Mail(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+# ts = URLSafeTimedSerializer(app.secret_key)
 
 # Sets variable images to uploader
 images = UploadSet('images', IMAGES)
 configure_uploads(app, images)
+
+
 
 
 
@@ -466,12 +481,93 @@ def remove_saved(product_id=None):
   return redirect(url_for('profile', username=user.username))
 
 
+# ====================================================================
+# ========================= Email Routes  =========================
+# ====================================================================
+
+def send_reset_email(user):
+  token = user.get_reset_token()
+  msg = Message('Password Reset Request', sender='noreply@demo.com', recipients =[user.email])
+
+  msg.body = f''' To reset your password, visit the following link: {url_for('reset_token', token=token, _external=True)} If you did not make this request then simply ignore this email'''
+
+# request to reset password
+@app.route('/reset_password', methods=['GET', 'POST'])
+def reset_request():
+  if current_user.is_authenticated:
+    return redirect(url_for('index'))
+  form = forms.RequestResetForm()
+  if form.validate_on_submit():
+    user = User.query.filter_by(email=form.email.data).first()
+    send_reset_email(user)
+    flash('An email has been sent to reset password', 'info')
+    return redirect(url_for('login'))
+  return render_template('reset_request.html', title='Reset Password', form=form)
+
+# copied from forms.py reset_request
+def validate_email(self, email):
+  # user = User.query.filter_by(email=email.data).first()
+  user = models.User.select().where(models.User.email == user.email).get()
+  query = user.email
+  if user is None:
+    raise ValidationError('There is no accoutn with that email. Please register')
+
+# reset password route
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_reset(token):
+  if current_user.is_authenticated:
+    return redirect(url_for('index'))
+  user = User.verify_reset_token(token)
+  if user is None:
+    # pass in class warningk, can be used by css
+    flash('That is an invalid or expired token', 'warning')
+    return redirect(url_for('reset_request'))
+  form = ResetPasswordForm()
+  if form.validate_on_submit():
+    user.password = form.password.data
+    save()
+    return redirect(url_for('login'))
+  return render_template('reset_token.html', title='Reset Password',form=form)
 
 
+# use salt when generating a token
 
 
+# @app.route('/reset', methods=["GET", "POST"])
+# def reset():
+#   form = forms.EmailForm()
+#   if form.validate_on_submit():
+#     user = User.query.filter_by(email=form.email.data)
+#     token = ts.dumps(self.email, salt='recover-key')
 
+#     recover_url = url_for('reset_with _token', token=token, _external=True)
 
+#     html = render_template('email-recover.html', recover_url=recover_url)
+# # Let's assume that send_email was defined in myapp/util.py
+#     send_email(user.email, subject, html)
+#     return redirect(url_for('index'))
+#   return render_template('reset.html', form=form)
+
+# @app.route('/reset/<token>', methods=['GET', 'POST'])
+# def reset_with_token(token):
+#   try:
+#     email = ts.loads(token, salt="recover-key", max_age=86400)
+#   except:
+#     abort(404)
+
+#   form = PasswordForm()
+
+#   if form.validate_on_submit():
+#     user = User.query.filter_by(email=email).first_or_404()
+
+#     user.password = form.password.data
+
+#     db.session.add(user)
+#     db.session.commit()
+
+#     return redirect(url_for('signin'))
+
+#   return render_template('reset_with_token.html', form=form, token=token)
 
 
 
