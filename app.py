@@ -112,6 +112,11 @@ def about():
 	return render_template('about.html')
 
 
+@app.route('/contact-us')
+def contact_us():
+	return render_template('contact-us.html')
+
+
 # ====================================================================
 # ========================= User Auth Routes  =========================
 # ====================================================================
