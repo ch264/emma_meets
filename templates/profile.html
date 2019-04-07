@@ -39,22 +39,22 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="container">
-			<div class="columns is-multiline">
-				<!-- if user is logged in show edit button -->
-				<div class="column">
-					<a href="{{ url_for('edit_profile', username=current_user.username) }}" class="button is-light">Edit Profile</a>
-				</div>
-				<div class="column">
-					<a href="" class="button is-dark">Add a Review</a>
-				</div>
-				<div class="column">
-					<a href="{{ url_for('add_product', username=current_user.username) }}" class="button is-dark">Add a Product</a> 
+		{% if current_user.id == user.id %}
+			<div class="container">
+				<div class="columns is-multiline">
+					<!-- if user is logged in show edit button -->
+					<div class="column">
+						<a href="{{ url_for('edit_profile', username=current_user.username) }}" class="button is-light">Edit Profile</a>
+					</div>
+					<div class="column">
+						<a href="" class="button is-dark">Add a Review</a>
+					</div>
+					<div class="column">
+						<a href="{{ url_for('add_product', username=current_user.username) }}" class="button is-dark">Add a Product</a> 
+					</div>
 				</div>
 			</div>
-		</div>
-
+		{% endif %}
 		<div class="container">
 			<div class="column">
 				<!-- Show any flash messages to user from logging in or signing up -->
