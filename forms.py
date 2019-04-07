@@ -107,7 +107,7 @@ class LoginForm(Form):
 			validators=[DataRequired()]
 			)
 		remember_me = BooleanField('Remember Me')
-		submit = SubmitField('Sign In')
+		# submit = SubmitField('Sign In')
 
 # Creates an EditUserForm class
 class EditUserForm(Form):

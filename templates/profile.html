@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<div class="container is-widescreen profile-container ">
+	<div class="container profile-container ">
 		<div class="columns profileTitle">
 			<!-- User photo -->
 			<div class="column">
 				<div class="image">
-					<img class="image is-rounded" src=" ../static/uploads/{{ user.image_filename }}"  alt="User profile image">
+					<img class="image" src=" ../static/uploads/{{ user.image_filename }}"  alt="User profile image">
 					<p><span class="about_me"><small>About me: {{ user.about_me }} </small></span></p>
 				</div>
 			</div>
 
 			<!-- User info -->
 			<div class="column">
-				<p><span class="title has-text-danger is-bold">{{ user.username }}</span></p>
-						<a href="" class="button is-dark">Woof</a>
+				<p><span class="title is-bold">{{ user.username }}</span></p>
+						<a href="" class="button submitting">Woof</a>
 						<a href="{{ url_for('follow', username=user.username)}}" class="button is-dark">Follow</a>
 
 				<div class="columns">
@@ -39,6 +39,7 @@
 					</div>
 				</div>
 			</div>
+	
 				<!-- If logged in user is on their profile, show Edit Profile button -->
 					<div class="columns is-multiline">
 						<div class="column">
@@ -52,6 +53,9 @@
 						</div>
 				</div>
 			</div>
+
+
+			<div>
 				<!-- Show any flash messages to user from logging in or signing up -->
 				{% with messages = get_flashed_messages(with_categories=True) %}
 					{% if messages %}
@@ -60,7 +64,7 @@
 						{% endfor %}
 					{% endif %}
 				{% endwith %}
-			 <!-- end of .column div-->
+			</div><!-- end of .column div-->
 		</div>  <!-- end of columns div-->
 	</div>  <!-- end of .container div -->
 
@@ -80,7 +84,7 @@
 			</div>  <!-- end of .column div -->
 
 			<!-- User saved recipes -->
-			<div class="column">
+			<div class="column is-center has-text-centered is-grouped-centered">
 				<h4>Favorite Prodcuts</h4>
 				<div class="columns is-multiline">
 					<!-- Iterate through saved_recipes passed down from app.py -->
@@ -91,17 +95,7 @@
 				</div>  <!-- end of .columns div -->
 			</div>  <!-- end of .column div -->
 
-			<div class="column follow">
-					<p> I have {{ user.follower_id }} followers, and I am following:{{ user.followed_id }}</p>
-					
-			
-					<p><a href="{{ url_for('follow', username=user.username) }}">Follow</a></p>
-					
-			
-					<p><a href="{{ url_for('unfollow', username=user.username) }}">Unfollow</a></p>
-					
-				
-			</div>
+
 			
 		</div>  <!-- end of .columns div -->
 	</div>  <!-- end of .container div -->

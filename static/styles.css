@@ -10,6 +10,30 @@ body {
   /* background-color: #F6F6F6; */
 }
 
+
+/* forms */
+.field {
+  margin: 0 auto;
+}
+
+input {
+  width: 100%;
+  border: none;
+  border-bottom: solid grey;
+  /* border-radius: 4px; */
+  padding: 6px;
+}
+
+button, .submitting {
+  background-color:#FFAA55;
+  color: white;
+}
+
+.error {
+  margin: 3em;
+  border: solid red;
+}
+
 /* Footer */
 /* ///// */
 

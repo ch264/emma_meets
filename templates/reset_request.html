@@ -6,23 +6,19 @@
 {% block content %}
 
 	<div class="container">
-		<div class="column control request">
+		<div class="column request">
+		
 			<h2 class="subtitle is-2">Reset Password</h2>
+		
 			<form method="POST" action="">
 				{{ form.hidden_tag() }}
-					<div class="form-input control">
-						{{ form.email.label(class="label") }}
-						{% if form.email.errors %}
-							{{ form.email(class="control", cols="35", rows="20") }}
-							<div class="invalid-feedback">
-								{% for error in form.email.errors %}
-									<span>{{ error }}</span>
-								{% endfor %}
-							</div>
-						{% else %}
-							{{ form.email(class="control", cols="35", rows="20") }}
-						{% endif %}
-					</div>
+					
+				<div class="form-input">
+					{{ field_error(form.email) }}
+
+					{{ form.email.label(class="label") }}
+					{{ form.email(class="control", cols="35", rows="20") }}
+				</div>
 		
 				<div class="has-text-centered">
 					<!-- Cancel link redirects to 'profile' function as defined in app.py -->
