@@ -48,7 +48,7 @@ class User(UserMixin, Model):
 		only_save_dirty = True
 
 	@classmethod
-	def create_user(cls, username, email, password, about_me, gender, location, fav_snack, fav_toy, breed, image_filename, image_url):
+	def create_user(cls, username, email, password, about_me, gender, location, fav_snack, fav_toy, breed, image_url, image_filename="../static/uploads/emma.jpg"):
 		try:
 			cls.create(
 				username = username,

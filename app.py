@@ -508,6 +508,8 @@ def remove_saved(product_id=None):
 # ====================================================================
 # ========================= Email Routes  =========================
 # ====================================================================
+# build reset password with help from Corey Schafer:
+# https://github.com/CoreyMSchafer/code_snippets/tree/master/Python/Flask_Blog/10-Password-Reset-Email/flaskblog
 
 # request to reset password, shows form to input email address
 @app.route('/reset_password', methods=['GET', 'POST'])
