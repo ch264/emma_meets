@@ -122,7 +122,7 @@ class EditUserForm(Form):
 		fav_snack = StringField('Favorite Snack', validators=[DataRequired()])
 		fav_toy = StringField('Favorite Toy', validators=[DataRequired()])
 		breed = StringField('Breed', validators=[DataRequired()])
-		profile_image = FileField('Profile Image')
+		image_filename = FileField('Profile Image')
 
 
 

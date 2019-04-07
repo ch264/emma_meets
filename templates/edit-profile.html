@@ -44,6 +44,12 @@
             {{ form.gender(class="control", value=user.gender) }}
           </div>
 
+          <div class="form-input">
+            {{ field_error(form.age) }}
+
+            {{ form.age.label(class="label") }}
+            {{ form.age(class="control", value=user.age) }}
+          </div>
 				
           <!-- location field -->
           <div class="form-input">
@@ -76,7 +82,14 @@
 						{{ form.breed.label(class="label") }}
 						{{ form.breed(class="control", value=user.breed) }}
 					</div>				
-	
+          
+          <!-- update image -->
+          <div class="form-input">
+              {{ field_error(form.image_filename) }}
+  
+              {{ form.image_filename.label(class="label") }}
+              {{ form.image_filename(class="control") }}
+            </div>		
 
           <div class="has-text-centered">
             <!-- Cancel link redirects to 'profile' function as defined in app.py -->

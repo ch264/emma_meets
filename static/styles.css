@@ -1,5 +1,7 @@
-/* Global Style */
-/* /////////// */
+
+/* //////////////////////*/
+/* ////Global Style ////*/
+/* ////////////////////*/
 
 body {
   box-sizing: border-box;
@@ -60,7 +62,9 @@ div.container.about-team {
   margin-top: 100px;
 } */
 
-
+/* //////////////////////*/
+/* ////Global Style ////*/
+/* ////////////////////*/
 .review {
   padding-top: 100px;
 }

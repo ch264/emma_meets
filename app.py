@@ -188,10 +188,9 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
-    # Ends logged in session
-    logout_user()
-    # Redirects user to 'index' method for landing page
-    return redirect(url_for('index'))
+  # Ends logged in session
+  logout_user()
+  return redirect(url_for('index'))
 
 
 # ====================================================================
@@ -219,10 +218,6 @@ def profile(username=None):
 
 def send_reset_email(user):
   token = user.get_reset_token()
-  # msg = Message('Hello', sender = 'lalatestingemma@gmail.com', recipients = ['id1@gmail.com'])
-  # msg.body = "This is the email body"
-  # mail.send(msg)
-  # return "Sent"
   msg = Message('Password Reset Request', sender='lalatestingemma@gmail.com', recipients =[user.email])
   msg.body = f''' To reset your password, visit the following link: {url_for('reset_token', token=token, _external=True)} If you did not make this request then simply ignore this email'''
   mail.send(msg)
@@ -242,21 +237,22 @@ def edit_profile(username=None):
     # user.password = generate_password_hash(form.password.data)
     # user.password = form.password.data
     user.about_me = form.about_me.data
-    age = form.age.data
+    user.age = form.age.data
     user.gender = form.gender.data
     user.location = form.location.data
     user.fav_snack = form.fav_snack.data
     user.fav_toy = form.fav_toy.data
     user.breed = form.breed.data
+    user.image_filename = form.image_filename.data
     
     user.save()
     flash('Your changes have been saved.', 'success')
     # Redirect to user's profile to reflect changes
     return redirect(url_for('profile', username=user.username))
-  # set the breed field in the edit profile form to show the users breed
-  form.breed.default = user.breed
-  # processes the form with the category populated
-  form.process()
+  # # set the breed field in the edit profile form to show the users breed
+  # form.breed.default = user.breed
+  # # processes the form with the category populated
+  # form.process()
   return render_template('edit-profile.html', form=form, user=user)
 
 # ====================================================================
