@@ -11,7 +11,6 @@
     <div class="columns">
       <div class="column">
 				<h2 class="subtitle is-2">Edit information for {{ product.name }}</h2>
-				
         <!-- form tag to enclose the form fields and upon submit, sends whole form as request -->
         <form class="has-text-centred" method="POST" action="">
 					{{ form.hidden_tag() }}
@@ -41,17 +40,16 @@
 					</div>
 					
           <div class=""> <hr>
-							
             <!-- Cancel link redirects to 'profile' function as defined in app.py -->
 						<button type="submit" class="button">Save my changes</button>
 						<a href="{{ url_for('product') }}" class="button is-light">Cancel</a>
           </div>
         </form>
-      </div>  <!-- end of .column div-->
+      </div> 
 
       <div class="column">
         <img src="{{ url_for('static', filename='dog-hotel.jpg') }}">
       </div>
-    </div>  <!-- end of .columns div -->
+    </div>  
   </div>
 {% endblock %}

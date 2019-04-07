@@ -5,48 +5,50 @@
 	<div class="container">
 		<div class="column reset-token">
 			<h2 class="subtitle is-2">Reset Password</h2>
-		<form method="POST" action="">
-			{{ form.hidden_tag() }}
-			
-			<div class="form-input">
-				{{ form.password.label(class="form-control-label") }}
-				{% if form.password.errors %}
-					{{ form.password(class="form-control form-control-lg is-invalid") }}
-				<div class="invalid-feedback">
-					{% for error in form.password.errors %}
-						<span>{{ error }}</span>
-					{% endfor %}
-				</div>
-					{% else %}
-						{{ form.password(class="form-control form-control-lg") }}
-					{% endif %}
-			</div>
-			<div class="form-input">
-				{{ form.confirm_password.label(class="form-control-label") }}
-				{% if form.confirm_password.errors %}
-					{{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+			<form method="POST" action="">
+				{{ form.hidden_tag() }}
+				
+				<div class="form-input">
+					{{ form.password.label(class="form-control-label") }}
+					{% if form.password.errors %}
+						{{ form.password(class="form-control form-control-lg is-invalid") }}
 					<div class="invalid-feedback">
-						{% for error in form.confirm_password.errors %}
+						{% for error in form.password.errors %}
 							<span>{{ error }}</span>
 						{% endfor %}
 					</div>
-				{% else %}
-					{{ form.confirm_password(class="form-control form-control-lg") }}
-				{% endif %}
-			</div>
-			<p>dont use this one</p>
-			<div class="form-input">
-				{{ form.submit(class="button") }}
-			</div>
+						{% else %}
+							{{ form.password(class="form-control form-control-lg") }}
+						{% endif %}
+				</div>
 
-			<p>use this one</p>
-			<div class="has-text-centered">
-				<!-- Cancel link redirects to 'profile' function as defined in app.py -->
-				<button type="submit" class="button is-danger">Save my changes</button>
-				<a href="{{ url_for('index') }}" class="button is-light">Cancel</a>
-			</div>
-		</form>
+				<div class="form-input">
+					{{ form.confirm_password.label(class="form-control-label") }}
+					{% if form.confirm_password.errors %}
+						{{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.confirm_password.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.confirm_password(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				
+				<p>dont use this one</p>
+				<div class="form-input">
+					{{ form.submit(class="button") }}
+				</div>
+
+				<p>use this one</p>
+				<div class="has-text-centered">
+					<!-- Cancel link redirects to 'profile' function as defined in app.py -->
+					<button type="submit" class="button is-danger">Save my changes</button>
+					<a href="{{ url_for('index') }}" class="button is-light">Cancel</a>
+				</div>
+			</form>
+		</div>
 	</div>
-</div>
 		
 {% endblock content %}

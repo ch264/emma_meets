@@ -14,23 +14,18 @@
         <!-- form tag to enclose the form fields and upon submit, sends whole form as request -->
         <form method="POST" action="{{ url_for('add_review', product_id=product.id) }}" class="field" enctype="multipart/form-data">
           {{ form.hidden_tag() }}
-          
-          <!-- "form" was passed into template in app.py in add_review method -->
-          <!-- if condition hides CSRF token field -->
+        
 					{% for field in form if field.widget.input_type != 'hidden' %}
-            <!-- Pass in iterated "field" value from form into macro render_field -->
             {{ render_field(field) }}
-            
           {% endfor %}
-          
-          </div>
-				</form>
-				<div class="has-text-centered">
-						<a href="{{ url_for('add_review', product_id=product.id) }}" class="button is-light">Leave Review</a>
-					<!-- Anchor tag makes use of user object passed in from app.py -->
-					<!-- <button type="submit" class="button is-danger">Save review</button> -->
-					<a href="{{ url_for('profile', username=user.username) }}" class="button is-light">Cancel</a>
-      </div>  <!-- end of .column div-->
-    </div>  <!-- end of .columns div-->
+        </form>
+      </div>
+      
+      <div class="has-text-centered">
+        <a href="{{ url_for('add_review', product_id=product.id) }}" class="button is-light">Leave Review</a>
+        <!-- <button type="submit" class="button is-danger">Save review</button> -->
+        <a href="{{ url_for('profile', username=user.username) }}" class="button is-light">Cancel</a>
+      </div> 
+    </div>  
   </div>
 {% endblock %}

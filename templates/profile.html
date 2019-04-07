@@ -2,8 +2,8 @@
 
 {% block content %}
 	<div class="container profile-container ">
-		<div class="columns profileTitle">
-			<!-- User photo -->
+		<div class="columns">
+			<!-- Profile Image -->
 			<div class="column">
 				<div class="image">
 					<img class="image" src=" ../static/uploads/{{ user.image_filename }}"  alt="User profile image">
@@ -14,8 +14,8 @@
 			<!-- User info -->
 			<div class="column">
 				<p><span class="title is-bold">{{ user.username }}</span></p>
-						<a href="" class="button submitting">Woof</a>
-						<a href="{{ url_for('follow', username=user.username)}}" class="button is-dark">Follow</a>
+				<a href="" class="button submitting">Woof</a>
+				<a href="{{ url_for('follow', username=user.username)}}" class="button is-dark">Follow</a>
 
 				<div class="columns">
 					<div class="column">
@@ -23,7 +23,6 @@
 						<p><span class="location"><small>I live in: {{ user.location }} </small></span></p>
 						<i class="fas fa-hotdog"></i>
 						<p><span class="fav_snack"><small>fav_snack: {{ user.fav_snack }}</small></span></p>
-						
 					</div>
 					<div class="column">
 						<i class="fas fa-venus-mars"></i>
@@ -32,29 +31,32 @@
 						<p><span class="breed"><small>breed: {{ user.breed }}</small></span></p>
 					</div>
 					<div class="column">
-							<i class="fas fa-birthday-cake"></i>
+						<i class="fas fa-birthday-cake"></i>
 						<p><span class="age"><small>I am: {{ user.age }} years</small></span></p>
 						<i class="fas fa-baseball-ball"></i>
 						<p><span class="fav_toy"><small>fav_toy: {{ user.fav_toy }}</small></span></p>
 					</div>
 				</div>
 			</div>
-	
-				<!-- If logged in user is on their profile, show Edit Profile button -->
-					<div class="columns is-multiline">
-						<div class="column">
-							<a href="{{ url_for('edit_profile', username=current_user.username) }}" class="button is-light">Edit Profile</a>
-						</div>
-						<div class="column">
-							<a href="" class="button is-dark">Add a Review</a>
-						</div>
-						<div class="column">
-							<a href="{{ url_for('add_product', username=current_user.username) }}" class="button is-dark">Add a Product</a> 
-						</div>
+		</div>
+
+		<div class="container">
+			<div class="columns is-multiline">
+				<!-- if user is logged in show edit button -->
+				<div class="column">
+					<a href="{{ url_for('edit_profile', username=current_user.username) }}" class="button is-light">Edit Profile</a>
+				</div>
+				<div class="column">
+					<a href="" class="button is-dark">Add a Review</a>
+				</div>
+				<div class="column">
+					<a href="{{ url_for('add_product', username=current_user.username) }}" class="button is-dark">Add a Product</a> 
 				</div>
 			</div>
+		</div>
 
-			<div>
+		<div class="container">
+			<div class="column">
 				<!-- Show any flash messages to user from logging in or signing up -->
 				{% with messages = get_flashed_messages(with_categories=True) %}
 					{% if messages %}
@@ -63,49 +65,44 @@
 						{% endfor %}
 					{% endif %}
 				{% endwith %}
-			</div><!-- end of .column div-->
-		</div>  <!-- end of columns div-->
-	</div>  <!-- end of .container div -->
-
-	<div class="container">
-		<div class="columns is-center has-text-centered is-grouped-centered">
-			<div class="column">
-				<h4>Your Reviews</h4>	
-				<button id="button_1" class="button submitting">click to see</button>
 			</div>
-			<div class="column">
-				<h4>Favorite Prodcuts</h4>
-				<button id="button_2" class="button submitting">click to see</button>
+		</div>  
+
+		<div class="container">
+			<div class="columns is-center has-text-centered is-grouped-centered">
+				<div class="column">
+					<h4>Your Reviews</h4>	
+					<button id="button_1" class="button submitting">click to see</button>
+				</div>
+				<div class="column">
+					<h4>Favorite Prodcuts</h4>
+					<button id="button_2" class="button submitting">click to see</button>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="container">
-		<div class="column">
+		<div class="container">
+			<div class="column">
 				<div id="description_button_1">
 					<!-- is-multiline is a Bulma class to allow columns to wrap -->
-				<div class="columns is-multiline">
-					<!-- Iterate through recipes passed down from app.py -->
-					{% for review in reviews  %}
-						<!-- Use each single recipe info in sub-template _recipe.html -->
-						{% include '_review.html' %}
-					{% endfor %}	
-				</div>  <!-- end of .columns div -->
-			</div>  <!-- end of .column div -->
-		</div>
-		<div class="column">
-			<div id="description_button_2">	
-				<div class="column is-center has-text-centered is-grouped-centered">	
 					<div class="columns is-multiline">
-						<!-- Iterate through saved_recipes passed down from app.py -->
-						{% for save in saved_product %}
-							<!-- Use each single save product info in sub-template _saved_product.html -->
-							{% include '_saved_product.html' %}
+						{% for review in reviews  %}
+							{% include '_review.html' %}
 						{% endfor %}	
-					</div>  <!-- end of .columns div -->
-				</div>  <!-- end of .column div -->
-			</div>	
-		</div>  <!-- end of .columns div -->
-	</div>  <!-- end of .container div -->
-</div>
+					</div>  
+				</div>  
+			</div>
+			<div class="column">
+				<div id="description_button_2">	
+					<div class="column is-center has-text-centered is-grouped-centered">	
+						<div class="columns is-multiline">
+							{% for save in saved_product %}
+								{% include '_saved_product.html' %}
+							{% endfor %}	
+						</div> 
+					</div>  
+				</div>	
+			</div> 
+		</div>  
+	</div>
 {% endblock %}

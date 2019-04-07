@@ -1,5 +1,4 @@
 	<!-- Template for product card, used as a sub-template in profile page and products page -->
-	<!-- .column class to be a child of .columns class whereever this sub-template is called -->
 
 	<div class="column is-one-third-desktop is-half-tablet">
 		<div class="card animated fadeIn">
@@ -13,13 +12,10 @@
 				<div class="content">
 					<div class="media-content is-grouped-centered has-text-centered">
 						<p class="title is-4 ">
-							<!-- Sets anchor tag to 'product' function defined in app.py to redirect to individual product page -->
 							<a href="{{ url_for('product', product_id=product.id) }}" class="has-text-danger">{{ product.name }}</a>
 						</p>
-						<!-- Uses product info passed in from app.py to dynamically change text content -->
 						<p class="title is-5 no-padding">location: {{ product.location }}</p>
 						<p class="title is-5 no-padding">Rating: {{ product.avg_rating }}</p>
-						<!-- Sets anchor tag to link to function 'save_to_favorite' defined in app.py -->
 						<a href="{{ url_for('save_to_profile', product_id=product.id) }}" class="button is-light is-small">Save to Favorites</a>
 					</div>
 				</div>

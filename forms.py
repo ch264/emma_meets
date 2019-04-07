@@ -92,7 +92,7 @@ class SignUpForm(Form):
 			validators=[DataRequired()
 			])
 		profile_image = FileField('Profile Image')
-
+		
 
 # Creates a LoginForm class. Do not need if use Google 
 class LoginForm(Form):
@@ -116,7 +116,7 @@ class EditUserForm(Form):
 		email = StringField('Email')
 		# password = PasswordField('Password', validators=[DataRequired()])
 		about_me = StringField('About Me', validators=[DataRequired()])
-		# age = StringField()('Age', validators=DataRequired())
+		age = IntegerField('Age', validators=[DataRequired()])
 		gender = SelectField('Gender', choices=[('male', 'female')])
 		location = StringField('Location', validators=[DataRequired()])
 		fav_snack = StringField('Favorite Snack', validators=[DataRequired()])
@@ -124,7 +124,7 @@ class EditUserForm(Form):
 		breed = StringField('Breed', validators=[DataRequired()])
 		profile_image = FileField('Profile Image')
 
-# Creates an EditRecipeForm class
+
 
 class CategoryForm(Form):
 	name = StringField(
@@ -167,7 +167,6 @@ class EditProductForm(Form):
 
 # Creates a new ReviewForm
 class ReviewForm(Form): 
-	
 		rating = SelectField(
 			'Rating', 
 			choices=[('5', '5'),('4','4'), ('3','3'), ('2','2'), ('1','1')], 
@@ -180,7 +179,6 @@ class ReviewForm(Form):
 				validators=[DataRequired()]
 				)
 		submit = SubmitField('Submit')
-		
   #  do we need ain image placeholder for the image of who is leaving the rview?
 
 class EditReviewForm(Form):

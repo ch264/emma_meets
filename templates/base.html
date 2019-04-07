@@ -8,19 +8,17 @@
 		<title>EmmaMeets | Woof</title>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 		
+		<!-- Bulma CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
+		<!-- Animations-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
+		<!-- Our CSS -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
-	<!-- Bulma CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
-	<!-- Animations-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-	<!-- Our CSS -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-
-	<!-- fontawesome -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-</head>
+		<!-- fontawesome -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	</head>
 
 	<body>
 		<header>
@@ -39,25 +37,23 @@
 
 				<div id="navbarExampleTransparentExample" class="navbar-menu">
 					<div class="navbar-end">
-							<!-- If user is not logged in, show Login/Signup button -->
-							
-							<a href="{{ url_for('about') }}" class="navbar-item nav-links">ABOUT</a>
-							<a href="{{ url_for('contact_us') }}" class="navbar-item nav-links">Contact us</a>
-							<div class="navbar-item has-dropdown is-hoverable">
-								<a class="navbar-link navbar-item" href="{{ url_for('product') }}" class="navbar-item nav-links">Products</a>
-								<div class="navbar-dropdown">
-									<a class="navbar-item has-dropdown is-hoverable">Dog Hotels</a>
+						<a href="{{ url_for('about') }}" class="navbar-item nav-links">ABOUT</a>
+						<a href="{{ url_for('contact_us') }}" class="navbar-item nav-links">Contact us</a>
+						<div class="navbar-item has-dropdown is-hoverable">
+							<a class="navbar-link navbar-item" href="{{ url_for('product') }}" class="navbar-item nav-links">Products</a>
+							<div class="navbar-dropdown">
+								<a class="navbar-item has-dropdown is-hoverable">Dog Hotels</a>
+							</div>
+							<div class="navbar-dropdown">
+									<a class="navbar-item has-dropdown is-hoverable">Dog Insurance</a>
 								</div>
-								<div class="navbar-dropdown">
-										<a class="navbar-item has-dropdown is-hoverable">Dog Insurance</a>
-									</div>
-							</div>	
-							{% if current_user.is_anonymous %}
+						</div>	
+						{% if current_user.is_anonymous %}
 							<a href="{{ url_for('login') }}" class="navbar-item nav-links" title="login">LOGIN</a>
 
 							<a href="{{ url_for('signup') }}" class="navbar-item nav-links" title="register">SIGN UP</a>
 						{% else %}
-						<!-- If user is logged in, show other pages -->
+							<!-- If user is logged in, show other pages -->
 							<a href="{{ url_for('profile', username=current_user.username) }}" class="navbar-item nav-links">PROFILE</a>
 
 							<a href="{{ url_for('logout') }}" class="navbar-item nav-links">LOGOUT</a>
@@ -68,15 +64,15 @@
 		</header>
 		<main>
 			<section class="content">
-				 <!-- Show any flash messages to user from logging in or signing up -->
-				 {% with messages = get_flashed_messages(with_categories=True) %}
-				 {% if messages %}
-					 {% for category, message in messages %}
-						 <div class="alert alert -{{category}}">{{ message }}</div>
-					 {% endfor %}
-				 {% endif %}
-			 {% endwith %}
-			 
+				<!-- Show any flash messages to user from logging in or signing up -->
+				{% with messages = get_flashed_messages(with_categories=True) %}
+					{% if messages %}
+						{% for category, message in messages %}
+							<div class="alert alert -{{category}}">{{ message }}</div>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+			
 				{% block content %}
 					<!-- Where templates will be entered -->
 				{% endblock %}
@@ -89,12 +85,11 @@
 				Made with &#x2661; by Christina Hastenrath</p>
 			</div>
 		</footer>
+
 		<!-- Vendor Scripts -->
 		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-
 		<!-- Our JS file -->
     <script src="{{ url_for('static', filename='app.js') }}"></script>
 	</body>
-
 </html>

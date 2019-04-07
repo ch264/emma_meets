@@ -1,34 +1,30 @@
 
 {% extends "base.html" %}
 
-
 {% block content %}
-
-<div class="container product">
-  <div class="columns">
-    <div class="column is-one-quarter product">
-      <h1 class="is-4">{{ product.name }}</h1>
-      <p class=""> Location: {{ product.location }}</p>
-      <p class=""> Website: {{ product.website }}</p>
-      <p class=""> Rating: {{ product.avg_rating }}</p>
-      <a class="button" href="{{ url_for('add_review', product_id=product.id) }}">Leave a Review</a><hr>
-      <a class="button" href="{{ url_for('save_to_profile', product_id=product.id) }}" class="button is-light is-small">Save to Favorites</a><hr>
-      <a class="button" href="{{ url_for('edit_product', product_id=product.id) }}" class="button is-light is-small">Edit Information</a>
+  <div class="container product">
+    <div class="columns">
+      <div class="column is-one-quarter product">
+        <h1 class="is-4">{{ product.name }}</h1>
+        <p class=""> Location: {{ product.location }}</p>
+        <p class=""> Website: {{ product.website }}</p>
+        <p class=""> Rating: {{ product.avg_rating }}</p>
+        <a class="button" href="{{ url_for('add_review', product_id=product.id) }}">Leave a Review</a><hr>
+        <a class="button" href="{{ url_for('save_to_profile', product_id=product.id) }}" class="button is-light is-small">Save to Favorites</a><hr>
+        <a class="button" href="{{ url_for('edit_product', product_id=product.id) }}" class="button is-light is-small">Edit Information</a>
+      </div>
+      <div class="column is-three-quarter">
+        <img src="{{ url_for('static', filename='dog-hotel.jpg') }}">
+      </div>
     </div>
-    <div class="column is-three-quarter">
-      <img src="{{ url_for('static', filename='dog-hotel.jpg') }}">
+    <div class="columns">
+      <div class="column ">
+        <h4>This pages reviews</h4>
+        
+          {% for review in reviews %}
+            {% include '_review.html' %}
+          {% endfor %}	
+      </div>
     </div>
   </div>
-  <div class="columns">
-
-        <div class="column ">
-          <h4>This pages reviews</h4>
-            <!-- Iterate through recipes passed down from app.py -->
-            {% for review in reviews %}
-              <!-- Use each single reivew info in sub-template _review.html -->
-              {% include '_review.html' %}
-            {% endfor %}	
-        </div>
-    </div>
-</div>
 {% endblock %}

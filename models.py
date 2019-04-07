@@ -48,7 +48,7 @@ class User(UserMixin, Model):
 		only_save_dirty = True
 
 	@classmethod
-	def create_user(cls, username, email, password, about_me, age, gender, location, fav_snack, fav_toy, breed, image_url, image_filename="../static/uploads/emma.jpg"):
+	def create_user(cls, username, email, password, about_me, age, gender, location, fav_snack, fav_toy, breed, image_url, image_filename):
 		try:
 			cls.create(
 				username = username,
@@ -64,7 +64,7 @@ class User(UserMixin, Model):
 				image_filename = image_filename,
 				image_url = image_url)
 		except IntegrityError:
-			raise ValueError('create user error')
+			raise 
 
 	# ///////// reset token for email reset of password ////////////////
 	# by default token expires after 30 min

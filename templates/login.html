@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-<!-- Imports macro template for form rendering -->
+
 {% from "macros.html" import render_field %}
 
 {% block content %}
@@ -9,24 +9,21 @@
           <h1>Sign in to discover more</h1>
           <form method="POST" action="">
             {{ form.hidden_tag() }}
-            <!-- Uses macro template to render form inputs with form being passed down in app.py -->
-            <!-- if condition hides CSRF token -->
+
             {% for field in form if field.widget.input_type != 'hidden' %}
-              <!-- Passing in iterated field into render_field macro -->
               {{ render_field(field) }}
             {% endfor %}
         
             <div class="columns">
               <div class="column">
-              <!-- Cancel button redirects to landing -->
-              <button type="submit" class="button is-dark">Log In</button>
-            </div>
-            <div class="column">
-              <a href="{{ url_for('index') }}" class="button is-light">Cancel</a>
-            </div>
-            <div class="column">
-              <a href="{{ url_for('reset_request') }}" class="button">Reset Password</a>
-            </div>
+                <button type="submit" class="button is-dark">Log In</button>
+              </div>
+              <div class="column">
+                <a href="{{ url_for('index') }}" class="button is-light">Cancel</a>
+              </div>
+              <div class="column">
+                <a href="{{ url_for('reset_request') }}" class="button">Reset Password</a>
+              </div>
             </div>
           </form>
         
@@ -44,6 +41,4 @@
       </div>
     </div>
   </div>
-	
-
 {% endblock %}

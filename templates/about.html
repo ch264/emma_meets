@@ -2,54 +2,48 @@
 
 {% block content %}
 
-
   <div class="container about is-widescreen">
-      <h1 class="subtitle">About the Emma Meets Team</h1>
+    <h1 class="subtitle">About the Emma Meets Team</h1>
     <div class="columns">
       <div class="column">
         <div class="image">
             <img class="image" src="{{ url_for('static', filename='emma-field2.jpeg')}}">
         </div>
         <div class="column">
-        <div class="box $box-shadow">
+          <div class="box $box-shadow">
             <h4 class="subtitle is-4">Meet Emma Meets</h4>
             <p>Emma Meets was created to provide a social media platform, for dog owners to find and leave reviews for dog related products.</p>  
           </div> 
         </div>
+      </div>
     </div>
   </div>
-</div>
 
-
-
-
-    <div class="container is-widescreen">
-    <!-- First pair of columns -->
+  <div class="container is-widescreen">
     <div class="columns">
-      <!-- About Nicolette -->
       <div class="column">
-          <div class="box">
+        <div class="box">
           <div class="card-content">
             <div class="media">
               <div class="media-left"> 
                 <div class="image is-128x128">
-                <img src="{{ url_for('static', filename='emma.jpg')}}" alt="Emma">
+                  <img src="{{ url_for('static', filename='emma.jpg')}}" alt="Emma">
+                </div>
               </div>
-              </div>
-
+              <!-- about Emma -->
               <div class="media-content">
                 <h4 class="subtitle is-4">Meet Emma</h4>
                 <p>Emma was born in 2004 into a puppy trading organisation. She was kept in isolation in a cellar and used as a puppy breeding machine for the first four years of her life. When finally someone reported the breeders, the police rescued the dogs and we took Emma in. When she came to us she did not know the feeling of grass below her paws, what snow felt like or how to interact with other dogs.
 								Since we adopted Emma in 2007 she has come a very long way. She has learned how to play with other dogs, how to swim in a lake, how to hike up mountains and sniff along the way and how good it is to cuddle for hours on the couch, whilst watching her favorite show. We love her very much and want to share all the love for her and products that make her life easier with others. Emma looooves her yellow raincoat and will not go outside without it, because it has a hoodie and she does not like her ears to get wet.</p>    
               </div>
-            </div>  <!-- end of .media div -->
-          </div>  <!-- end of .card-content div -->
-        </div>  <!-- end of div .card -->
-      </div>  <!-- end of first .column div -->
+            </div>  
+          </div>  
+        </div>  
+      </div>  
       
       <!-- About Christina -->
       <div class="column">
-          <div class="box">
+        <div class="box">
           <div class="card-content">
             <div class="media">
               <div class="media-left">
@@ -72,11 +66,8 @@
     <div class="container">
       <div class="column">
         <h4>with special thanks to:</h4>
-    <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-			<div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+          <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+      </div>
     </div>
-  </div>
   </div>   <!-- end of container div .about-team -->
-
-</div>
 {% endblock %}

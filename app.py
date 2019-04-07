@@ -102,7 +102,11 @@ def index():
     # mail.send(msg)
     # return "Sent"
     msg = Message('Password Reset Request', sender='lalatestingemma@gmail.com', recipients =[user.email])
-    msg.body = f''' To reset your password, visit the following link: {url_for('reset_token', token=token, _external=True)} If you did not make this request then simply ignore this email'''
+    msg.body = f''' 
+    
+    To reset your password, visit the following link: {url_for('reset_token', token=token, _external=True)} 
+    
+    If you did not make this request then simply ignore this email'''
     mail.send(msg)
     return "Sent"
   return render_template('landing.html')
@@ -123,15 +127,16 @@ def contact_us():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    # Access SignUpForm from forms.py
     form = forms.SignUpForm()
-
+    print('out if create signup')
+    print(request.form)
     if form.validate_on_submit():
       # Sets variable filename to image file of uploaded 'profile_image' from form
       filename = images.save(request.files['profile_image'])
       # Sets variable url to change image url to match filename
       url = images.url(filename)
       # Calls method 'create_user' as defined in models.py to create a user in database
+      print('in if create user')
       models.User.create_user(
         username = form.username.data,
         email = form.email.data,
@@ -228,18 +233,16 @@ def send_reset_email(user):
 @app.route('/edit-profile/<username>', methods=['GET', 'POST'])
 @login_required
 def edit_profile(username=None):
-  # Finds user in database by logged in current user's id
   user = models.User.get(g.user.id)
-  # Accesses EditUserForm from forms.py
   form = forms.EditUserForm()
 
   if form.validate_on_submit():
-    # Set user's info in database to new values entered in form
     user.username = form.username.data
     user.email = form.email.data
-    # user.password = form.password.data,
+    # user.password = generate_password_hash(form.password.data)
+    # user.password = form.password.data
     user.about_me = form.about_me.data
-        # age = form.age.data,
+    age = form.age.data
     user.gender = form.gender.data
     user.location = form.location.data
     user.fav_snack = form.fav_snack.data

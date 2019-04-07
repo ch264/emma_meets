@@ -11,21 +11,19 @@
 		</div>
 	</div>
 
-	<div class="containger">
+	<div class="container">
 		<div class="column is-full is-multiline">
 			<div class="productLine">
-					<h1>Here are all product instances of this category</h1>
-					<div class="columns is-multiline">
-					<!-- Iterates through products passed down from app.py -->
+				<h1>Here are all product instances of this category</h1>
+				<div class="columns is-multiline">
+					
 					{% for product in products %}
-					<!-- Uses sub-template _product.html to create product cards -->
 						{% include '_product.html' %}
 					{% endfor %}
 
-					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-
 
 {% endblock %}
