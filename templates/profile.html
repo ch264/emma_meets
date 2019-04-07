@@ -54,7 +54,6 @@
 				</div>
 			</div>
 
-
 			<div>
 				<!-- Show any flash messages to user from logging in or signing up -->
 				{% with messages = get_flashed_messages(with_categories=True) %}
@@ -70,10 +69,21 @@
 
 	<div class="container">
 		<div class="columns is-center has-text-centered is-grouped-centered">
-			<!-- User created recipes -->
-			<div class="column ">
-				<h4>Your Reviews</h4>		
-			<!-- is-multiline is a Bulma class to allow columns to wrap -->
+			<div class="column">
+				<h4>Your Reviews</h4>	
+				<button id="button_1" class="button submitting">click to see</button>
+			</div>
+			<div class="column">
+				<h4>Favorite Prodcuts</h4>
+				<button id="button_2" class="button submitting">click to see</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="column">
+				<div id="description_button_1">
+					<!-- is-multiline is a Bulma class to allow columns to wrap -->
 				<div class="columns is-multiline">
 					<!-- Iterate through recipes passed down from app.py -->
 					{% for review in reviews  %}
@@ -82,21 +92,20 @@
 					{% endfor %}	
 				</div>  <!-- end of .columns div -->
 			</div>  <!-- end of .column div -->
-
-			<!-- User saved recipes -->
-			<div class="column is-center has-text-centered is-grouped-centered">
-				<h4>Favorite Prodcuts</h4>
-				<div class="columns is-multiline">
-					<!-- Iterate through saved_recipes passed down from app.py -->
-					{% for save in saved_product %}
-						<!-- Use each single save product info in sub-template _saved_product.html -->
-						{% include '_saved_product.html' %}
-					{% endfor %}	
-				</div>  <!-- end of .columns div -->
-			</div>  <!-- end of .column div -->
-
-
-			
+		</div>
+		<div class="column">
+			<div id="description_button_2">	
+				<div class="column is-center has-text-centered is-grouped-centered">	
+					<div class="columns is-multiline">
+						<!-- Iterate through saved_recipes passed down from app.py -->
+						{% for save in saved_product %}
+							<!-- Use each single save product info in sub-template _saved_product.html -->
+							{% include '_saved_product.html' %}
+						{% endfor %}	
+					</div>  <!-- end of .columns div -->
+				</div>  <!-- end of .column div -->
+			</div>	
 		</div>  <!-- end of .columns div -->
 	</div>  <!-- end of .container div -->
+</div>
 {% endblock %}

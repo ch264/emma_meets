@@ -449,11 +449,12 @@ def add_review(product_id):
 @app.route('/delete-review/<review_id>', methods=['GET', 'DELETE'])
 @login_required
 def delete_review(review_id=None):
+  user = g.user._get_current_object()
   if review_id != None:
     deleted_review = models.Review.delete().where(models.Review.id == review_id)
     deleted_review.execute()
-    return redirect(url_for('profile'))
-  return redirect(url_for('profile'))
+    return redirect(url_for('profile', username=user.username))
+  return redirect(url_for('profile', username=user.username))
 
 
 @app.route('/edit-review/<review_id>', methods=['GET', 'POST'])

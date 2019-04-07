@@ -18,4 +18,22 @@ $(document).ready(function() {
     event.preventDefault();
     $('.modal').toggleClass('is-active');
   });
+
+  $('.button').each(function(){
+    var toggle_div_id = 'description_' + $(this).attr('id');
+    $(this).click(function(){
+        $('#'+toggle_div_id).toggle(700)
+    });
+  });
+
+
+  // $('.button_1').on('click', function(e){
+  //   e.preventDefault();
+  //   $('description_button_1').toggle(700)
+  //     // .not($('description_button_2'+toggle_div_id)).hide();
+  //   });
+  // });
+
+
 });
+
