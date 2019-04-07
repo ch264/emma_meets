@@ -2,7 +2,7 @@
 
 
 {% extends "base.html" %}
-<!-- Imports macro template for error rendering -->
+
 {% from "macros.html" import field_error %}
 {% from "macros.html" import render_field %}
 
@@ -21,7 +21,7 @@
             {{ field_error(form.name) }}
 
             {{ form.name.label(class="label") }}
-            {{ form.name(class="control", placeholder=product.name, cols="35", rows="20") }}
+            {{ form.name(class="control", value=product.name, cols="35", rows="20") }}
           </div>
 
           <!-- body field -->
@@ -29,7 +29,7 @@
             {{ field_error(form.location) }}
 
             {{ form.location.label(class="label") }}
-            {{ form.location(class="control", placeholder=product.location, cols="35", rows="20") }}
+            {{ form.location(class="control", value=product.location, cols="35", rows="20") }}
           </div>
 
 					<!-- rating field -->
@@ -37,7 +37,7 @@
 						{{ field_error(form.website) }}
 
 						{{ form.website.label(class="label") }}
-						{{ form.website(class="control", placeholder=product.website, cols="35", rows="20") }}
+						{{ form.website(class="control", value=product.website, cols="35", rows="20") }}
 					</div>
 					
           <div class=""> <hr>

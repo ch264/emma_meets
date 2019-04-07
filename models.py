@@ -33,7 +33,7 @@ class User(UserMixin, Model):
 	email = CharField(unique=True)
 	password = CharField(max_length=100)
 	about_me = TextField()
-	# age = IntegerField()
+	age = IntegerField()
 	gender = CharField()
 	location = TextField()
 	fav_snack = CharField(255)
@@ -48,14 +48,14 @@ class User(UserMixin, Model):
 		only_save_dirty = True
 
 	@classmethod
-	def create_user(cls, username, email, password, about_me, gender, location, fav_snack, fav_toy, breed, image_url, image_filename="../static/uploads/emma.jpg"):
+	def create_user(cls, username, email, password, about_me, age, gender, location, fav_snack, fav_toy, breed, image_url, image_filename="../static/uploads/emma.jpg"):
 		try:
 			cls.create(
 				username = username,
 				email = email,
 				password = generate_password_hash(password),
 				about_me = about_me,
-				# age = age,
+				age = age,
 				gender = gender,
 				location = location,
 				fav_snack = fav_snack,
@@ -85,7 +85,7 @@ class User(UserMixin, Model):
 	def __repr__(self):
 		return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 
-# //////////////////////////////////////
+# ////////////////////////////////////// follow
 
 	# example, "give me all the users this user is following":
 	# def following(self):

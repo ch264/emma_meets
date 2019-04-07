@@ -67,9 +67,9 @@ class SignUpForm(Form):
 				Length(min=2)
 			])
 			# convert to integerfield
-		# age = StringField()(
-		# 	'Age', 
-		# 	)
+		age = IntegerField(
+			'Age'
+			)
 		gender = SelectField(
 			'Gender', 
 			choices=[(
@@ -133,7 +133,7 @@ class CategoryForm(Form):
 			DataRequired(),
 			Length(min=1, max=140)
 		])
-	submit = SubmitField('Submit')
+	# submit = SubmitField('Submit')
 
 # Create a new Product Form
 class ProductForm(Form):

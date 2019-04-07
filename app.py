@@ -137,7 +137,7 @@ def signup():
         email = form.email.data,
         password = form.password.data,
 				about_me=form.about_me.data,
-						# age = form.age.data,
+				age = form.age.data,
 				gender = form.gender.data,
 				location = form.location.data,
 				fav_snack = form.fav_snack.data,
@@ -421,8 +421,8 @@ def edit_product(product_id=None):
       product.website = form.website.data
       product.save()
       flash('Your edited Product is now online', 'success')
-      return redirect(url_for('product', product=product_id))
-    form.process()
+      return redirect(url_for('product', product_id=product.id))
+    # form.process()
     return render_template('edit-product.html', product=product, form=form, user=user)
 # ====================================================================
 # =========================  Review Routes  =========================

@@ -18,7 +18,7 @@
             {{ field_error(form.title) }}
 
             {{ form.title.label(class="label") }}
-            {{ form.title(class="control", placeholder=review.title, cols="35", rows="20") }}
+            {{ form.title(class="control", value=review.title, cols="35", rows="20") }}
           </div>
 
           <!-- body field -->
@@ -26,7 +26,7 @@
             {{ field_error(form.body) }}
 
             {{ form.body.label(class="label") }}
-            {{ form.body(class="control", placeholder=review.body, cols="35", rows="20") }}
+            {{ form.body(class="control", value=review.body, cols="35", rows="20") }}
           </div>
 
 					<!-- rating field -->
@@ -34,7 +34,7 @@
 						{{ field_error(form.rating) }}
 
 						{{ form.rating.label(class="label") }}
-						{{ form.rating(class="control", placeholder=review.rating, cols="35", rows="20") }}
+						{{ form.rating(class="control", value=review.rating, cols="35", rows="20") }}
 					</div> <hr>
 					
           <div class="">
