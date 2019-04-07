@@ -9,7 +9,8 @@
         <img src="">
       </div>
       <div class="column">
-        <h2 class="subtitle is-2">Add Category</h2>
+        <h1 class="subtitle is-2">Add a new Category</h1>
+        <p> Please choose a name such as: Dog Hotel, Dog Magazine, Dog Insurance, Dog Park etc.</p>
         <form method="POST" action="{{ url_for('add_category') }}" class="field" enctype="multipart/form-data">
           {{ form.hidden_tag() }}
   

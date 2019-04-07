@@ -7,6 +7,8 @@ $(document).ready(function() {
     $('.navbar-menu').toggleClass('is-active');
   });
 
+
+  
   // Click function to open modal when user wants to delete a review
   $('.modal-button').on('click', function(event) {
     event.preventDefault();
@@ -19,6 +21,9 @@ $(document).ready(function() {
     $('.modal').toggleClass('is-active');
   });
 
+
+
+  // function to toggle between reviews and favorites on profile page
   $('.button').each(function(){
     var toggle_div_id = 'description_' + $(this).attr('id');
     $(this).click(function(){

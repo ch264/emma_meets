@@ -346,6 +346,7 @@ def product(product_id=None):
 @login_required
 def add_product():
   form = forms.ProductForm()
+
   # choices accepts an array of tuples which is immtable.
   categories = models.Product.get_categories()
   if len(categories) > 0:
@@ -363,15 +364,12 @@ def add_product():
       choices.append(tuple(temp))
     form.category.choices = choices
 
-  # Set variable user to current logged in user
   user = g.user._get_current_object()
 
   if form.validate_on_submit():
-    # Sets variable filename to image file of uploaded 'product_image' from form
     filename = images.save(request.files['product_image'])
-    # Sets variable url to change image url to match filename
     url = images.url(filename)
-    # Call method create_product defined in models.py for the Product model
+
     prod = models.Product.create_product(
       name = form.name.data,
       location = form.location.data,
@@ -380,16 +378,12 @@ def add_product():
       image_filename = filename,
       image_url = url)
     product = models.Product.get(models.Product.website == form.website.data)
-    print(product)
+    
     # return render_template('create-product.html', form=form, user=user)
     # Find new created product in database
     
     flash('Product Created', 'Success')
-    # Redirect user to individual product page with found products id passed as parameter
     return redirect(url_for('product', product_id=product.id))
-  # Render the create-product template with the ProductForm
-  # Pass in the current_user in order to redirect user back to their profile if they choose to cancel create a product
- 
   return render_template('create-product.html', form=form, user=user, categories=categories)
 
 @app.route('/create-category', methods=['GET', 'POST'])
