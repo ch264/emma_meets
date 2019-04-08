@@ -597,8 +597,10 @@ def reset_token(token):
 PORT = 5000
 DEBUG = True
 
-
-
+# if on heroku initialise this:
+if 'ON_HEROKU' in os.environ:
+    print('hitting ')
+    models.initialize()
 
 
 # copied to routes
