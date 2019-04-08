@@ -12,13 +12,9 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from playhouse.db_url import connect
 
 
-# Peewee provides advanced support for SQLite and Postgres via database-specific extension modules.
-# from playhouse.postgres_ext import PostgresqlExtDatabase
-# db = PostgresqlExtDatabase('app', user='christinahastenrath', register_hstore=True)
-
-
 # DATABASE = SqliteDatabase('emma.db')
 # DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
+
 # Deployment to Heroku
 DATABASE = connect(os.environ.get('DATABASE_URL'))
 
@@ -28,7 +24,7 @@ DATABASE = connect(os.environ.get('DATABASE_URL'))
 #     user='postgres',  # Will be passed directly to psycopg2.
 #     password='secret',  # Ditto.
 #     host='db.mysite.com')  # Ditto.
-# or pg_db = PostgresqlDatabase('my_app', user='postgres', password='secret', host='10.1.0.9', port=5432)
+
 
 # ====================================================================
 # =========================  User Model  =============================

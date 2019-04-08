@@ -599,11 +599,9 @@ DEBUG = True
 
 # if on heroku initialise this:
 if 'ON_HEROKU' in os.environ:
-    print('hitting ')
-    models.initialize()
+  print('hitting ')
+  models.initialize()
 
-
-# copied to routes
 
 if __name__ == '__main__':
 	models.initialize()
