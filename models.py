@@ -13,8 +13,8 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 # db = PostgresqlExtDatabase('app', user='christinahastenrath', register_hstore=True)
 
 
-DATABASE = SqliteDatabase('emma.db')
-# DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
+# DATABASE = SqliteDatabase('emma.db')
+DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
 
 # initialise a database
 # db = PostgresqlDatabase(
