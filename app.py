@@ -85,7 +85,8 @@ def not_found_error(error):
 
 @app.errorhandler(500)
 def internal_error(error):
-    db.session.rollback()
+    # db.session.rollback()
+    DATABASE.session.rollback()
     return render_template('500.html'), 500
 
 
