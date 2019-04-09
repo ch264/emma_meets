@@ -483,13 +483,14 @@ def edit_review(review_id=None):
 def save_to_profile(product_id=None):
   user = g.user._get_current_object()
   # user = models.User.get(g.user.id)
-  product = models.Product.get(models.Product.id == product_id)
-  print(user.id)
-  models.Saved.create(
-    user=user.id, 
-    product=product_id)
+  if product_id != None:
+    product = models.Product.get(models.Product.id == product_id)
+    print(user.id)
+    models.Saved.create(
+      user=user.id, 
+      product=product_id)
+    return redirect(url_for('profile', username=user.username))
   return redirect(url_for('profile', username=user.username))
-  # return redirect(url_for('product'))
 
 
 @app.route('/remove/<product_id>', methods=['GET', 'DELETE'])

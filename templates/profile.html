@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<div class="container profile-container profileTitle ">
+	<div class="container profile-container profileTitle has-text-centered">
 		<div class="columns">
 			<!-- Profile Image -->
 			<div class="column">
@@ -24,7 +24,9 @@
 				<div class="columns info">
 					<div class="column">
 						<!-- <i class="fas fa-couch"></i> -->
-						<img src="{{ url_for('static', filename='dog-house.png') }}"
+						<!-- <figure class="image is-32x32"> -->
+						<img class="image is-32x32 is-centered" src="{{ url_for('static', filename='dog-house.png') }}">
+						<!-- </figure> -->
 						<p><span class="location meets">I live in: {{ user.location }} </small></span></p>
 						<i class="fas fa-hotdog"></i>
 						<p><span class="fav_snack meets"><small>fav_snack: {{ user.fav_snack }}</small></span></p>

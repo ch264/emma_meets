@@ -58,18 +58,34 @@ input {
   padding: 6px;
 }
 
+/* imgages */
+/* img {
+  width: 100%;
+  height: 100vh;
+  padding: 0em;
+} */
+
 /* buttons  */
 button, .submitting {
   border: 2px solid #64bba6;
   border-radius: 5px;
   background-color: white;
-  color: #676459;
+  /* color: #676459; */
+  color: #64bba6;
   cursor: pointer;
 }
 .submitting:hover {
   border: 2px solid #64bba6;
   background-color: #64bba6;
   color: white;
+}
+
+.cancel {
+  border: 2px solid #8e4246;
+  border-radius: 5px;
+  background-color: white;
+  color: #8e4246;
+  cursor: pointer;
 }
 
 .cancel:hover {
@@ -105,10 +121,15 @@ button, .submitting {
   height: 100%;
 }
 
-
+/* footer */
 .footer {
+  position: fixed;
   padding: 1.5rem;
   background-color: #f2f2f0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
 } 
 
 
@@ -184,22 +205,30 @@ img.div.container.section-two {
   background-color: #F7FBFE;
 }
 
-
+/* FORMS */
+label {
+  margin-top: 1em;
+}
 
 /* signup page */
 .signupForm {
   padding-top: 100px;
 }
-/* loogin page */
 
+
+/* login page */
 .loginForm {
   padding-top: 10em;
 }
+
 .loginimg img {
   height: 100%;
   width: 100%;
-  padding-top: 10em;
+  padding-top: 5em;
 }
+
+
+
 
 /* reset password */
 .reset-token {
@@ -219,6 +248,10 @@ img.div.container.section-two {
 .about-me {
   padding-top: 2em;
 }
+
+/* figure.image.is-32x32 {
+  margin: 0em;
+} */
 
 /* product page */
 
@@ -298,6 +331,9 @@ div.product-line {
 h1.contact {
   padding-bottom: 20em;
 }
+
+
+
 /* images on landing page */
 
 .rotateInDownLeft {

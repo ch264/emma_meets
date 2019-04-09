@@ -6,7 +6,7 @@
   <div class="container">
     <div class="columns">
       <div class="column is-one-third loginForm">
-          <h1>Sign in to discover more</h1>
+          <h1>Sign in and find out</h1><br>
           <form method="POST" action="">
             {{ form.hidden_tag() }}
 
@@ -16,13 +16,13 @@
         
             <div class="columns">
               <div class="column">
-                <button type="submit" class="button is-dark">Log In</button>
+                <button type="submit" class="button submitting">Log In</button>
               </div>
               <div class="column">
-                <a href="{{ url_for('index') }}" class="button is-light">Cancel</a>
+                <a href="{{ url_for('index') }}" class="button cancel">Cancel</a>
               </div>
               <div class="column">
-                <a href="{{ url_for('reset_request') }}" class="button">Reset Password</a>
+                <a href="{{ url_for('reset_request') }}" class="button submitting ">Reset Password</a>
               </div>
             </div>
           </form>
@@ -37,7 +37,7 @@
           {% endwith %}
       </div>
       <div class="column loginimg">
-        <img src="{{ url_for('static', filename='login.jpeg') }}">
+        <img src="{{ url_for('static', filename='login.jpg') }}">
       </div>
     </div>
   </div>
