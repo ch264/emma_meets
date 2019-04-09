@@ -35,14 +35,13 @@
 
 						{{ form.rating.label(class="label") }}
 						{{ form.rating(class="control", value=review.rating, cols="35", rows="20") }}
-					</div> <hr>
+					</div>
 					
-          <div class="">
-            <!-- Cancel link redirects to 'profile' function as defined in app.py -->
-						<button type="submit" class="button">Save my changes</button>
-						<a href="{{ url_for('product') }}" class="button is-light">Cancel</a>
+          <div class="button-space">
+						<button type="submit" class="button submitting space">Save my changes</button>
+						<a href="{{ url_for('product') }}" class="button cancel">Cancel</a>
           </div>
-        </form><hr>
+        </form>
       </div>  
 
       <div class="column">

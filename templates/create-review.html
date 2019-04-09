@@ -9,23 +9,24 @@
         <img src="{{ url_for('static', filename='new-product.jpg') }}">
       </div>
       
-      <div class="column">
+      <div class="column create-space">
         <h2 class="subtitle is-2">Write a Review</h2>
-        <!-- form tag to enclose the form fields and upon submit, sends whole form as request -->
         <form method="POST" action="{{ url_for('add_review', product_id=product.id) }}" class="field" enctype="multipart/form-data">
           {{ form.hidden_tag() }}
         
 					{% for field in form if field.widget.input_type != 'hidden' %}
             {{ render_field(field) }}
           {% endfor %}
+
+        <div class="has-text-centered">
+            <button type="submit" class="button submitting space">Leave Review</button>
+            <!-- <button type="submit" class="button is-danger">Save review</button> -->
+            <a href="{{ url_for('profile', username=user.username) }}" class="button cancel">Cancel</a>
+          </div> 
         </form>
       </div>
       
-      <div class="has-text-centered">
-        <a href="{{ url_for('add_review', product_id=product.id) }}" class="button is-light">Leave Review</a>
-        <!-- <button type="submit" class="button is-danger">Save review</button> -->
-        <a href="{{ url_for('profile', username=user.username) }}" class="button is-light">Cancel</a>
-      </div> 
+      
     </div>  
   </div>
 {% endblock %}

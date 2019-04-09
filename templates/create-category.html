@@ -19,8 +19,8 @@
           {% endfor %}
 
           <div class="has-text-centered">
-						<button type="submit" class="button is-danger">Save</button>
-						<a href="{{ url_for('profile', username=user.username) }}" class="button is-light">Cancel</a>
+						<button type="submit" class="button submitting">Save</button>
+						<a href="{{ url_for('profile', username=user.username) }}" class="button cancel">Cancel</a>
           </div>
 				</form>
       </div>  

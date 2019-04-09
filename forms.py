@@ -178,7 +178,7 @@ class ReviewForm(Form):
 				'Let us konw what you think',
 				validators=[DataRequired()]
 				)
-		submit = SubmitField('Submit')
+		# submit = SubmitField('Submit')
   #  do we need ain image placeholder for the image of who is leaving the rview?
 
 class EditReviewForm(Form):

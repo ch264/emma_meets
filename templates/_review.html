@@ -6,20 +6,20 @@
 			<div class="card-content">
 				<div class="content">
 					<div class="media-content is-grouped-centered has-text-centered">
-						<p class="title is-4 ">
-							<a href="" class="has-text-danger">{{ review.title }}</a>
+						<p class="title is-4 meets">
+							<a href="">{{ review.title }}</a>
 						</p>
 						<p class="title is-5 no-padding">Content: {{ review.body }}</p>
 						<p class="title is-5 no-padding">Rating: {{ review.rating }}</p>
-						<a href="{{ url_for('edit_review', review_id=review.id) }}" class="button is-light is-small">Edit review</a>
+						<a href="{{ url_for('edit_review', review_id=review.id) }}" class="button submitting">Edit review</a>
 						<!-- <a href="{{ url_for('delete_review', review_id=review.id) }}" class="button is-light is-small">Delete review</a> -->
-						<button class="button is-danger is-small modal-button">Delete Review</button>
+						<button class="button cancel modal-button">Delete Review</button>
 							<div class="modal">
 								<div class="modal-background has-background-grey-dark"></div>
 								<div class="modal-content">
 									<p class="has-text-white">Are you sure you want to delete your review?</p>
-									<a href="{{ url_for('delete_review', review_id=review.id) }}" class="button is-danger is-small">Be gone with it!</a>
-									<button class="button is-light is-small modal-button">No, I will keep it</button>
+									<a href="{{ url_for('delete_review', review_id=review.id) }}" class="button submitting">Be gone with it!</a>
+									<button class="button cancel modal-button">No, I will keep it</button>
 								</div>
 							<button class="modal-close is-large" aria-label="close"></button>
 						</div>  
