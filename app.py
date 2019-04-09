@@ -83,10 +83,10 @@ def after_request(response):
 def not_found_error(error):
     return render_template('404.html'), 404
 
-# @app.errorhandler(500)
-# def internal_error(error):
-#     g.db.session.rollback()
-#     return render_template('500.html'), 500
+@app.errorhandler(500)
+def internal_error(error):
+    g.db.session.rollback()
+    return render_template('500.html'), 500
 
 
 # ====================================================================
@@ -594,8 +594,8 @@ def reset_token(token):
 
 
 
-# PORT = 5000
-# DEBUG = True
+PORT = 5000
+DEBUG = True
 
 # if on heroku initialise this:
 if 'ON_HEROKU' in os.environ:
@@ -606,7 +606,7 @@ if 'ON_HEROKU' in os.environ:
 if __name__ == '__main__':
 	models.initialize()
 
-# app.run(port=PORT, debug=DEBUG)
+app.run(port=PORT, debug=DEBUG)
 	# try:
 	# 	models.Category.create_category(
 	# 		name='name')

@@ -12,11 +12,11 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from playhouse.db_url import connect
 
 
-# DATABASE = SqliteDatabase('emma.db')
+DATABASE = SqliteDatabase('emma.db')
 # DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
 
 # Deployment to Heroku
-DATABASE = connect(os.environ.get('DATABASE_URL'))
+# DATABASE = connect(os.environ.get('DATABASE_URL'))
 
 # initialise a database
 # db = PostgresqlDatabase(

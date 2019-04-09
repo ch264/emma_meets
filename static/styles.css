@@ -3,6 +3,9 @@
 /* ////Global Style ////*/
 /* ////////////////////*/
 
+
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Roboto');
+
 body {
   box-sizing: border-box;
   display: flex;
@@ -10,11 +13,21 @@ body {
   /* font-family: 'Questrial', sans-serif; */
   min-height: 100vh;
   /* background-color: #F6F6F6; */
+  /* font-family: 'Indie Flower', cursive; */
+  font-family: 'Roboto', sans-serif;
+  background: #F4F3EF;
+  color: #33303F;
 }
 
-.navbar.is-transparent {
-    background-color: transparent;
-    background-image: none;
+span.title {
+  color: pink;
+}
+/* .navbar.is-transparent */
+
+div.navbar{
+    /* background-color: transparent; */
+    /* background-image: none; */
+    color: #7995BC;
   }
 
 
@@ -26,7 +39,7 @@ body {
 input {
   width: 100%;
   border: none;
-  border-bottom: solid grey;
+  border-bottom: solid #C9B9AB;
   /* border-radius: 4px; */
   padding: 6px;
 }
@@ -90,17 +103,23 @@ a.navbar-item {
   text-transform: uppercase;
 }
 
+
+/* landing page */
 .landing {
-  background-image: url(landing_hero.jpg);
-  background-position: center;
-  background-repeat:  no-repeat;
+  /* background-image: url(landing_hero.jpg); */
+  /* background-position: center;
+  background-repeat:  no-repeat; */
   /* background-attachment: fixed; */
-  background-size:  cover;
+  /* background-size:  cover; */
   /* background-color: #999; */
   min-height: 100vh;
   padding-left: 5em;
   padding-top: 5em;
 } 
+
+.section-one {
+  padding-top: 2em;
+}
 
 .hero-body {
   background-color: #F7FBFE;

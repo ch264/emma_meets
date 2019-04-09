@@ -6,39 +6,55 @@
 				<div class="container landing">
 					<div class="columns">
 						<div class="column is-half">
+								<h3>Welcome to </h3>
 								<h1 class="emma-title animated fadeIn has-text-left">Emma Meets</h1>
-								<p>Emma is a 14 year old spaniel who loves to meet other dogs and share her experience with dog products that she uses like, dog Hotels, pet insurances, dog fashion etc. Join your fellow pooches eaters and find what works best for other dogs!  Or share your review to contribute to our community.  Feel free to browse reviews created by the community and save them to your favorites! Just sign up for an account to get started or login if you already have an account. Woof woof!</p>  
-								<a class="button" href="#">Contact us</a>
+								<p>Emma is a 14 year old spaniel who loves to meet other dogs and share her experience with dog products that she uses. These include dog Hotels, pet insurances, dog fashion and many more. Join us for free and find what works best for other dogs!  Or share your review to contribute to our community.  Feel free to browse reviews created by the community and save them to your favorites! Just sign up for an account to get started or login if you already have an account. Happy woof!</p>  
+								<a class="button submitting" href="{{ url_for('contact_us') }}">Contact us</a>
 						</div>		
-				</div>  <!-- end of .container div -->
-			</div>  <!-- end of .hero-body div -->
+				</div>  
+			</div> 
 		</div>
 
 
 	<div class="container section-one">
 		<div class="columns">
 			<div class="column">
-				<img src="#" alt="">
-				<img src="" alt="">
+				<img src="{{ url_for('static', filename='landing7.jpg') }}" alt="">
+				
 			</div>
 
-			<div class="column">
-				<img src="" alt="">
+			<!-- <div class="column">
+				<img src="{{ url_for('static', filename='landing5.jpg') }}" alt="">
 			</div>
-		</div>  <!-- end of .columns div -->
-	</div>  <!-- end of .container div -->
+		</div>   -->
+	</div>  
 
 	<div class="container section-one">
+			<div class="columns">
+				<div class="column">
+					<!-- <img src="{{ url_for('static', filename='landing5.jpg') }}" alt=""> -->
+					<!-- <img src="{{ url_for('static', filename='landing4.jpg') }}" alt=""> -->
+				</div>
+	
+				<div class="column">
+					<!-- <img src="{{ url_for('static', filename='landing3.jpg') }}" alt=""> -->
+				</div>
+			</div> 
+		</div> 
+
+		<div class="container section-one">
 		<div class="columns">
 			<div class="column">
-				<img src="#" alt="">
-				<img src="#" alt="">
+				<img src="{{ url_for('static', filename='landing6.jpg') }}" alt="">
+				<img src="{{ url_for('static', filename='landing8.jpg') }}" alt="">
+				
 			</div>
 
 			<div class="column">
-				<img src="#" alt="">
+				<img src="{{ url_for('static', filename='landing1.jpg') }}" alt="">
+				<img src="{{ url_for('static', filename='landing9.jpg') }}" alt="">
 			</div>
-		</div>  <!-- end of .columns div -->
-	</div>  <!-- end of -->
+		</div>  
+	</div>  
 
 {% endblock %}

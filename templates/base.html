@@ -37,17 +37,10 @@
 
 				<div id="navbarExampleTransparentExample" class="navbar-menu">
 					<div class="navbar-end">
+							<a href="{{ url_for('index') }}" class="navbar-item nav-links">HOME</a>
 						<a href="{{ url_for('about') }}" class="navbar-item nav-links">ABOUT</a>
 						<a href="{{ url_for('contact_us') }}" class="navbar-item nav-links">Contact us</a>
-						<div class="navbar-item has-dropdown is-hoverable">
-							<a class="navbar-link navbar-item" href="{{ url_for('product') }}" class="navbar-item nav-links">Products</a>
-							<div class="navbar-dropdown">
-								<a class="navbar-item has-dropdown is-hoverable">Dog Hotels</a>
-							</div>
-							<div class="navbar-dropdown">
-									<a class="navbar-item has-dropdown is-hoverable">Dog Insurance</a>
-								</div>
-						</div>	
+						<a href="{{ url_for('product') }}" class="navbar-item nav-links">Products</a>
 						{% if current_user.is_anonymous %}
 							<a href="{{ url_for('login') }}" class="navbar-item nav-links" title="login">LOGIN</a>
 
