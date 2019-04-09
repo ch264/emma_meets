@@ -65,6 +65,13 @@ input {
   padding: 0em;
 } */
 
+
+/* messages */
+div.success{
+  border: 2px solid #64bba6;
+  padding: 1em;
+}
+
 /* buttons  */
 button, .submitting {
   border: 2px solid #64bba6;
@@ -123,7 +130,7 @@ button, .submitting {
 
 /* footer */
 .footer {
-  position: fixed;
+  position: relative;
   padding: 1.5rem;
   background-color: #f2f2f0;
   left: 0;
@@ -211,10 +218,23 @@ label {
 }
 
 /* signup page */
-.signupForm {
-  padding-top: 100px;
+.signup-form {
+  padding-top: 7em;
 }
 
+h1.signup-form {
+  margin-bottom: 2em;
+}
+.button-space {
+  margin: 1em 0em;
+}
+button.button.submitting.space {
+  margin-right: 0.5em;
+}
+
+div.column.is-half.signup {
+  padding-top: 13em;
+}
 
 /* login page */
 .loginForm {

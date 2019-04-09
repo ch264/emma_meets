@@ -12,16 +12,15 @@
 			<div class="card-content">
 				<div class="content">
 					<div class="media-content">
-						<p class="title is-4">
-							<!-- Sets anchor tag to 'product' function defined in app.py to redirect to individual product page -->
-							<a href="{{ url_for('product', product_id=save.product) }}" class="has-text-dark">{{ save.product.name }}</a>
+						<p class="title is-4 meets">
+							<a href="{{ url_for('product', product_id=save.product) }}">{{ save.product.name }}</a>
 						</p>
 						<p>Rating: {{ (save.product.avg_rating)|round(1) }}</p>
 						<p>Website: {{ save.product.website }}</p>
-						<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button is-dark is-small">Remove</a>
+						<!-- <a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button cancel">Remove</a> -->
 						<!-- Sets anchor tag to link to function 'remove_saved' defined in app.py -->
 						{% if current_user.id == save.user.id %}
-							<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button is-danger is-small">logged in user remove</a>
+							<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button cancel">Remove Again</a>
 						{% endif %}
 					</div>
 				</div>

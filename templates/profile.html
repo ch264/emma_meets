@@ -46,13 +46,13 @@
 				</div>
 				<div class="columns about-me">
 					<div class="column">
-						<p><span class="about_me meets">About me:<br> {{ user.about_me }} </span></p></div>
+						<p><span class="about_me meets">About {{ user.username }}:<br> {{ user.about_me }} </span></p></div>
 				</div>
 			</div>
 		</div>
 		
 		<div class="container">
-			<div class="column">
+			<div class="column messages">
 				<!-- Show any flash messages to user from logging in or signing up -->
 				{% with messages = get_flashed_messages(with_categories=True) %}
 					{% if messages %}

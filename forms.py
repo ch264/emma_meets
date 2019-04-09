@@ -24,7 +24,7 @@ class SignUpForm(Form):
     # Sets names of fields equal to what type of data to receive
 		username = StringField(
 			# Label for the field
-			'Username',
+			'Your Dogs Name',
 			validators=[
 				# Requires user to enter something
 				DataRequired(),
@@ -61,14 +61,14 @@ class SignUpForm(Form):
         DataRequired()
       ])
 		about_me = StringField(
-			'About Me', 
+			'About Your Dog', 
 			validators=[
 				DataRequired(),
 				Length(min=2)
 			])
 			# convert to integerfield
 		age = IntegerField(
-			'Age'
+			'Age (Number)'
 			)
 		gender = SelectField(
 			'Gender', 

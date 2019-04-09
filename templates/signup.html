@@ -6,7 +6,8 @@
 
 <div class="container">
   <div class="columns">
-    <div class="column is-half signupForm">
+    <div class="column is-half signup-form">
+      <h1>Please sign up your dogs profile</h1>
       <form method="POST" action="{{ url_for('signup') }}" class="field" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
 
@@ -14,12 +15,13 @@
           {{ render_field(field) }}
         {% endfor %}
 
-        <div class="has-text-centered">
-          <button type="submit" class="button is-dark">Sign Up</button><a href="{{ url_for('index') }}" class="button is-light">Cancel</a>
+        <div class="has-text-centered button-space">
+          <button type="submit" class="button submitting space">Sign Up</button>
+          <a href="{{ url_for('index') }}" class="button cancel">Cancel</a>
         </div>
       </form>
     </div>
-    <div clas="column is half">
+    <div class="column is-half signup">
       <img src="{{ url_for('static', filename='signup.jpeg') }}">
     </div>
   </div>
