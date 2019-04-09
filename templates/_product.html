@@ -4,19 +4,18 @@
 		<div class="card animated fadeIn">
 			<div class="card-image">
 				<figure class="image">
-					<!-- Uses product info passed in from app.py to dynamically change anchor tag and image src -->
-					<a href="{{ url_for('product', product_id=product.id) }}"><img src="" alt=""></a>
+					<a href="{{ url_for('product', product_id=product.id) }}"><img class="image" src=" ../static/uploads/{{ product.image_filename }}"  alt="Product image"></a>
 				</figure>
 			</div>
 			<div class="card-content">
 				<div class="content">
 					<div class="media-content is-grouped-centered has-text-centered">
-						<p class="title is-4 ">
-							<a href="{{ url_for('product', product_id=product.id) }}" class="has-text-danger">{{ product.name }}</a>
+						<p class="title is-4 meets">
+							<a href="{{ url_for('product', product_id=product.id) }}">{{ product.name }}</a>
 						</p>
 						<p class="title is-5 no-padding">location: {{ product.location }}</p>
 						<p class="title is-5 no-padding">Rating: {{ (product.avg_rating)|round(1) }}</p>
-						<a href="{{ url_for('save_to_profile', product_id=product.id) }}" class="button is-light is-small">Save to Favorites</a>
+						<a href="{{ url_for('save_to_profile', product_id=product.id) }}" class="button submitting">Save to Favorites</a>
 					</div>
 				</div>
 			</div>  

@@ -7,54 +7,48 @@
 			<div class="column">
 				<div class="image">
 					<img class="image" src=" ../static/uploads/{{ user.image_filename }}"  alt="User profile image">
-					<p><span class="about_me"><small>About me: {{ user.about_me }} </small></span></p>
 				</div>
 			</div>
 
 			<!-- User info -->
 			<div class="column">
-				<p><span class="title is-bold">{{ user.username }}</span></p>
-				<a href="" class="button submitting">Woof</a>
-				<a href="{{ url_for('follow', username=user.username)}}" class="button is-dark">Follow</a>
-
-				<div class="columns">
+				<p><span class="title meets">{{ user.username }}</span></p>
+				{% if current_user.id == user.id %}
+					<a href="{{ url_for('edit_profile', username=current_user.username) }}" class="button submitting">Edit Profile</a>
+					<a href="{{ url_for('add_product', username=current_user.username) }}" class="button grey">Add a Product</a> 
+				{% else %}
+					<a href="" class="button submitting">Woof</a>
+					<a href="{{ url_for('follow', username=user.username)}}" class="button is-dark">Follow</a>
+				{% endif %}
+	
+				<div class="columns info">
 					<div class="column">
-						<i class="fas fa-couch"></i>
-						<p><span class="location"><small>I live in: {{ user.location }} </small></span></p>
+						<!-- <i class="fas fa-couch"></i> -->
+						<img src="{{ url_for('static', filename='dog-house.png') }}"
+						<p><span class="location meets">I live in: {{ user.location }} </small></span></p>
 						<i class="fas fa-hotdog"></i>
-						<p><span class="fav_snack"><small>fav_snack: {{ user.fav_snack }}</small></span></p>
+						<p><span class="fav_snack meets"><small>fav_snack: {{ user.fav_snack }}</small></span></p>
 					</div>
 					<div class="column">
 						<i class="fas fa-venus-mars"></i>
-						<p><span class="gender"><small>gender: {{ user.gender }}</small><nder/span></p>
+						<p><span class="gender meets"><small>gender: {{ user.gender }}</small><nder/span></p>
 						<i class="fas fa-hotdog"></i>
-						<p><span class="breed"><small>breed: {{ user.breed }}</small></span></p>
+						<p><span class="breed meets"><small>breed: {{ user.breed }}</small></span></p>
 					</div>
 					<div class="column">
 						<i class="fas fa-birthday-cake"></i>
-						<p><span class="age"><small>I am: {{ user.age }} years</small></span></p>
+						<p><span class="age meets"><small>I am: {{ user.age }} years</small></span></p>
 						<i class="fas fa-baseball-ball"></i>
-						<p><span class="fav_toy"><small>fav_toy: {{ user.fav_toy }}</small></span></p>
+						<p><span class="fav_toy meets"><small>fav_toy: {{ user.fav_toy }}</small></span></p>
 					</div>
+				</div>
+				<div class="columns about-me">
+					<div class="column">
+						<p><span class="about_me meets">About me:<br> {{ user.about_me }} </span></p></div>
 				</div>
 			</div>
 		</div>
-		{% if current_user.id == user.id %}
-			<div class="container">
-				<div class="columns is-multiline">
-					<!-- if user is logged in show edit button -->
-					<div class="column">
-						<a href="{{ url_for('edit_profile', username=current_user.username) }}" class="button is-light">Edit Profile</a>
-					</div>
-					<div class="column">
-						<a href="" class="button is-dark">Add a Review</a>
-					</div>
-					<div class="column">
-						<a href="{{ url_for('add_product', username=current_user.username) }}" class="button is-dark">Add a Product</a> 
-					</div>
-				</div>
-			</div>
-		{% endif %}
+		
 		<div class="container">
 			<div class="column">
 				<!-- Show any flash messages to user from logging in or signing up -->
@@ -67,6 +61,7 @@
 				{% endwith %}
 			</div>
 		</div>  
+	</div>
 
 		<div class="container">
 			<div class="columns is-center has-text-centered is-grouped-centered">
