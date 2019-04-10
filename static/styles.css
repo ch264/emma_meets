@@ -136,9 +136,15 @@ button, .submitting {
   background-color: #f2f2f0;
   left: 0;
   bottom: 0;
+  right: 0;
   width: 100%;
-
 } 
+
+/* footer.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+} */
 
 
 /* review page */
