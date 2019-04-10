@@ -137,7 +137,7 @@ button, .submitting {
   left: 0;
   bottom: 0;
   right: 0; 
-  /* width: 100%;
+  /* width: 100%;*/
 } 
 
 /* footer.footer {
@@ -175,7 +175,7 @@ a.navbar-item {
 
 /* landing page */
 .landing {
-  background-image: url(landing_hero.jpg);
+  background-image: url(/static/landing_hero.jpg);
   /* background-position: center; */
   /* background-repeat:  no-repeat;  */
   /* background-attachment: fixed; */
