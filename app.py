@@ -206,10 +206,7 @@ def profile(username=None):
     # Finds all reviews in database where the user id stored with a reciew matches the found user aboves id
     reviews = models.Review.select().where(models.Review.user == user.id).order_by(-models.Review.timestamp)
     
-    saved_product = models.Saved.select(models.Saved, models.User, models.Product).join(models.User).switch(models.Saved).join(models.Product)
-    temp = models.Saved.select(models.Saved, models.Product).join(models.Product).where(models.Saved.user==current_user.id, models.Saved.product==models.Product.id)
-    print(temp)
-    # print(saved_product)
+    saved_product = models.Saved.select(models.Saved, models.Product).join(models.Product).where(models.Saved.user==user.id, models.Saved.product==models.Product.id)
     # //////////////treehouse ///////////
     # finds all followers and followed
     # following = models.Follow.select().where(models.Follow)
