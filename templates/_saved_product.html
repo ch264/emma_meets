@@ -25,6 +25,8 @@
 
 						<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button cancel">Remove</a>
 						<!-- Sets anchor tag to link to function 'remove_saved' defined in app.py -->
+						<p>{{current_user.id}}</p>
+						<p>{{save.user_id}}</p>
 						{% if current_user.id == save.user_id %}
 							<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button cancel">Remove Again</a>
 						{% endif %}
