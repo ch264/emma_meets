@@ -230,8 +230,9 @@ def send_reset_email(user):
 def edit_profile(username=None):
   user = models.User.get(g.user.id)
   form = forms.EditUserForm()
-
+  print('out if edit user')
   if form.validate_on_submit():
+    print('in if edit user')
     user.username = form.username.data
     user.email = form.email.data
     # user.password = generate_password_hash(form.password.data)
@@ -243,12 +244,12 @@ def edit_profile(username=None):
     user.fav_snack = form.fav_snack.data
     user.fav_toy = form.fav_toy.data
     user.breed = form.breed.data
-    user.image_filename = form.image_filename.data
+    user.image_filename = images.save(request.files['image_filename'])
     user.save()
     flash('Your changes have been saved.', 'success')
-    # Redirect to user's profile to reflect changes
     return redirect(url_for('profile', username=user.username))
-  form.process()
+  # form.breed.default = user.breed
+  # form.process()
   return render_template('edit-profile.html', form=form, user=user)
 
 # ====================================================================
@@ -392,8 +393,9 @@ def add_category():
     )
     category = models.Category.get(models.Category.name == form.name.data)
     flash('Category created', 'Success')
-    return redirect(url_for('product'))
+    return redirect(url_for('profile', username=user.username))
   return render_template('create-category.html', form=form, user=user)
+
 
 @app.route('/edit-product/<product_id>', methods=['GET', 'POST'])
 @login_required
@@ -550,6 +552,10 @@ def reset_token(token):
     flash('Your password has been updated!, please log in')
     return redirect(url_for('login'))
   return render_template('reset_token.html', title='Reset Password',form=form)
+
+
+
+
 
 
 # use salt when generating a token

@@ -37,10 +37,10 @@
 
 				<div id="navbarExampleTransparentExample" class="navbar-menu">
 					<div class="navbar-end">
-							<a href="{{ url_for('index') }}" class="navbar-item nav-links">HOME</a>
+						<a href="{{ url_for('index') }}" class="navbar-item nav-links">HOME</a>
 						<a href="{{ url_for('about') }}" class="navbar-item nav-links">ABOUT</a>
-						<a href="{{ url_for('contact_us') }}" class="navbar-item nav-links">Contact us</a>
-						<a href="{{ url_for('product') }}" class="navbar-item nav-links">Products</a>
+						<a href="{{ url_for('contact_us') }}" class="navbar-item nav-links">CONTACT US</a>
+						<a href="{{ url_for('product') }}" class="navbar-item nav-links">PRODUCTS</a>
 						{% if current_user.is_anonymous %}
 							<a href="{{ url_for('login') }}" class="navbar-item nav-links" title="login">LOGIN</a>
 
@@ -73,10 +73,8 @@
 		</main>
 
 		<footer class="footer">
-			<div class="content ">
 				<p class="has-text-right">&copy; EmmaMeets 2019. 
 				Made with &#x2661; by Christina Hastenrath</p>
-			</div>
 		</footer>
 
 		<!-- Vendor Scripts -->

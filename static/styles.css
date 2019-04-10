@@ -131,13 +131,13 @@ button, .submitting {
 
 /* footer */
 .footer {
-  position: relative;
+  /* position: relative; */
   padding: 1.5rem;
   background-color: #f2f2f0;
   left: 0;
   bottom: 0;
-  right: 0;
-  width: 100%;
+  right: 0; 
+  /* width: 100%;
 } 
 
 /* footer.footer {
