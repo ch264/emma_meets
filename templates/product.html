@@ -5,13 +5,17 @@
   <div class="container product">
     <div class="columns">
       <div class="column is-one-quarter product">
-        <h1 class="is-4">{{ product.name }}</h1>
+        <h1 class="title is-2"><span class="meets">{{ product.name }}</span></h1>
         <p class=""> Location: {{ product.location }}</p>
         <p class=""> Website: {{ product.website }}</p>
-        <p class=""> Rating: {{ (product.avg_rating) }}</p>
-        <a class="button" href="{{ url_for('add_review', product_id=product.id) }}">Leave a Review</a><hr>
-        <a class="button" href="{{ url_for('save_to_profile', product_id=product.id) }}" class="button is-light is-small">Save to Favorites</a><hr>
-        <a class="button" href="{{ url_for('edit_product', product_id=product.id) }}" class="button is-light is-small">Edit Information</a>
+        {% if product.avg_rating == int %}
+          <p class=""> Rating: {{ (product.avg_rating) | round(1) }}</p>
+        {% else %}
+          <p class=""> Rating: {{ (product.avg_rating) }}</p>
+        {% endif %}
+        <a class="button submitting" href="{{ url_for('add_review', product_id=product.id) }}">Leave a Review</a><hr>
+        <a class="button submitting" href="{{ url_for('save_to_profile', product_id=product.id) }}">Save to Favorites</a><hr>
+        <a class="button submitting" href="{{ url_for('edit_product', product_id=product.id) }}">Edit Information</a>
       </div>
       <div class="column is-three-quarter">
         <img src="{{ url_for('static', filename='dog-hotel.jpg') }}">

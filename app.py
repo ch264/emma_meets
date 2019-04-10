@@ -481,8 +481,8 @@ def edit_review(review_id=None):
 # create route to add data to join table
 @app.route('/save/<product_id>')
 def save_to_profile(product_id=None):
-  user = g.user._get_current_object()
-  # user = models.User.get(g.user.id)
+  # user = g.user._get_current_object()
+  user = models.User.get(g.user.id)
   if product_id != None:
     product = models.Product.get(models.Product.id == product_id)
     print(user.id)
@@ -497,9 +497,12 @@ def save_to_profile(product_id=None):
 @login_required
 def remove_saved(product_id=None):
   # user = models.User.get(g.user.id)
-  user = g.user._get_current_object()
+  user = models.User.get(g.user.id)
+  # user = g.user._get_current_object()
+  print('out if')
   if product_id != None:
-    remove_saved = models.Saved.delete().where(models.Saved.user == user.id and models.Saved.product == product_id)
+    print(product_id)
+    remove_saved = models.Saved.delete().where(models.Saved.user_id == user.id, models.Saved.product_id == product_id)
     remove_saved.execute()
     return redirect(url_for('profile', username=user.username))
   return redirect(url_for('profile', username=user.username))

@@ -10,8 +10,7 @@
   <div class="container edit-product">
     <div class="columns">
       <div class="column">
-				<h2 class="subtitle is-2">Edit information for {{ product.name }}</h2>
-        <!-- form tag to enclose the form fields and upon submit, sends whole form as request -->
+				<h2 class="subtitle is-2">Edit information for <br> {{ product.name }}</h2>
         <form class="has-text-centred" method="POST" action="">
 					{{ form.hidden_tag() }}
 					
@@ -39,10 +38,10 @@
 						{{ form.website(class="control", value=product.website, cols="35", rows="20") }}
 					</div>
 					
-          <div class=""> <hr>
+          <div class="has-text-centred button-space">
             <!-- Cancel link redirects to 'profile' function as defined in app.py -->
-						<button type="submit" class="button">Save my changes</button>
-						<a href="{{ url_for('product') }}" class="button is-light">Cancel</a>
+						<button type="submit" class="button submitting space">Save my changes</button>
+						<a href="{{ url_for('product') }}" class="button cancel">Cancel</a>
           </div>
         </form>
       </div> 

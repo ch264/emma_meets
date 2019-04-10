@@ -14,7 +14,11 @@
 							<a href="{{ url_for('product', product_id=product.id) }}">{{ product.name }}</a>
 						</p>
 						<p class="title is-5 no-padding">location: {{ product.location }}</p>
-						<p class="title is-5 no-padding">Rating: {{ (product.avg_rating)|round(1) }}</p>
+						{% if product.avg_rating == int %}
+							<p class="title is-5 no-padding">Rating: {{ (product.avg_rating)|round(1) }}</p>
+						{% else %}
+							<p class="title is-5 no-padding"> Rating: {{ (product.avg_rating) }}</p>
+						{% endif %}
 						<a href="{{ url_for('save_to_profile', product_id=product.id) }}" class="button submitting">Save to Favorites</a>
 					</div>
 				</div>

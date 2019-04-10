@@ -2,27 +2,35 @@
 
 {% block content %}
 	<div class="container product">
+		
+		<div class="columns products-header has-text-centered">
+			<div class="column has-text-centered space">
+					<h1><span class="meets">Product overview</span></h1>
+			</div>
+		</div>
+
 		<div class="columns">
-			<div class="column products-header">
-				<div class="">
-					<h1>Product overview</h1>
+			<div class="column">
+				<img src="{{ url_for('static', filename='dog-hotel.jpg') }}">
+			</div>
+		</div>
+
+		<div class="columns">
+			<div class="column">
+				<div class="product-line has-text-centered">
+					<h1>Find the product review you were looking for...</h1>
+					<p>not finding what you are looking for? Help us build up our offering by adding a product <span class="meets"><a href="{{ url_for('add_product') }}"> here </a></span></p>
 				</div>
-				<h3>Find the product review you were looking for...</h3>
 			</div>
 		</div>
-	</div>
-	<div class="container">
-		<div class="column">
-			<div class="product-line has-text-centered">
-				<h1>These are all the dog related products in our database</h1>
-				<p>not finding what you are looking for? Help us build up our offering by adding a product  <span class="meets"><a href="{{ url_for('add_product') }}">here</a></span></p>
-			</div>
-			<div class="column is-multiline">
-				{% for product in products %}
-					{% include '_product.html' %}
-				{% endfor %}
-			</div>
-		</div>
-	</div>
+
+		<div class="columns products">
+			{% for product in products %}
+				{% include '_product.html' %}
+			{% endfor %}
+		</div> 
+	</div> 
+
+
 
 {% endblock %}

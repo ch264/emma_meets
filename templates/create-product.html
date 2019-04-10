@@ -9,8 +9,8 @@
         <img src="{{ url_for('static', filename='new-product.jpg') }}">
       </div>
       
-      <div class="column">
-        <h2 class="subtitle is-2">Add Product</h2>
+      <div class="column create-space">
+        <h2 class="subtitle is-2">Add a new Product</h2>
         <form method="POST" action="{{ url_for('add_product') }}" class="field" enctype="multipart/form-data">
           {{ form.hidden_tag() }}
           

@@ -285,20 +285,19 @@ div.has-text-centered.add-product {
 /* product page */
 
 .product {
-  background-image: url(products.jpg);
+  /* background-image: url(products.jpg); */
   background-size: cover;
   padding-top: 10em;
   height: 100vh;
   width: 100%;
 }
 
-/* .productsHeader img {
-  height:100%;
-  width:100%;
-} */
+div.columns.products-header.has-text-centered {
+  margin: 2em 0em;
+}
 
-.product-header {
-
+.columns.products {
+  margin-bottom: 7em;
 }
 
 .bubbles {
@@ -353,12 +352,12 @@ div.product-line {
 
 /* contact us form page */
 .contact {
-  padding-top: 5em;
+  padding-top: 2em;
   color: #868474;
 }
 
 h1.contact {
-  padding-bottom: 20em;
+  padding-bottom: 10em;
 }
 
 
