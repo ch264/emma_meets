@@ -288,6 +288,14 @@ div.has-text-centered.add-product {
   padding-top: 2em;
 }
 
+.fas {
+  color: #EC3661;
+  background-color: #EFFAF6;
+  padding: 1em;
+  border-radius: 30%;
+  margin-bottom: 1em;
+}
+
 /* figure.image.is-32x32 {
   margin: 0em;
 } */
@@ -347,7 +355,7 @@ div.product-line {
 }
 
 .four {
-  background-image: url(404.jpg);
+  background-image: url(/static/404.jpg);
   background-position: center;
   background-repeat:  no-repeat;
   /* background-attachment: fixed; */
