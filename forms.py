@@ -2,8 +2,10 @@ from flask_wtf import FlaskForm as Form
 from wtforms import StringField, PasswordField, TextAreaField, SelectField, BooleanField, SubmitField, IntegerField, FileField, TextField
 from wtforms.validators import DataRequired, Regexp, ValidationError, Length, EqualTo, Email
 
+
+
 # Imports for file/photo uploader
-# from flask_wtf.file import FileField, FileRequired, FileAllowed
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 
 # Imports User model
 from models import User
@@ -91,7 +93,10 @@ class SignUpForm(Form):
 			'Breed', 
 			validators=[DataRequired()
 			])
-		profile_image = FileField('Profile Image')
+		profile_image = FileField('Profile Image', validators=[
+        FileRequired(),
+        FileAllowed(['jpg', 'png'], 'Images only!')
+    ])
 		
 
 # Creates a LoginForm class. Do not need if use Google 
@@ -121,8 +126,11 @@ class EditUserForm(Form):
 		location = StringField('Location', validators=[DataRequired()])
 		fav_snack = StringField('Favorite Snack', validators=[DataRequired()])
 		fav_toy = StringField('Favorite Toy', validators=[DataRequired()])
-		breed = StringField('Breed', validators=[DataRequired()])
-		image_filename = FileField('Profile Image')
+		breed = StringField('Breed')
+		image_filename = FileField('Profile Image', validators=[
+        FileRequired(),
+        FileAllowed(['jpg', 'png'], 'Images only!')
+    ])
 
 
 

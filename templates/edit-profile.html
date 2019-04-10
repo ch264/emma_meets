@@ -9,7 +9,7 @@
       <div class="column create-space">
         <h2 class="subtitle is-2">Edit My Profile</h2>
         <!-- form tag to enclose the form fields and upon submit, sends whole form as request -->
-        <form method="POST" action="" class="field" enctype="multipart/form-data">
+        <form method="POST" action="">
 					{{ form.hidden_tag() }}
 					
           <!-- username field -->
@@ -92,16 +92,15 @@
           </div>		
 
           <div class="has-text-centered button-space">
-            <!-- Cancel link redirects to 'profile' function as defined in app.py -->
             <button type="submit" class="button submitting space">Save my changes</button>
             <a href="{{ url_for('profile', username=user.username) }}" class="button cancel">Cancel</a>
           </div>
         </form>
-      </div>  <!-- end of .column div-->
+      </div>  
 
       <div class="column create-space">
         <img src="{{ url_for('static', filename='edit-profile.jpeg') }}">
       </div>
-    </div>  <!-- end of .columns div -->
+    </div> 
   </div>
 {% endblock %}

@@ -15,15 +15,17 @@
 						<p class="title is-4 meets">
 							<a href="{{ url_for('product', product_id=save.product) }}">{{ save.product.name }}</a>
 						</p>
+
 						{% if save.product.avg_rating == int %}
 							<p> Rating: {{ (save.product.avg_rating) | round(1) }}</p>
 						{% else %}
 							<p> Rating: {{ save.product.avg_rating }}</p>
 						{% endif %}
 						<p>Website: {{ save.product.website }}</p>
-						<!-- <a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button cancel">Remove</a> -->
+
+						<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button cancel">Remove</a>
 						<!-- Sets anchor tag to link to function 'remove_saved' defined in app.py -->
-						{% if current_user.id == save.user.id %}
+						{% if current_user.id == save.user_id %}
 							<a href="{{ url_for('remove_saved', product_id=save.product) }}" class="button cancel">Remove Again</a>
 						{% endif %}
 					</div>

@@ -244,15 +244,11 @@ def edit_profile(username=None):
     user.fav_toy = form.fav_toy.data
     user.breed = form.breed.data
     user.image_filename = form.image_filename.data
-    
     user.save()
     flash('Your changes have been saved.', 'success')
     # Redirect to user's profile to reflect changes
     return redirect(url_for('profile', username=user.username))
-  # # set the breed field in the edit profile form to show the users breed
-  # form.breed.default = user.breed
-  # # processes the form with the category populated
-  # form.process()
+  form.process()
   return render_template('edit-profile.html', form=form, user=user)
 
 # ====================================================================
@@ -481,8 +477,8 @@ def edit_review(review_id=None):
 # create route to add data to join table
 @app.route('/save/<product_id>')
 def save_to_profile(product_id=None):
-  # user = g.user._get_current_object()
-  user = models.User.get(g.user.id)
+  user = g.user._get_current_object()
+  # user = models.User.get(g.user.id)
   if product_id != None:
     product = models.Product.get(models.Product.id == product_id)
     print(user.id)
