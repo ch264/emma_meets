@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-<!-- Imports macro template for error rendering -->
+
 {% from "macros.html" import field_error %}
 {% from "macros.html" import render_field %}
 
 {% block content %}
+
   <div class="container edit-review">
     <div class="columns">
       <div class="column review">
@@ -42,11 +43,11 @@
 						<a href="{{ url_for('product') }}" class="button cancel">Cancel</a>
           </div>
         </form>
-      </div>  
-
+      </div>
       <div class="column">
         <img src="{{ url_for('static', filename='dog-hotel.jpg') }}">
       </div>
     </div>  
   </div>
+  
 {% endblock %}

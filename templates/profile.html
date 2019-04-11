@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 	<div class="container profile-container profileTitle has-text-centered">
 		<div class="columns">
-			<!-- Profile Image -->
 			<div class="column">
 				<div class="image">
 					<img class="image" src=" ../static/uploads/{{ user.image_filename }}"  alt="User profile image">
 				</div>
 			</div>
-
-			<!-- User info -->
 			<div class="column">
 				<p><span class="title meets">{{ user.username }}</span></p>
 				{% if current_user.id == user.id %}
@@ -18,16 +16,12 @@
 					<a href="{{ url_for('add_product', username=current_user.username) }}" class="button submitting">Add a Product</a> 
 				{% else %}
 					<a href="" class="button submitting">Woof</a>
-					<a href="{{ url_for('follow', username=user.username)}}" class="button is-dark">Follow</a>
+					<a href="{{ url_for('follow', username=user.username)}}" class="button submitting">Follow</a>
 				{% endif %}
 	
 				<div class="columns info">
 					<div class="column">
-						
 						<i class="fas fa-couch"></i>
-							<!-- <figure class="image is-64 has-text-centered">
-						<img class="image is-32x32 is-centered" src="{{ url_for('static', filename='dog-house.png') }}">
-						</figure> -->
 						<p><span class="location">I live in: <br> {{ user.location }} </small></span></p>
 						<i class="fas fa-hotdog"></i>
 						<p><span class="fav_snack"><small>fav_snack: <br> {{ user.fav_snack }}</small></span></p>
@@ -47,11 +41,11 @@
 				</div>
 				<div class="columns about-me">
 					<div class="column">
-						<p><span class="about_me">About {{ user.username }}:<br> {{ user.about_me }} </span></p></div>
+						<p><span class="about_me">About {{ user.username }}:<br> {{ user.about_me }} </span></p>
+					</div>
 				</div>
 			</div>
 		</div>
-		
 		<div class="container">
 			<div class="column">
 				<!-- Show any flash messages to user from logging in or signing up -->
@@ -65,42 +59,40 @@
 			</div>
 		</div>  
 	</div>
-
-		<div class="container">
-			<div class="columns is-center has-text-centered is-grouped-centered">
-				<div class="column">
-					<h4>Your Reviews</h4>	
-					<button id="button_1" class="button submitting">click to see</button>
-				</div>
-				<div class="column">
-					<h4>Favorite Products</h4>
-					<button id="button_2" class="button submitting">click to see</button>
-				</div>
+	<div class="container">
+		<div class="columns is-center has-text-centered is-grouped-centered">
+			<div class="column">
+				<h4>Your Reviews</h4>	
+				<button id="button_1" class="button submitting">click to see</button>
+			</div>
+			<div class="column">
+				<h4>Favorite Products</h4>
+				<button id="button_2" class="button submitting">click to see</button>
 			</div>
 		</div>
-
-		<div class="container">
-			<div class="column">
-				<div id="description_button_1">
-					<!-- is-multiline is a Bulma class to allow columns to wrap -->
-					<div class="column is-multiline">
-						{% for review in reviews  %}
-							{% include '_review.html' %}
-						{% endfor %}	
-					</div>  
-				</div>  
-			</div>
-			<div class="column">
-				<div id="description_button_2">	
-					<div class="column is-center has-text-centered is-grouped-centered">	
-						<div class="columns is-multiline">
-							{% for save in saved_product %}
-								{% include '_saved_product.html' %}
-							{% endfor %}	
-						</div> 
-					</div>  
-				</div>	
-			</div> 
-		</div>  
 	</div>
+	<div class="container">
+		<div class="column">
+			<div id="description_button_1">
+				<!-- is-multiline is a Bulma class to allow columns to wrap -->
+				<div class="column is-multiline">
+					{% for review in reviews  %}
+						{% include '_review.html' %}
+					{% endfor %}	
+				</div>  
+			</div>  
+		</div>
+		<div class="column">
+			<div id="description_button_2">	
+				<div class="column is-center has-text-centered is-grouped-centered">	
+					<div class="columns is-multiline">
+						{% for save in saved_product %}
+							{% include '_saved_product.html' %}
+						{% endfor %}	
+					</div> 
+				</div>  
+			</div>	
+		</div> 
+	</div>  
+	
 {% endblock %}

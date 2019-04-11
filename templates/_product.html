@@ -14,7 +14,7 @@
 							<a href="{{ url_for('product', product_id=product.id) }}">{{ product.name }}</a>
 						</p>
 						<p class="title is-5 no-padding">location: {{ product.location }}</p>
-						{% if product.avg_rating == int %}
+						{% if product.avg_rating == (int > 0) %}
 							<p class="title is-5 no-padding">Rating: {{ (product.avg_rating)|round(1) }}</p>
 						{% else %}
 							<p class="title is-5 no-padding"> Rating: {{ (product.avg_rating) }}</p>

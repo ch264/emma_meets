@@ -1,30 +1,27 @@
 
 	<!-- Template for review card, used as a sub-template in profile page and products page -->
-
 	<div class="column is-one-third-desktop is-half-tablet">
 		<div class="box">
 			<div class="card-content">
 				<div class="content">
 					<div class="media-content is-grouped-centered has-text-centered">
 						<p class="title is-4 meets">
-							<a href="">{{ review.title }}</a>
+							<a href="{{ url_for('product', product_id=review.product_id) }}">{{ review.title }}</a>
 						</p>
 						<p class="title is-5 no-padding">Content: {{ review.body }}</p>
 						<p class="title is-5 no-padding">Rating: {{ review.rating }}</p>
 						{% if current_user.id == review.user_id %}
-						<a href="{{ url_for('edit_review', review_id=review.id) }}" class="button submitting">Edit review</a>
-						<!-- <a href="{{ url_for('delete_review', review_id=review.id) }}" class="button is-light is-small">Delete review</a> -->
-						
-						<button class="button cancel modal-button">Delete Review</button>
-							<div class="modal">
-								<div class="modal-background has-background-grey-dark"></div>
-								<div class="modal-content">
-									<p class="has-text-white">Are you sure you want to delete your review?</p>
-									<a href="{{ url_for('delete_review', review_id=review.id) }}" class="button submitting">Be gone with it!</a>
-									<button class="button cancel modal-button">No, I will keep it</button>
-								</div>
-							<button class="modal-close is-large" aria-label="close"></button>
-						</div>  
+							<a href="{{ url_for('edit_review', review_id=review.id) }}" class="button submitting">Edit review</a>
+							<button class="button cancel modal-button">Delete Review</button>
+								<div class="modal">
+									<div class="modal-background has-background-grey-dark"></div>
+									<div class="modal-content">
+										<p class="has-text-white">Are you sure you want to delete your review?</p>
+										<a href="{{ url_for('delete_review', review_id=review.id) }}" class="button submitting">Be gone with it!</a>
+										<button class="button cancel modal-button">No, I will keep it</button>
+									</div>
+								<button class="modal-close is-large" aria-label="close"></button>
+							</div>  
 						{% endif %}
 					</div>
 				</div>

@@ -470,6 +470,24 @@ div.product-line {
 } 
 
 
+/* create product page */
+
+.create-product {
+  padding-top: 4em;
+  padding-bottom: 1em;
+}
+
+/* create category */
+
+.new-category {
+  padding-top: 4em;
+  padding-bottom: 1em;
+}
+
+.create-review {
+  padding-top: 4em;
+  padding-bottom: 1em;
+}
 
 /* contact us form page */
 .contact {

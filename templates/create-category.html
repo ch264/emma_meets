@@ -1,12 +1,13 @@
 {% extends "base.html" %}
-<!-- Imports macro template for form rendering -->
+
 {% from "macros.html" import render_field %}
 
 {% block content %}
-  <div class="container">
+
+  <div class="container new-category">
     <div class="columns">
       <div class="column">
-        <img src="">
+        <img src="{{ url_for('static', filename='new-category.jpg') }}">
       </div>
       <div class="column">
         <h1 class="subtitle is-2">Add a new Category</h1>
@@ -26,4 +27,5 @@
       </div>  
     </div> 
   </div>
+  
 {% endblock %}

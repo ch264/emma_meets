@@ -4,26 +4,27 @@
 
 {% block content %}
 
-<div class="container">
-  <div class="columns">
-    <div class="column is-half signup-form">
-      <h1>Please sign up your dogs profile</h1>
-      <form method="POST" action="{{ url_for('signup') }}" class="field" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
+  <div class="container">
+    <div class="columns">
+      <div class="column is-half signup-form">
+        <h1>Please sign up your dogs profile</h1>
+        <form method="POST" action="{{ url_for('signup') }}" class="field" enctype="multipart/form-data">
+          {{ form.hidden_tag() }}
 
-        {% for field in form if field.widget.input_type != 'hidden' %}
-          {{ render_field(field) }}
-        {% endfor %}
+          {% for field in form if field.widget.input_type != 'hidden' %}
+            {{ render_field(field) }}
+          {% endfor %}
 
-        <div class="has-text-centered button-space">
-          <button type="submit" class="button submitting space">Sign Up</button>
-          <a href="{{ url_for('index') }}" class="button cancel">Cancel</a>
-        </div>
-      </form>
-    </div>
-    <div class="column is-half signup">
-      <img src="{{ url_for('static', filename='signup.jpeg') }}">
+          <div class="has-text-centered button-space">
+            <button type="submit" class="button submitting space">Sign Up</button>
+            <a href="{{ url_for('index') }}" class="button cancel">Cancel</a>
+          </div>
+        </form>
+      </div>
+      <div class="column is-half signup">
+        <img src="{{ url_for('static', filename='signup.jpeg') }}">
+      </div>
     </div>
   </div>
-</div>
+  
 {% endblock %}

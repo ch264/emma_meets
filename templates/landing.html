@@ -1,64 +1,60 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 	<div class="hero is-fullheight-with-navbar">
-			<div class="hero-body">
-				<div class="container landing">
-					<div class="columns">
-						<div class="column">
-								<h3 class="fade-in one">Welcome</h3>
-								<h4 class="fade-in two">to</h4>
-								<h1 class="emma-title animated fadeIn has-text-left fade-in three">Emma <span class="meets fade-in three ">Meets</span></h1>
-								<!-- <p>Join us for free and find what products work best for other dogs!  Or share your review to contribute to our community.  Feel free to browse reviews created by the community and save them to your favorites! Just sign up for an account to get started or login if you already have an account. Happy woof!</p>   -->
-						</div>		
+		<div class="hero-body">
+			<div class="container landing">
+				<div class="columns">
+					<div class="column">
+						<h3 class="fade-in one">Welcome</h3>
+						<h4 class="fade-in two">to</h4>
+						<h1 class="emma-title animated fadeIn has-text-left fade-in three">Emma <span class="meets fade-in three ">Meets</span></h1>
+					</div>		
 				</div>  
 			</div> 
 		</div>
-
-
-
-	<div class="container">
-		<div class="columns">
-			<div class="column icon-heading has-text-centered">
-				<h1 class="join-us">Come and Join us! <br> <br> <span class="meets">It's so easy!</span></h1> <br>
-				<p class="join">Join us for free and find what products work best for other dogs! Or share your review to contribute to our community. Feel free to browse reviews created by the community and save them to your favorites! Just sign up for an account to get started or login if you already have an account. 
-				<div id="typed-strings">
-					<p><span id="typed-strings" class="meets">Happy woof!</span></p> 
-				</div>
-				<span id="typed"></span>
+		<div class="container">
+			<div class="columns">
+				<div class="column icon-heading has-text-centered">
+					<h1 class="join-us">Come and Join us! <br> <br> <span class="meets">It's so easy!</span></h1> <br>
+					<p class="join">Join us for free and find what products work best for other dogs! Or share your review to contribute to our community. Feel free to browse reviews created by the community and save them to your favorites! Just sign up for an account to get started or login if you already have an account. 
+					<div id="typed-strings">
+						<p><span id="typed-strings" class="meets">Happy woof!</span></p> 
+					</div>
+					<span id="typed"></span>
 				</div>
 			</div>
-			</div>
-		<div class="columns">
-			<div class="column icon has-text-centered">
-				<img class="is-128x128" src="{{ url_for('static', filename='password.png') }}">
-				<h2>Easy Sign Up</h2><br>
-				<p>Signing up is free. We will never share your data with anyone. Being part of our community can help you in deciding which products to buy for your dog.</p>
-			</div>
-			<div class="column icon has-text-centered">
-				<img class="is-128x128" src="{{ url_for('static', filename='dogicon3.png') }}">
-				<h2>Create Your <br>Dog's Profile</h2>
-				<p>Create a profile for your beloved pooch. You can let other know about your dogs favorite snacks, toys and connect with other dogs.</p>
-			</div>
-			<div class="column icon has-text-centered">
-				<img class="is-128x128" src="{{ url_for('static', filename='review.png') }}">
-				<h2>Read And Write Reviews</h2>
-				<p>Help us build our platform. You can create dog related products, rate and review them and help other dogs find what works best.</p>
-			</div>
-		</div>  
-	</div>
-
+			<div class="columns">
+				<div class="column icon has-text-centered">
+					<img class="is-128x128" src="{{ url_for('static', filename='password.png') }}">
+					<h2>Easy Sign Up</h2><br>
+					<p>Signing up is free. We will never share your data with anyone. Being part of our community can help you in deciding which products to buy for your dog.</p>
+				</div>
+				<div class="column icon has-text-centered">
+					<img class="is-128x128" src="{{ url_for('static', filename='dogicon3.png') }}">
+					<h2>Create Your <br>Dog's Profile</h2>
+					<p>Create a profile for your beloved pooch. You can let other know about your dogs favorite snacks, toys and connect with other dogs.</p>
+				</div>
+				<div class="column icon has-text-centered">
+					<img class="is-128x128" src="{{ url_for('static', filename='review.png') }}">
+					<h2>Read And Write Reviews</h2>
+					<p>Help us build our platform. You can create dog related products, rate and review them and help other dogs find what works best.</p>
+				</div>
+			</div>  
+		</div>
 		<div class="container section-one">
 			<div class="columns">
 				<div class="column">
 					<img class="animated rotateInDownLeft" src="{{ url_for('static', filename='landing6.jpg') }}" alt="">
 					<img class="" src="{{ url_for('static', filename='landing8.jpg') }}" alt="">
 				</div>
-			<div class="column">
-				<img class="animated rotateInDownLeft" src="{{ url_for('static', filename='landing1.jpg') }}" alt="">
-				<img class="" src="{{ url_for('static', filename='landing9.jpg') }}" alt="">
-			</div>
-		</div>  
-	</div>  
+				<div class="column">
+					<img class="animated rotateInDownLeft" src="{{ url_for('static', filename='landing1.jpg') }}" alt="">
+					<img class="" src="{{ url_for('static', filename='landing9.jpg') }}" alt="">
+				</div>
+			</div>  
+		</div> 
+	</div> 
 
 {% endblock %}

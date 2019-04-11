@@ -4,7 +4,7 @@
 <div class="column is-one-third-desktop is-half-tablet">
 		<div class="card">
 			<div class="card-image">
-				<figure class="image">
+				<figure class="image is-auto">
 					<!-- Because this accesses a referenced product from the join table, call values with an additional dot notation -->
 					<a href="{{ url_for('product', product_id=save.product.id) }}"><img src="../static/uploads/{{ save.product.image_filename}}" alt="{{ save.product.image_filename }}"></a>
 				</figure>
@@ -16,12 +16,12 @@
 							<a href="{{ url_for('product', product_id=save.product) }}">{{ save.product.name }}</a>
 						</p>
 
-						{% if save.product.avg_rating == int %}
+						{% if save.product.avg_rating == (int > 0)  %}
 							<p> Rating: {{ (save.product.avg_rating) | round(1) }}</p>
 						{% else %}
 							<p> Rating: {{ save.product.avg_rating }}</p>
 						{% endif %}
-						<p>Website: {{ save.product.website }}</p>
+						<p>Website: <br><a href="http://{{ save.product.website }}">{{ save.product.website }}</a></p>
 
 					
 						<!-- Sets anchor tag to link to function 'remove_saved' defined in app.py -->

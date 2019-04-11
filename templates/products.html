@@ -1,20 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 	<div class="container product">
-		
 		<div class="columns products-header has-text-centered">
 			<div class="column has-text-centered space">
 					<h1><span class="meets">Product overview</span></h1>
 			</div>
 		</div>
-
 		<div class="columns">
 			<div class="column">
 				<img src="{{ url_for('static', filename='dog-hotel.jpg') }}">
 			</div>
 		</div>
-
 		<div class="columns">
 			<div class="column">
 				<div class="product-line has-text-centered">
@@ -23,14 +21,11 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="columns products">
+		<div class="columns products is-multiline">
 			{% for product in products %}
 				{% include '_product.html' %}
 			{% endfor %}
 		</div> 
 	</div> 
-
-
 
 {% endblock %}

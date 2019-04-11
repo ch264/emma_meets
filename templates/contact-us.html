@@ -2,70 +2,58 @@
 
 {% block content %}
 
-<div class="container contact">
-	<div class="column contact">
-		<div class="colum has-text-centered contact">
-		<h1 class="conctact">Do you have and questions or feedback for us?</h1>
-		</div>
-
-		<div class="field">
-			<label class="label">Name</label>
-			<div class="control has-icons-left">
-				<input class="input" type="text" placeholder="Your Name">
-				<!-- <span class="icon is-small is-left">
-					<i class="fas fa-user"></i>
-				</span> -->
+	<div class="container contact">
+		<div class="column contact">
+			<div class="colum has-text-centered contact">
+				<h1 class="conctact">Do you have and questions or feedback for us?</h1>
 			</div>
-		</div>
-			
-		<div class="field">
-			<label class="label">Email</label>
-			<div class="control has-icons-left has-icons-right">
-				<input class="input" type="email" placeholder="Email input">
-				<!-- <span class="icon is-small is-left">
-					<i class="fas fa-envelope"></i>
-				</span> -->
+			<div class="field">
+				<label class="label">Name</label>
+				<div class="control has-icons-left">
+					<input class="input" type="text" placeholder="Your Name">
+				</div>
 			</div>
-		</div>
-			
-		<div class="field">
-			<label class="label">Subject</label>
-			<div class="control">
-				<div class="select">
-					<select>
-						<option>Select dropdown</option>
-						<option>Question</option>
-						<option>Concern</option>
-						<option>Feedback</option>
-					</select>
+			<div class="field">
+				<label class="label">Email</label>
+				<div class="control has-icons-left has-icons-right">
+					<input class="input" type="email" placeholder="Email input">
+				</div>
+			</div>
+			<div class="field">
+				<label class="label">Subject</label>
+				<div class="control">
+					<div class="select">
+						<select>
+							<option>Select dropdown</option>
+							<option>Question</option>
+							<option>Concern</option>
+							<option>Feedback</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="field">
+				<label class="label">What would you like to tell us</label>
+				<div class="control">
+					<textarea class="textarea" placeholder="Textarea"></textarea>
+				</div>
+			</div>
+			<div class="field">
+				<div class="control">
+					<label class="checkbox">
+						<input type="checkbox">I agree to the <a href="#">terms and conditions</a>
+					</label>
+				</div>
+			</div>
+			<div class="field is-grouped">
+				<div class="control">
+					<button class="button submitting">Submit</button>
+				</div>
+				<div class="control">
+					<a href="{{url_for('index') }}" class="button cancel">Cancel</a>
 				</div>
 			</div>
 		</div>
-			
-		<div class="field">
-			<label class="label">What would you like to tell us</label>
-			<div class="control">
-				<textarea class="textarea" placeholder="Textarea"></textarea>
-			</div>
-		</div>
-			
-		<div class="field">
-			<div class="control">
-				<label class="checkbox">
-					<input type="checkbox">
-					I agree to the <a href="#">terms and conditions</a>
-				</label>
-			</div>
-		</div>
-		<div class="field is-grouped">
-			<div class="control">
-				<button class="button submitting">Submit</button>
-			</div>
-			<div class="control">
-				<a href="{{url_for('index') }}" class="button cancel">Cancel</a>
-			</div>
-		</div>
-			
-		</div>
 	</div>
+	
 {% endblock %}

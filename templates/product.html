@@ -2,13 +2,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+
   <div class="container product">
     <div class="columns">
       <div class="column is-one-quarter product">
         <h1 class="title is-2"><span class="meets">{{ product.name }}</span></h1>
         <p class=""> Location: {{ product.location }}</p>
-        <p class=""> Website: {{ product.website }}</p>
-        {% if product.avg_rating == int %}
+        <p class="">Website:<a href="http://{{product.website}}">  {{ product.website }}</a></p>
+        {% if product.avg_rating == (int > 0) %}
           <p class=""> Rating: {{ (product.avg_rating) | round(1) }}</p>
         {% else %}
           <p class=""> Rating: {{ (product.avg_rating) }}</p>
@@ -18,17 +19,17 @@
         <a class="button submitting" href="{{ url_for('edit_product', product_id=product.id) }}">Edit Information</a>
       </div>
       <div class="column is-three-quarter">
-        <img class="image" src=" ../static/uploads/{{ product.image_filename }}"  alt="User product image">
+        <img class="image is-480x480" src=" ../static/uploads/{{ product.image_filename }}"  alt="User product image">
       </div>
     </div>
     <div class="columns">
       <div class="column ">
         <h4>This pages reviews</h4>
-        
           {% for review in reviews %}
             {% include '_review.html' %}
           {% endfor %}	
       </div>
     </div>
   </div>
+
 {% endblock %}
