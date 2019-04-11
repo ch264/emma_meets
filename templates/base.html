@@ -81,6 +81,19 @@
 		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<!-- Our JS file -->
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
+		<script src="{{ url_for('static', filename='app.js') }}"></script>
+		<!-- Typed.js animation -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+    <script>
+      var typed = new Typed('#typed', {
+        stringsElement: '#typed-strings',
+        typeSpeed: 90,
+        backSpeed: 40,
+				smartBackspace: false,
+        loop: true,
+        loopCount: Infinity,
+      });
+    </script>
+
 	</body>
 </html>

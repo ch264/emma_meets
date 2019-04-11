@@ -22,6 +22,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   background: white; 
   color: #676459;
+  letter-spacing: 0.1em;
 }
 
 /* .navbar.is-transparent */
@@ -49,6 +50,10 @@ a.navbar-item:hover {
 .field {
   margin: 0 auto;
 }
+
+/* div.column {
+  padding: 0em;
+} */
 
 input {
   width: 100%;
@@ -171,21 +176,68 @@ h1.subtitle {
 
 a.navbar-item {
   text-transform: uppercase;
+  letter-spacing: 0.1em
 }
 
 
 /* landing page */
 .landing {
-  background-image: url(/static/landinghero2.jpg);
+  
   /* background-position: center; */
   /* background-repeat:  no-repeat;  */
   /* background-attachment: fixed; */
-  background-size:  cover;
+  
   /* background-color: #999; */
   min-height: 100vh;
   /* padding-left: 5em; */
   padding-top: 5em;
 } 
+
+/* Typewriter Header */
+.overlay {
+  /* font-size: 45px; */
+  /* left: 0vw; */
+  position: absolute;
+  /* text-align: center; */
+  /* top: 50vh; */
+  width: 100%;
+  z-index: 2;
+}
+
+div.hero-body {
+  background-image: url(/static/landinghero2.jpg);
+  background-size:  cover;
+}
+
+h3.fade-in.one {
+  padding-top: 0em;
+  font-size: 6em;
+  padding-left: 1em;
+}
+
+h4.fade-in.two{
+  padding-top: 0em;
+  font-size: 4em;
+  padding-left: 2.5em;
+  
+}
+
+
+h1.fade-in.three {
+  padding-top: 0.5em;
+  font-size: 6em;
+  padding-left: 0.5em;
+}
+
+.join {
+  padding: 2em 7em;
+  font-size: 1.2em;
+  
+}
+
+h1.join-us {
+  font-size: 3em;
+}
 
 span.title {
   color: pink;
@@ -194,6 +246,8 @@ span.meets {
   font-family: 'Rock Salt', cursive;
   color: #64bba6;
 }
+
+span.meets.fade-in.three {}
 
 div.hero-body {
   padding: 0em;
@@ -205,8 +259,10 @@ div.container.section-two {
 div.column.icon-heading.has-text-centered {
   margin-top: 10em;
   margin-bottom: 5em;
-  margin-bottom: 5em;
+  margin-bottom: 10em;
+  /* background-color: #effaf6; */
 }
+
 
 
 
@@ -226,6 +282,48 @@ img.div.container.section-two {
 .hero-body {
   background-color: #F7FBFE;
 }
+
+/* title fade in https://codepen.io/jmelgoza/pen/jEaGYg*/
+
+/* make keyframes that tell the start state and the end state of our object */
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fade-in {
+  opacity:0;  /* make things invisible upon start */
+  -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+
+.fade-in.one {
+  -webkit-animation-delay: 0.9s;
+  -moz-animation-delay: 0.9s;
+  animation-delay: 0.9s;
+}
+
+.fade-in.two {
+  -webkit-animation-delay: 1.5s;
+  -moz-animation-delay:1.5s;
+  animation-delay: 1.5s;
+}
+
+.fade-in.three {
+  -webkit-animation-delay: 1.8s;
+  -moz-animation-delay: 1.8s;
+  animation-delay: 1.8s;
+}
+
+
 
 /* FORMS */
 label {
