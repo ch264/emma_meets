@@ -599,8 +599,8 @@ def reset_token(token):
 
 
 
-PORT = 5000
-DEBUG = True
+# PORT = 5000
+# DEBUG = True
 
 # if on heroku initialise this:
 if 'ON_HEROKU' in os.environ:
@@ -611,7 +611,7 @@ if 'ON_HEROKU' in os.environ:
 if __name__ == '__main__':
 	models.initialize()
 
-app.run(port=PORT, debug=DEBUG)
+# app.run(port=PORT, debug=DEBUG)
 	# try:
 	# 	models.Category.create_category(
 	# 		name='name')
