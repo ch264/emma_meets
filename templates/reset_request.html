@@ -16,9 +16,9 @@
 					{{ form.email.label(class="label") }}
 					{{ form.email(class="control", cols="35", rows="20") }}
 				</div>
-				<div class="has-text-centered">
-					<button type="submit" class="button is-danger">Request Password Reset</button>
-					<a href="{{ url_for('index') }}" class="button is-light">Cancel</a>
+				<div class="has-text-centered button-space">
+					<button type="submit" class="button submitting space">Request Password Reset</button>
+					<a href="{{ url_for('index') }}" class="button cancel">Cancel</a>
 				</div>
 			</form>
 		</div>

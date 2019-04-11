@@ -35,17 +35,10 @@
 						{{ form.confirm_password(class="form-control form-control-lg") }}
 					{% endif %}
 				</div>
-				
-				<p>dont use this one</p>
-				<div class="form-input">
-					{{ form.submit(class="button") }}
-				</div>
-
-				<p>use this one</p>
-				<div class="has-text-centered">
+				<div class="has-text-centered button-space">
 					<!-- Cancel link redirects to 'profile' function as defined in app.py -->
-					<button type="submit" class="button is-danger">Save my changes</button>
-					<a href="{{ url_for('index') }}" class="button is-light">Cancel</a>
+					<button type="submit" class="button submitting space">Save my changes</button>
+					<a href="{{ url_for('index') }}" class="button cancel">Cancel</a>
 				</div>
 			</form>
 		</div>

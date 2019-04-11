@@ -14,7 +14,7 @@ body {
   display: flex;
   flex-direction: column;
   /* font-family: 'Questrial', sans-serif; */
-  min-height: 100vh;
+  height: 100vh;
   /* background-color: #F6F6F6; */
   /* font-family: 'Indie Flower', cursive; */
   /* font-family: 'Roboto', sans-serif; */
@@ -22,6 +22,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   background: white; 
   color: #676459;
+
 }
 
 /* .navbar.is-transparent */
@@ -175,7 +176,7 @@ a.navbar-item {
 
 /* landing page */
 .landing {
-  background-image: url(/static/landing_hero.jpg);
+  background-image: url(/static/landinghero2.jpg);
   /* background-position: center; */
   /* background-repeat:  no-repeat;  */
   /* background-attachment: fixed; */
@@ -203,15 +204,14 @@ div.container.section-two {
 
 div.column.icon-heading.has-text-centered {
   margin-top: 10em;
-  margin-bottom: 0em;
-  padding-bottom: 0em;
-}
-.icon {
-  
+  margin-bottom: 5em;
+  margin-bottom: 5em;
 }
 
-.icon-text {
-  padding: 7em;
+
+
+.icon {
+  padding: 2em;
   margin-top: 1em;
   margin-bottom: 5em;
 }
@@ -389,5 +389,4 @@ h1.contact {
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  }
-
+}
