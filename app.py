@@ -212,9 +212,7 @@ def send_reset_email(user):
 def edit_profile(username=None):
   user = models.User.get(g.user.id)
   form = forms.EditUserForm()
-  print('out if edit user')
   if form.validate_on_submit():
-    print('in if edit user')
     user.username = form.username.data
     user.email = form.email.data
     user.about_me = form.about_me.data
@@ -230,65 +228,7 @@ def edit_profile(username=None):
     return redirect(url_for('profile', username=user.username))
   return render_template('edit-profile.html', form=form, user=user)
 
-# ==================================================================================
-# =========================  Follow Routes  FUTURE FEATURE =========================
-# ==================================================================================
 
-# //////////////// MegaFlask Tutorial //////////////////
-# @app.route('/follow/<username>')
-# @login_required
-# def follow(username):
-#   user = User.query.filter_by(username=username).first()
-#   if user is None:
-#     return redirect(url_for('index'))
-#   if user == current_user:
-#     flash('You cannot follow yourself!')
-#     return redirect(url_for('profile', username=username))
-#   current_user.follow(user)
-#   flash('You are following {}!'.format(username))
-#   return redirect(url_for('profile', username=username))
-
-# @app.route('/unfollow/<username>')
-# @login_required
-# def unfollow(username):
-#   user = User.query.filter_by(username=username).first()
-#   if user is None:
-#     flash('User {} not found.'.format(username))
-#     return redirect(url_for('index'))
-#   if user == current_user:
-#     flash('You cannot unfollow yourself!')
-#     return redirect(url_for('user', username=username))
-#   current_user.unfollow(user)
-#   db.session.commit()
-#   flash('You are not following {}.'.format(username))
-#   return redirect(url_for('user', username=username))
-
-# //////////////// Treehouse tutorial ////////////////////////////
-# @app.route('/follow/<username>')
-# @login_required
-# def follow(username):
-#   try:
-#     user = models.User.get(models.User.username == current_user.username)
-#     models.Follow.create(
-#         follower = g.user._get_current_object(),
-#         followed = user
-#     )
-#   except models.DoesNotExist:
-#     pass
-#   return redirect(url_for('index'))
-
-# @app.route('/unfollow/<username>')
-# @login_required
-# def unfollow(username):
-#     try:
-#       user = models.User.get(models.User.id == username)
-#       models.Follow.get(
-#         models.Follow.follower == g.user._get_current_object(),
-#         models.Follow.followed == user
-#       ).delete_instance()
-#     except models.DoesNotExist:
-#       pass
-#     return render_template('profile.html', user=user.username)
 
 # ====================================================================
 # =========================  Product Routes  =========================
@@ -466,8 +406,9 @@ def remove_saved(product_id=None):
 
 
 # ====================================================================
-# ========================= Email Routes  =========================
+# ========================= Email Routes  ============================
 # ====================================================================
+
 # build reset password with help from Corey Schafer:
 # https://github.com/CoreyMSchafer/code_snippets/tree/master/Python/Flask_Blog/10-Password-Reset-Email/flaskblog
 
@@ -511,7 +452,6 @@ DEBUG = True
 
 # if on heroku initialise this:
 if 'ON_HEROKU' in os.environ:
-  print('hitting ')
   models.initialize()
 
 
@@ -524,3 +464,62 @@ app.run(port=PORT, debug=DEBUG)
 
 
 
+# ==================================================================================
+# =========================  FUTURE FEATURE : FOLLOW ROUTES =========================
+# ==================================================================================
+
+# //////////////// MegaFlask Tutorial //////////////////
+# @app.route('/follow/<username>')
+# @login_required
+# def follow(username):
+#   user = User.query.filter_by(username=username).first()
+#   if user is None:
+#     return redirect(url_for('index'))
+#   if user == current_user:
+#     flash('You cannot follow yourself!')
+#     return redirect(url_for('profile', username=username))
+#   current_user.follow(user)
+#   flash('You are following {}!'.format(username))
+#   return redirect(url_for('profile', username=username))
+
+# @app.route('/unfollow/<username>')
+# @login_required
+# def unfollow(username):
+#   user = User.query.filter_by(username=username).first()
+#   if user is None:
+#     flash('User {} not found.'.format(username))
+#     return redirect(url_for('index'))
+#   if user == current_user:
+#     flash('You cannot unfollow yourself!')
+#     return redirect(url_for('user', username=username))
+#   current_user.unfollow(user)
+#   db.session.commit()
+#   flash('You are not following {}.'.format(username))
+#   return redirect(url_for('user', username=username))
+
+# //////////////// Treehouse tutorial ////////////////////////////
+# @app.route('/follow/<username>')
+# @login_required
+# def follow(username):
+#   try:
+#     user = models.User.get(models.User.username == current_user.username)
+#     models.Follow.create(
+#         follower = g.user._get_current_object(),
+#         followed = user
+#     )
+#   except models.DoesNotExist:
+#     pass
+#   return redirect(url_for('index'))
+
+# @app.route('/unfollow/<username>')
+# @login_required
+# def unfollow(username):
+#     try:
+#       user = models.User.get(models.User.id == username)
+#       models.Follow.get(
+#         models.Follow.follower == g.user._get_current_object(),
+#         models.Follow.followed == user
+#       ).delete_instance()
+#     except models.DoesNotExist:
+#       pass
+#     return render_template('profile.html', user=user.username)

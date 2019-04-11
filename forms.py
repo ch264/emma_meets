@@ -2,8 +2,6 @@ from flask_wtf import FlaskForm as Form
 from wtforms import StringField, PasswordField, TextAreaField, SelectField, BooleanField, SubmitField, IntegerField, FileField, TextField
 from wtforms.validators import DataRequired, Regexp, ValidationError, Length, EqualTo, Email
 
-
-
 # Imports for file/photo uploader
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 
@@ -21,14 +19,11 @@ def email_exists(form, field):
         raise ValidationError("User with this email already exists")
 
 
-# Creates a SignUpForm inheriting from Form from flask_wtf
 class SignUpForm(Form):
     # Sets names of fields equal to what type of data to receive
 		username = StringField(
-			# Label for the field
 			'Your Dogs Name',
 			validators=[
-				# Requires user to enter something
 				DataRequired(),
 				# Limits characters to alphanumeric
 				Regexp(
@@ -68,7 +63,6 @@ class SignUpForm(Form):
 				DataRequired(),
 				Length(min=2)
 			])
-			# convert to integerfield
 		age = IntegerField(
 			'Age (Number)'
 			)
@@ -99,7 +93,6 @@ class SignUpForm(Form):
     ])
 		
 
-# Creates a LoginForm class. Do not need if use Google 
 class LoginForm(Form):
 		email = StringField(
 			'Email',
@@ -112,9 +105,7 @@ class LoginForm(Form):
 			validators=[DataRequired()]
 			)
 		remember_me = BooleanField('Remember Me')
-		# submit = SubmitField('Sign In')
-
-# Creates an EditUserForm class
+	
 class EditUserForm(Form):
 		# username =  StringField('Username', validators=[name_exists])
 		username =  StringField('Username')
@@ -130,8 +121,6 @@ class EditUserForm(Form):
 		image_filename = FileField('Profile Image')
     
 
-
-
 class CategoryForm(Form):
 	name = StringField(
 		'Name',
@@ -139,9 +128,8 @@ class CategoryForm(Form):
 			DataRequired(),
 			Length(min=1, max=140)
 		])
-	# submit = SubmitField('Submit')
 
-# Create a new Product Form
+
 class ProductForm(Form):
 	name = TextField(
         'Name',
@@ -160,18 +148,15 @@ class ProductForm(Form):
         ])
 	product_image = FileField('Product Image')
 	category = SelectField('Category', choices=[], validators=[DataRequired()])
-	# submit = SubmitField('Submit')
 
 
 class EditProductForm(Form):
 	name = TextField('name')
 	location = TextField('Location')
 	website = TextField('Website')
-	# product_image = FileField('Profile Image')
-	# category = SelectField('Category', choices=[], validators=[DataRequired()])
 	submit = SubmitField('Submit')
 
-# Creates a new ReviewForm
+
 class ReviewForm(Form): 
 		rating = SelectField(
 			'Rating', 
@@ -184,27 +169,24 @@ class ReviewForm(Form):
 				'Let us konw what you think',
 				validators=[DataRequired()]
 				)
-		# submit = SubmitField('Submit')
-  #  do we need ain image placeholder for the image of who is leaving the rview?
+  #  Future Feature update: include user image icon to review
 
 class EditReviewForm(Form):
-    # Provides same category options as create review form
 		title = StringField('Title')
 		body = TextAreaField('Content')
 		rating = SelectField(
 			'Rating', 
 			choices=[('5', '5'),('4','4'), ('3','3'), ('2','2'), ('1','1')
 			])
-		# submit = SubmitField('Submit')
+	
 
-# email reset form
+# Email reset password form
 class RequestResetForm(Form):
 	email = StringField('Email', validators=[DataRequired(), Email()])
 	submit = SubmitField('Request Password Reset')
 
 	def validate_email(self, email):
 		user = User.get(email = email.data)
-		# user = User.query.filter_by(email=email.data).first()
 		if user is None:
 			raise ValidationError('There is no accoutn with that email. Please register')
 

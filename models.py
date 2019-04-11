@@ -1,5 +1,4 @@
 import os, datetime
-
 from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash
 # from app import db, app
@@ -11,19 +10,12 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 # deployment on heroku
 from playhouse.db_url import connect
 
-
+# needed for further development
 # DATABASE = SqliteDatabase('emma.db')
 DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
 
 # Deployment to Heroku
 # DATABASE = connect(os.environ.get('DATABASE_URL'))
-
-# initialise a database
-# db = PostgresqlDatabase(
-#     'database_name',  # Required by Peewee.
-#     user='postgres',  # Will be passed directly to psycopg2.
-#     password='secret',  # Ditto.
-#     host='db.mysite.com')  # Ditto.
 
 
 # ====================================================================
@@ -68,12 +60,11 @@ class User(UserMixin, Model):
 		except IntegrityError:
 			raise 
 
-	# ///////// reset token for email reset of password ////////////////
-	# by default token expires after 30 min
+	# Email reset password token expires after 30 min
 	def get_reset_token(self, expires_sec=1800):
 		s = Serializer('secret_key', expires_sec)
 		return s.dumps({'user_id': self.id}).decode('utf-8')
-	# do not expect self as arguement, only use token
+	# Does not expect self as arguement, only uses token
 	@staticmethod
 	def verify_reset_token(token):
 		s = Serializer('secret_key')
@@ -83,90 +74,8 @@ class User(UserMixin, Model):
 			return None
 		return User.get(user_id)
 
-	# do we need this or is this for sql alquemy only?
 	def __repr__(self):
 		return f"User('{self.username}', '{self.email}', '{self.image_file}')"
-
-# ////////////////////////////////////// follow
-
-	# example, "give me all the users this user is following":
-	# def following(self):
-	# 	# query other users through the "relationship" table
-	# 	return (User
-	# 					.select()
-	# 					.join(Follow, on=Follow.to_user)
-	# 					.where(Follow.from_user == self)
-	# 					.order_by(User.username))
-
-	# def followers(self):
-	# 	return (User
-	# 					.select()
-	# 					.join(Follow, on=Follow.from_user)
-	# 					.where(Follow.to_user == self)
-	# 					.order_by(User.username))
-
-	# def is_following(self, user):
-	# 	return (Follow
-	# 					.select()
-	# 					.where(
-	# 							(Follow.from_user == self) &
-	# 							(Follow.to_user == user))
-	# 					.exists())
-
-# =================== Mega Tutorial ==================================
-
-	#  join Two Users into  the Model
-	# followed = models.Saved.select(models.Saved, models.User, models.User).join(models.User).switch(models.Saved).join(models.User)
-
-
-	# def follow(self, user):
-	# 	if not self.is_following(user):
-	# 		self.followed.append(user)
-
-	# def unfollow(self, user):
-	# 	if self.is_following(user):
-	# 		self.followed.remove(user)
-
-	# def is_following(self, user):
-	# 	return self.followed.filter(
-	# 		followers.c.followed_id == user.id).count() > 0
-
-
-	# //////////////// treehouse ////////////////
-	# @property
-	# def following(self):
-	# 	return (User.select().join(Follow, on=Follow.followed).where(Follow.follower == self))
-	
-	# @property
-	# def followers(self):
-	# 	return (User.select().join(Follow, on=Follow.follower).where(Follow.followed == self))
-
-# ====================================================================
-# ========================= Follow Model  ============================
-# ====================================================================
-
-class Follow(Model):
-	follower = ForeignKeyField(User, backref="user_follower")
-	followed = ForeignKeyField(User, backref="user_followed")
-	class Meta:
-		database = DATABASE
-		# db_table = 'follow'
-		# Specify a unique multi-column index on follower/followed.
-		indexes = (
-            (('follower', 'followed'), True),
-        )
-
-	# def follower(self):
-	# 	User.select().join(Follow, on=Follow.followed).where(Follow.follower == user.id)
-	# 	for follower in Follow:
-	# 		print(follower)
-
-	# def following(self): 
-	# 	User.select().join(Follow, on=Follow.follower).where(Follower.followed == user.id)
-	# 	for followed in Follow:
-	# 		print(followed)
-
-
 
 
 # ====================================================================
@@ -280,7 +189,6 @@ class Review(Model):
 
 	
 class Saved(Model):
-	# Sets user column to expect a foreign key (product Id)
 	user = ForeignKeyField(User, backref='favorites')
 	product = ForeignKeyField(Product, backref="favorites")
 	timestamp = DateTimeField(default=datetime.datetime.now())
@@ -296,3 +204,85 @@ def initialize():
 	DATABASE.connect()
 	DATABASE.create_tables([User, Product, Review, Category, Saved, Follow], safe=True)
 	DATABASE.close()
+
+
+
+
+
+# ========================================================================
+# FUTURE FEATURE: USERS CAN FOLLOW EACH OTHER
+# =========================================================================
+	# example, "give me all the users this user is following":
+	# def following(self):
+	# 	# query other users through the "relationship" table
+	# 	return (User
+	# 					.select()
+	# 					.join(Follow, on=Follow.to_user)
+	# 					.where(Follow.from_user == self)
+	# 					.order_by(User.username))
+	# def followers(self):
+	# 	return (User
+	# 					.select()
+	# 					.join(Follow, on=Follow.from_user)
+	# 					.where(Follow.to_user == self)
+	# 					.order_by(User.username))
+	# def is_following(self, user):
+	# 	return (Follow
+	# 					.select()
+	# 					.where(
+	# 							(Follow.from_user == self) &
+	# 							(Follow.to_user == user))
+	# 					.exists())
+
+	# =================== Mega Tutorial ==================================
+
+	#  join Two Users into  the Model
+	# followed = models.Saved.select(models.Saved, models.User, models.User).join(models.User).switch(models.Saved).join(models.User)
+
+
+	# def follow(self, user):
+	# 	if not self.is_following(user):
+	# 		self.followed.append(user)
+
+	# def unfollow(self, user):
+	# 	if self.is_following(user):
+	# 		self.followed.remove(user)
+
+	# def is_following(self, user):
+	# 	return self.followed.filter(
+	# 		followers.c.followed_id == user.id).count() > 0
+
+
+	# //////////////// treehouse ////////////////
+	# @property
+	# def following(self):
+	# 	return (User.select().join(Follow, on=Follow.followed).where(Follow.follower == self))
+	
+	# @property
+	# def followers(self):
+	# 	return (User.select().join(Follow, on=Follow.follower).where(Follow.followed == self))
+
+# ====================================================================
+# ========================= Follow Model  ============================
+# ====================================================================
+
+# class Follow(Model):
+# 	follower = ForeignKeyField(User, backref="user_follower")
+# 	followed = ForeignKeyField(User, backref="user_followed")
+# 	class Meta:
+# 		database = DATABASE
+		# db_table = 'follow'
+		# Specify a unique multi-column index on follower/followed.
+		# indexes = (
+    #         (('follower', 'followed'), True),
+    #     )
+
+	# def follower(self):
+	# 	User.select().join(Follow, on=Follow.followed).where(Follow.follower == user.id)
+	# 	for follower in Follow:
+	# 		print(follower)
+
+	# def following(self): 
+	# 	User.select().join(Follow, on=Follow.follower).where(Follower.followed == user.id)
+	# 	for followed in Follow:
+	# 		print(followed)
