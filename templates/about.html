@@ -24,46 +24,45 @@
 
   <div class="container">
     <div class="columns">
-      <div class="column is-half">
-        <div class="card">
+
+      <div class="column">
+        <div class="card animated fadeIn">
+          <div class="card-image has-text-centered">
+            <figure class="image is-128x128">
+              <img src="{{ url_for('static', filename='emma.jpg')}}" alt="Emma">
+            </figure>
+          </div>
           <div class="card-content">
-            <div class="media">
-              <div class="media-left"> 
-                <figure class="image is-128x128">
-                  <img src="{{ url_for('static', filename='emma.jpg')}}" alt="Emma">
-                </figure>
+            <div class="content">
+              <div class="media-content is-grouped-centered has-text-centered">
+                <h4 class="subtitle is-4"><span class="meets">Meet Emma</span></h4> <br>
+                <p>Emma was born in 2004 into a puppy trading organisation. She was kept in isolation in a cellar and used as a puppy breeding machine for the first four years of her life. When finally someone reported the breeders, the police rescued the dogs and we took Emma in.</p> 
+                <p> When Emma came to us in 2007 she did not know the feeling of grass below her paws, what snow felt like or how to interact with other dogs. Since then she has come a very long way. </p>
+                <p> Emma has learned how to play, how to swim in a lake, how to hike up mountains and sniff along the way and how good it is to cuddle for hours on the couch. We love her very much and want to share all the products that make her life easier. Emma looooves her yellow raincoat and will not go outside without it, because it has a hoodie that keeps her ears dry.</p>    
               </div>
-              <!-- about Emma -->
-              <div class="media-content">
-                <h4 class="subtitle is-4"><span class="meets">Meet Emma</span></h4>
-                <p>Emma was born in 2004 into a puppy trading organisation. She was kept in isolation in a cellar and used as a puppy breeding machine for the first four years of her life. When finally someone reported the breeders, the police rescued the dogs and we took Emma in. When she came to us she did not know the feeling of grass below her paws, what snow felt like or how to interact with other dogs.
-								Since we adopted Emma in 2007 she has come a very long way. She has learned how to play with other dogs, how to swim in a lake, how to hike up mountains and sniff along the way and how good it is to cuddle for hours on the couch, whilst watching her favorite show. We love her very much and want to share all the love for her and products that make her life easier with others. Emma looooves her yellow raincoat and will not go outside without it, because it h,as a hoodie and she does not like her ears to get wet.</p>    
               </div>
-            </div>  
+            </div>
+          </div>  
+        </div>  
+      <div class="column">
+        <div class="card is-centered">
+          <div class="card-image">
+            <figure class="image is-128x128 about">
+              <img clas="image" src="{{ url_for('static', filename='../static/christina.jpg') }}" alt="Christina">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="content">
+              <div class="media-content is-grouped-centered has-text-centered">
+                <h4 class="subtitle is-4"><span class="meets">Meet Christina</span></h4><br>
+                  <p>Christina is a former Cell and Molecular Biologist, DNA expert and Customer Success Manager turned Full Stack Developer. With a continuous drive to learn and craving for knowledge, she has a passion for products that provide meaningful value.</p>
+                  <p>With her love for Emma and striving to make her live as pleasant as possible Christina is always on the lookout for dog related products. Lets create a community help each other to choose only the best for our puppies by leaving an honest review about dog related products.<hr>If you would like to see more of Christina's project, you can check out <span><a class="git" href="https://github.com/ch264" alt="Christina"> Christina's GitHub</a></span></p>
+              </div>
+            </div>
           </div>  
         </div>  
       </div>  
-      
-      <!-- About Christina -->
-      <div class="column is-half">
-        <div class="card">
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                <figure class="image is-128x128">
-                  <img src="{{ url_for('static', filename='../static/christina.jpg') }}" alt="Christina">
-                </figure>
-              </div>
-              <div class="media-content">
-                <h4 class="subtitle is-4"><span class="meets">Meet Christina</span></h4>
-                <p>Christina is a former Cell and Molecular Biologist, DNA expert and Customer Success Manager turned Full Stack Developer. With a continuous drive to learn and craving for knowledge, she has a passion for products that provide meaningful value. With her love for Emma and striving to make her live as pleasant as possible Christina is always on the lookout for dog related products. Lets create a community help each other to choose only the best for our puppies by leaving an honest review about dog related products. <hr>
-                  If you would like to see more of Christina's project, you can check out <span><a class="git" href="https://github.com/ch264" alt="Christina"> Christina's GitHub</a></span></p>
-              </div>
-            </div>  
-          </div>  
-        </div>  
-      </div>  
-    </div>  
+    </div>
   </div>
 
     <div class="container">
