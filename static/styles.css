@@ -94,16 +94,16 @@ button, .submitting {
 }
 
 .cancel {
-  border: 2px solid #8e4246;
+  border: 2px solid #ec3661;
   border-radius: 5px;
   background-color: white;
-  color: #8e4246;
+  color: #ec3661;
   cursor: pointer;
 }
 
 .cancel:hover {
-  border: 2px solid #8e4246;
-  background-color: #8e4246;
+  border: 2px solid #ec3661;
+  background-color: #ec3661;
   color: white;
 }
 

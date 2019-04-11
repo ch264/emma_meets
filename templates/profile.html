@@ -28,26 +28,26 @@
 							<!-- <figure class="image is-64 has-text-centered">
 						<img class="image is-32x32 is-centered" src="{{ url_for('static', filename='dog-house.png') }}">
 						</figure> -->
-						<p><span class="location meets">I live in: {{ user.location }} </small></span></p>
+						<p><span class="location">I live in: <br> {{ user.location }} </small></span></p>
 						<i class="fas fa-hotdog"></i>
-						<p><span class="fav_snack meets"><small>fav_snack: {{ user.fav_snack }}</small></span></p>
+						<p><span class="fav_snack"><small>fav_snack: <br> {{ user.fav_snack }}</small></span></p>
 					</div>
 					<div class="column">
 						<i class="fas fa-venus-mars"></i>
-						<p><span class="gender meets"><small>gender: {{ user.gender }}</small><nder/span></p>
+						<p><span class="gender"><small>gender: <br> {{ user.gender }}</small><nder/span></p>
 						<i class="fas fa-dog"></i>
-						<p><span class="breed meets"><small>breed: {{ user.breed }}</small></span></p>
+						<p><span class="breed"><small>breed: <br> {{ user.breed }}</small></span></p>
 					</div>
 					<div class="column">
 						<i class="fas fa-birthday-cake"></i>
-						<p><span class="age meets"><small>I am: {{ user.age }} years</small></span></p>
+						<p><span class="age"><small>I am: <br> {{ user.age }} years</small></span></p>
 						<i class="fas fa-baseball-ball"></i>
-						<p><span class="fav_toy meets"><small>fav_toy: {{ user.fav_toy }}</small></span></p>
+						<p><span class="fav_toy"><small>fav_toy: <br> {{ user.fav_toy }}</small></span></p>
 					</div>
 				</div>
 				<div class="columns about-me">
 					<div class="column">
-						<p><span class="about_me meets">About {{ user.username }}:<br> {{ user.about_me }} </span></p></div>
+						<p><span class="about_me">About {{ user.username }}:<br> {{ user.about_me }} </span></p></div>
 				</div>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
 					<button id="button_1" class="button submitting">click to see</button>
 				</div>
 				<div class="column">
-					<h4>Favorite Prodcuts</h4>
+					<h4>Favorite Products</h4>
 					<button id="button_2" class="button submitting">click to see</button>
 				</div>
 			</div>
