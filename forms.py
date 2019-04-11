@@ -122,7 +122,7 @@ class EditUserForm(Form):
 		# password = PasswordField('Password', validators=[DataRequired()])
 		about_me = StringField('About Me', validators=[DataRequired()])
 		age = IntegerField('Age', validators=[DataRequired()])
-		gender = SelectField('Gender', choices=[('male', 'female')])
+		gender = SelectField('Gender', choices=[('male', 'Male'), ('female', 'Female')])
 		location = StringField('Location', validators=[DataRequired()])
 		fav_snack = StringField('Favorite Snack', validators=[DataRequired()])
 		fav_toy = StringField('Favorite Toy', validators=[DataRequired()])
