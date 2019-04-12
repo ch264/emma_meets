@@ -3,42 +3,60 @@
 /* ////Global Style ////*/
 /* ////////////////////*/
 
-
-@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Roboto');
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:600|Montserrat');
-@import url('https://fonts.googleapis.com/css?family=Kristi');
 @import url('https://fonts.googleapis.com/css?family=Rock+Salt');
 
 body {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  /* font-family: 'Questrial', sans-serif; */
   height: 100%;
-  /* background-color: #F6F6F6; */
-  /* font-family: 'Indie Flower', cursive; */
-  /* font-family: 'Roboto', sans-serif; */
-  /* font-family: 'Josefin Sans', sans-serif; */
   font-family: 'Montserrat', sans-serif;
   background: white; 
   color: #676459;
   letter-spacing: 0.1em;
 }
 
-/* .navbar.is-transparent */
+/* font */
+span.meets {
+  font-family: 'Rock Salt', cursive;
+  color: #64bba6;
+}
 
+/* layout */
+.column {
+  height: 100%;
+}
+
+.card {
+  height: 100vh;
+  padding-top: 1em;
+  padding-bottom: 10em;
+  margin-bottom: 2em;
+}
+
+/* navbar */
 nav.navbar.is-fixed-top {
-    /* background-color: transparent; */
-    /* background-image: none; */
-    /* background-color: #7995BC; */
-    background-color: #f2f2f0;
-  }
+  background-color: #f2f2f0;
+}
+
+/* footer  for future debugging */
+/* div.foot { 
+  position: relative;
+  padding: 1.5rem;
+  background-color: #f2f2f0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 100em;
+  width: 100%;
+}  */
 
 /* links */
-
 a {
   color: #64bba6;
 }
+
 a.navbar-item {
   color: #676459;
 }
@@ -46,30 +64,22 @@ a.navbar-item {
 a.navbar-item:hover {
   color: #64bba6;
 }
+
 /* forms */
 .field {
   margin: 0 auto;
 }
 
-/* div.column {
-  padding: 0em;
-} */
+label {
+  margin-top: 1em;
+}
 
 input {
   width: 100%;
   border: none;
   border-bottom: solid #C9B9AB;
-  /* border-radius: 4px; */
   padding: 6px;
 }
-
-/* imgages */
-/* img {
-  width: 100%;
-  height: 100vh;
-  padding: 0em;
-} */
-
 
 /* messages */
 div.success{
@@ -87,6 +97,7 @@ button, .submitting {
   color: #64bba6;
   cursor: pointer;
 }
+
 .submitting:hover {
   border: 2px solid #64bba6;
   background-color: #64bba6;
@@ -100,176 +111,55 @@ button, .submitting {
   color: #ec3661;
   cursor: pointer;
 }
-
 .cancel:hover {
   border: 2px solid #ec3661;
   background-color: #ec3661;
   color: white;
 }
 
-.grey {
-  border: 2px solid #64bba6;
-  background-color: #64bba6;
-  color: white;
-  cursor: pointer;
+.button-space {
+  margin: 1em 0em;
+}
+button.button.submitting.space {
+  margin-right: 0.5em;
 }
 
-.grey:hover {
-  border: 2px solid #64bba6;
-  background-color: white;
-  color: #676459;
-}
 
 /* error message */
 .error {
   margin: 3em;
-  border: solid #8e4246;
-}
-
-/* layout */
-.column {
-  height: 100%;
-}
-.card {
-  height: 100vh;
-  padding-top: 1em;
-  padding-bottom: 10em;
-  margin-bottom: 2em;
+  border: solid #ec3661;
 }
 
 
-/* 
-footer
-.footer { */
-  /* position: relative; */
-  /* padding: 1.5rem;
-  background-color: #f2f2f0;
-  left: 0;
-  bottom: 0;
-  right: 0; */
-  /* top: 19rem; */
-  /* width: 100%;*/
-/* }  */
+/* //////////////////////*/
+/* //// Landing Page ////*/
+/* ////////////////////*/
 
-/* footer.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-} */
-
-
-/* review page */
-.review {
-  padding-top: 5em;
-}
-
-.create-space {
-  padding-top: 5em;
-}
-
-.box {
-  width: 80vw;
-}
-
-h1.subtitle {
-  padding-top: 100px;
-}
-
-.request {
-  padding-top: 100px;
-}
-
-a.navbar-item {
-  text-transform: uppercase;
-  letter-spacing: 0.1em
-}
-
-
-/* landing page */
 .landing {
-  
-  /* background-position: center; */
-  /* background-repeat:  no-repeat;  */
-  /* background-attachment: fixed; */
-  
-  /* background-color: #999; */
   min-height: 100vh;
-  /* padding-left: 5em; */
   padding-top: 5em;
 } 
 
+div.hero-body {
+  background-image: url(/static/landinghero2.jpg);
+  background-size: cover;
+  padding: 0em;
+}
+
 /* Typewriter Header */
 .overlay {
-  /* font-size: 45px; */
-  /* left: 0vw; */
   position: absolute;
-  /* text-align: center; */
-  /* top: 50vh; */
   width: 100%;
   z-index: 2;
 }
 
-div.hero-body {
-  background-image: url(/static/landinghero2.jpg);
-  background-size:  cover;
-}
-
-h3.fade-in.one {
-  padding-top: 0em;
-  font-size: 6em;
-  padding-left: 1em;
-}
-
-h4.fade-in.two{
-  padding-top: 0em;
-  font-size: 4em;
-  padding-left: 2.5em;
-  
-}
-
-
-h1.fade-in.three {
-  padding-top: 0.5em;
-  font-size: 6em;
-  padding-left: 0.5em;
-}
-
-.join {
-  padding: 2em 7em;
-  font-size: 1.2em;
-  
-}
-
-h1.join-us {
-  font-size: 3em;
-}
-
-span.title {
-  color: pink;
-}
-span.meets {
-  font-family: 'Rock Salt', cursive;
-  color: #64bba6;
-}
-
-span.meets.fade-in.three {}
-
-div.hero-body {
-  padding: 0em;
-}
-div.container.section-two {
-  margin: 0em;
-}
-
+/* 3 icons */
 div.column.icon-heading.has-text-centered {
   margin-top: 10em;
   margin-bottom: 5em;
   margin-bottom: 10em;
-  /* background-color: #effaf6; */
 }
-
-
-
 
 .icon {
   padding: 2em;
@@ -277,19 +167,29 @@ div.column.icon-heading.has-text-centered {
   margin-bottom: 5em;
 }
 
-img.div.container.section-two {
-  width: 100vw;
-}
 .section-one {
   padding-top: 2em;
 }
 
-.hero-body {
-  background-color: #F7FBFE;
+/* title animation */
+h3.fade-in.one {
+  padding-top: 0em;
+  font-size: 6em;
+  padding-left: 1em;
+}
+h4.fade-in.two{
+  padding-top: 0em;
+  font-size: 4em;
+  padding-left: 2.5em;
+  
+}
+h1.fade-in.three {
+  padding-top: 0.5em;
+  font-size: 6em;
+  padding-left: 0.5em;
 }
 
 /* title fade in https://codepen.io/jmelgoza/pen/jEaGYg*/
-
 /* make keyframes that tell the start state and the end state of our object */
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -328,26 +228,40 @@ img.div.container.section-two {
   animation-delay: 1.8s;
 }
 
-
-
-/* FORMS */
-label {
-  margin-top: 1em;
+/* images on landing page */
+.rotate-in-down-left {
+  -webkit-animation-name: rotateInDownLeft;
+  animation-name: rotateInDownLeft;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
-/* signup page */
+
+/* ////////////////////////////////*/
+/* //// CONTACT US PAGE //////*/
+/* ///////////////////////////////*/
+
+.contact {
+  padding-top: 2em;
+  color: #868474;
+}
+
+h1.contact {
+  padding-bottom: 10em;
+}
+
+/* ///////////////////////*/
+/* //// SIGNUP  PAGE ////*/
+/* /////////////////////*/
+
 .signup-form {
   padding-top: 7em;
 }
 
 h1.signup-form {
   margin-bottom: 2em;
-}
-.button-space {
-  margin: 1em 0em;
-}
-button.button.submitting.space {
-  margin-right: 0.5em;
 }
 
 div.column.is-half.signup {
@@ -358,28 +272,31 @@ div.has-text-centered.add-product {
   margin-top: 2em;
 }
 
-/* login page */
-.loginForm {
+/* ///////////////////////*/
+/* //// LOGIN  PAGE /////*/
+/* /////////////////////*/
+.login-form {
   padding-top: 10em;
 }
 
-.loginimg img {
+.login-img img {
   height: 100%;
   width: 100%;
   padding-top: 5em;
 }
 
-
-
-
-/* reset password */
+/* /////////////////////////*/
+/* //// RESET PASSWORD ////*/
+/* ///////////////////////*/
 .reset-token {
   padding-top: 100px;
 }
 
-/* profile page */
+/* /////////////////////////*/
+/* //// PROFILE PAGE //////*/
+/* ///////////////////////*/
 
-.profileTitle {
+.profile-title {
   padding-top: 100px;
 }
 
@@ -399,15 +316,11 @@ div.has-text-centered.add-product {
   margin-bottom: 1em;
 }
 
-/* figure.image.is-32x32 {
-  margin: 0em;
-} */
-
-/* product page */
+/* /////////////////////////*/
+/* //// PRODUCT PAGE //////*/
+/* ///////////////////////*/
 
 .product {
-  /* background-image: url(products.jpg); */
-  background-size: cover;
   padding-top: 10em;
   height: 100vh;
   width: 100%;
@@ -421,33 +334,9 @@ div.columns.products-header.has-text-centered {
   margin-bottom: 7em;
 }
 
-.bubbles {
-display: inline-block;
-font-family: arial;
-position: relative;
-}
-
-h1.bubbles {
-position: relative;
-margin: 1em 0 0;
-font-family: 'Luckiest Guy', cursive;
-color: #fff;
-z-index: 2;
-}
-
-.individual-bubble {
-position: absolute;
-border-radius: 100%;
-bottom: 10px;
-background-color: #fff;
-z-index: 1;
-}
-
-
 .product { 
   padding-top: 5em;
 }
-
 
 .edit-product {
   padding-top: 100px;
@@ -461,53 +350,67 @@ div.product-line {
   background-image: url(/static/404.jpg);
   background-position: center;
   background-repeat:  no-repeat;
-  /* background-attachment: fixed; */
   background-size:  cover;
-  /* background-color: #999; */
   min-height: 100vh;
   padding-left: 5em;
   padding-top: 5em;
 } 
 
 
-/* create product page */
+
+/* //////////////////////*/
+/* //// Review Page ////*/
+/* ////////////////////*/
+.review {
+  padding-top: 5em;
+}
+
+.create-space {
+  padding-top: 5em;
+}
+
+.box {
+  width: 80vw;
+}
+
+h1.subtitle {
+  padding-top: 100px;
+}
+
+.request {
+  padding-top: 100px;
+}
+
+a.navbar-item {
+  text-transform: uppercase;
+  letter-spacing: 0.1em
+}
+
+/* ////////////////////////////////*/
+/* //// CREATE PRODUCT PAGE //////*/
+/* ///////////////////////////////*/
 
 .create-product {
   padding-top: 4em;
   padding-bottom: 1em;
 }
 
-/* create category */
+/* all the same but keeping seperated for future styling */
+/* ////////////////////////////////*/
+/* //// CREATE CATEGORY PAGE //////*/
+/* ///////////////////////////////*/
 
 .new-category {
   padding-top: 4em;
   padding-bottom: 1em;
 }
 
+/* ////////////////////////////////*/
+/* //// CREATE REVIEW PAGE //////*/
+/* ///////////////////////////////*/
+
 .create-review {
   padding-top: 4em;
   padding-bottom: 1em;
 }
 
-/* contact us form page */
-.contact {
-  padding-top: 2em;
-  color: #868474;
-}
-
-h1.contact {
-  padding-bottom: 10em;
-}
-
-
-
-/* images on landing page */
-
-.rotateInDownLeft {
-  -webkit-animation-name: rotateInDownLeft;
-  animation-name: rotateInDownLeft;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}

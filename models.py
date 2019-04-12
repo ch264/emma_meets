@@ -197,18 +197,6 @@ class Saved(Model):
 		database = DATABASE
 		db_table = 'saved'
 
-
-
-# Defines initialize function to connect to database, create empty tables, and close connection
-def initialize():
-	DATABASE.connect()
-	DATABASE.create_tables([User, Product, Review, Category, Saved, Follow], safe=True)
-	DATABASE.close()
-
-
-
-
-
 # ========================================================================
 # FUTURE FEATURE: USERS CAN FOLLOW EACH OTHER
 # =========================================================================
@@ -266,16 +254,16 @@ def initialize():
 # ========================= Follow Model  ============================
 # ====================================================================
 
-# class Follow(Model):
-# 	follower = ForeignKeyField(User, backref="user_follower")
-# 	followed = ForeignKeyField(User, backref="user_followed")
-# 	class Meta:
-# 		database = DATABASE
-		# db_table = 'follow'
+class Follow(Model):
+	follower = ForeignKeyField(User, backref="user_follower")
+	followed = ForeignKeyField(User, backref="user_followed")
+	class Meta:
+		database = DATABASE
+		db_table = 'follow'
 		# Specify a unique multi-column index on follower/followed.
-		# indexes = (
-    #         (('follower', 'followed'), True),
-    #     )
+		indexes = (
+            (('follower', 'followed'), True),
+        )
 
 	# def follower(self):
 	# 	User.select().join(Follow, on=Follow.followed).where(Follow.follower == user.id)
@@ -286,3 +274,15 @@ def initialize():
 	# 	User.select().join(Follow, on=Follow.follower).where(Follower.followed == user.id)
 	# 	for followed in Follow:
 	# 		print(followed)
+
+
+# Defines initialize function to connect to database, create empty tables, and close connection
+def initialize():
+	DATABASE.connect()
+	DATABASE.create_tables([User, Product, Review, Category, Saved, Follow], safe=True)
+	DATABASE.close()
+
+
+
+
+

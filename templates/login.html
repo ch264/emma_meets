@@ -6,7 +6,7 @@
 
   <div class="container">
     <div class="columns">
-      <div class="column is-one-third loginForm">
+      <div class="column is-one-third login-form">
           <h1>Sign in and find out</h1><br>
           <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -37,7 +37,7 @@
             {% endif %}
           {% endwith %}
       </div>
-      <div class="column loginimg">
+      <div class="column login-img">
         <img src="{{ url_for('static', filename='login.jpg') }}">
       </div>
     </div>

@@ -1,13 +1,17 @@
+
+# needed for future refractoring
+
+
 # from app import app
-import models, app, forms, os
+# import models, app, forms, os
 
-from flask import render_template, flash, redirect, url_for, Flask, g, request
-from flask import Flask, g, request, render_template, flash, redirect, url_for, session, escape
-# from config import Config
+# from flask import render_template, flash, redirect, url_for, Flask, g, request
+# from flask import Flask, g, request, render_template, flash, redirect, url_for, session, escape
+# # from config import Config
 
-# User login
-from flask_login import LoginManager, login_user, logout_user, current_user, login_required
-from flask_bcrypt import check_password_hash
+# # User login
+# from flask_login import LoginManager, login_user, logout_user, current_user, login_required
+# from flask_bcrypt import check_password_hash
 
 
 # # Connects to database and gets current user who is logged in
