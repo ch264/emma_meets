@@ -57,3 +57,4 @@ https://trello.com/c/nuxyuQmI/15-erd
 - use instagram SPI to display pictures of profile
 - implement WYSIWIG
 - add birthdate and calculate automatic age change on profile
+- users should be added to product table
