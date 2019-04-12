@@ -1,4 +1,6 @@
-# emma_meets
+### emma_meets
+
+https://emmameets.herokuapp.com/
 
 Emma Meets was created to provide a social media platform, for dog owners to find and leave reviews for dog related products. Users can sign up, reset their password by email, create a profile for their dog, browse existing products in the database, leave reviews and favorite products to their profile page. In addition they can remove these as well as their reviews. Each review has a rating that is dispayed as an average rating on the product page itself and in the product cards on the profile. If a user does not find a dog-related product on the page, they can create a category, which populates in a dropdown menu in the create product page. here they can upload an appropriate picture and information about the product they would like to review. After they are done, they can logout again.  
 
@@ -41,7 +43,12 @@ https://trello.com/c/nuxyuQmI/15-erd
 
 
 ## unsolved problems
-
+- Average ratings do not always round up
+- reviews should show the product their are written for
+- reviews should show the users profile
+- the footer is not sticking to the bottom
+- a user should not be required to upload a picture when editing their profile
+- 
 
 ## future features
 - when user logs in, they should go to a page with all recent reviews displayed (meaty content)

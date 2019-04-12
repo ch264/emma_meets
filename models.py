@@ -12,10 +12,10 @@ from playhouse.db_url import connect
 
 # needed for further development
 # DATABASE = SqliteDatabase('emma.db')
-# DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
+DATABASE = PostgresqlDatabase('emma', user='christinahastenrath', password='secret', host='127.0.0.1', port=5432)
 
 # Deployment to Heroku
-DATABASE = connect(os.environ.get('DATABASE_URL'))
+# DATABASE = connect(os.environ.get('DATABASE_URL'))
 
 
 # ====================================================================
