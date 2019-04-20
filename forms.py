@@ -188,7 +188,7 @@ class RequestResetForm(Form):
 	def validate_email(self, email):
 		user = User.get(email = email.data)
 		if user is None:
-			raise ValidationError('There is no accoutn with that email. Please register')
+			raise ValidationError('There is no account with that email. Please register')
 
 class ResetPasswordForm(Form):
 	password = PasswordField('Password', validators=[DataRequired()])

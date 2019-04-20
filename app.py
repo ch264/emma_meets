@@ -447,8 +447,8 @@ def reset_token(token):
 
 
 # needed for further development
-PORT = 5000
-DEBUG = True
+# PORT = 5000
+# DEBUG = True
 
 # if on heroku initialise this:
 if 'ON_HEROKU' in os.environ:
@@ -460,7 +460,7 @@ if __name__ == '__main__':
 
 
 # needed for further development
-app.run(port=PORT, debug=DEBUG)
+# app.run(port=PORT, debug=DEBUG)
 
 
 
