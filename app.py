@@ -121,7 +121,7 @@ def signup():
       # Sets variable filename to image file of uploaded 'profile_image' from form
       # filename = images.save(request.files['profile_image'])
       # Sets variable url to change image url to match filename
-      url = images.url(filename)
+      # url = images.url(filename)
 
       models.User.create_user(
         username = form.username.data,
