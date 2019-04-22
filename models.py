@@ -33,8 +33,8 @@ class User(UserMixin, Model):
 	fav_snack = CharField(255)
 	fav_toy = CharField(255)
 	breed = CharField()
-	image_filename = CharField()
-	image_url = CharField()
+	# image_filename = CharField()
+	# image_url = CharField()
         
 	class Meta:
 		database = DATABASE
@@ -42,7 +42,7 @@ class User(UserMixin, Model):
 		only_save_dirty = True
 
 	@classmethod
-	def create_user(cls, username, email, password, about_me, age, gender, location, fav_snack, fav_toy, breed, image_url, image_filename):
+	def create_user(cls, username, email, password, about_me, age, gender, location, fav_snack, fav_toy, breed):
 		try:
 			cls.create(
 				username = username,
@@ -54,9 +54,9 @@ class User(UserMixin, Model):
 				location = location,
 				fav_snack = fav_snack,
 				fav_toy = fav_toy,
-				breed = breed,
-				image_filename = image_filename,
-				image_url = image_url)
+				breed = breed)
+				# image_filename = image_filename,
+				# image_url = image_url)
 		except IntegrityError:
 			raise 
 
@@ -75,7 +75,8 @@ class User(UserMixin, Model):
 		return User.get(user_id)
 
 	def __repr__(self):
-		return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+		# return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+		return f"User('{self.username}', '{self.email}')"
 
 
 # ====================================================================
@@ -105,8 +106,8 @@ class Product(Model):
 	name = CharField()
 	location = TextField()
 	website = CharField(unique=True)
-	image_url = CharField()
-	image_filename = CharField()
+	# image_url = CharField()
+	# image_filename = CharField()
 	category = ForeignKeyField(model=Category, backref='product_category')
 	avg_rating = FloatField(default=None, null=True)
 	class Meta:
@@ -115,14 +116,14 @@ class Product(Model):
 		only_save_dirty = True
 
 	@classmethod
-	def create_product(cls, name, location, website, image_filename, image_url, category):
+	def create_product(cls, name, location, website, category):
 		try:
 			cls.create(
 				name = name,
 				location = location,
 				website = website,
-				image_url = image_url,
-				image_filename = image_filename,
+				# image_url = image_url,
+				# image_filename = image_filename,
 				category = category
 				)
 		except IntegrityError:

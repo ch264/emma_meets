@@ -119,7 +119,7 @@ def signup():
     form = forms.SignUpForm()
     if form.validate_on_submit():
       # Sets variable filename to image file of uploaded 'profile_image' from form
-      filename = images.save(request.files['profile_image'])
+      # filename = images.save(request.files['profile_image'])
       # Sets variable url to change image url to match filename
       url = images.url(filename)
 
@@ -133,9 +133,9 @@ def signup():
 				location = form.location.data,
 				fav_snack = form.fav_snack.data,
 				fav_toy = form.fav_toy.data,
-				breed = form.breed.data,
-        image_filename=filename,
-        image_url=url)
+				breed = form.breed.data)
+        # image_filename=filename,
+        # image_url=url)
         
       # Gets newly created user from the database by matching username in the database to username entered in the form
       user = models.User.get(models.User.username == form.username.data)
@@ -222,7 +222,7 @@ def edit_profile(username=None):
     user.fav_snack = form.fav_snack.data
     user.fav_toy = form.fav_toy.data
     user.breed = form.breed.data
-    user.image_filename = images.save(request.files['image_filename'])
+    # user.image_filename = images.save(request.files['image_filename'])
     user.save()
     flash('Your changes have been saved.', 'success')
     return redirect(url_for('profile', username=user.username))
@@ -278,15 +278,15 @@ def add_product():
   user = g.user._get_current_object()
 
   if form.validate_on_submit():
-    filename = images.save(request.files['product_image'])
-    url = images.url(filename)
+    # filename = images.save(request.files['product_image'])
+    # url = images.url(filename)
     prod = models.Product.create_product(
       name = form.name.data,
       location = form.location.data,
       website = form.website.data,
-      category = form.category.data,
-      image_filename = filename,
-      image_url = url)
+      category = form.category.data)
+      # image_filename = filename,
+      # image_url = url)
     product = models.Product.get(models.Product.website == form.website.data)
     flash('Product Created', 'Success')
     return redirect(url_for('product', product_id=product.id))

@@ -87,10 +87,10 @@ class SignUpForm(Form):
 			'Breed', 
 			validators=[DataRequired()
 			])
-		profile_image = FileField('Profile Image', validators=[
-        FileRequired(),
-        FileAllowed(['jpg', 'png'], 'Images only!')
-    ])
+		# profile_image = FileField('Profile Image', validators=[
+    #     FileRequired(),
+    #     FileAllowed(['jpg', 'png'], 'Images only!')
+    # ])
 		
 
 class LoginForm(Form):
@@ -118,7 +118,7 @@ class EditUserForm(Form):
 		fav_snack = StringField('Favorite Snack', validators=[DataRequired()])
 		fav_toy = StringField('Favorite Toy', validators=[DataRequired()])
 		breed = StringField('Breed')
-		image_filename = FileField('Profile Image')
+		# image_filename = FileField('Profile Image')
     
 
 class CategoryForm(Form):
@@ -146,7 +146,7 @@ class ProductForm(Form):
         validators=[
             DataRequired()
         ])
-	product_image = FileField('Product Image')
+	# product_image = FileField('Product Image')
 	category = SelectField('Category', choices=[], validators=[DataRequired()])
 
 

@@ -4,6 +4,13 @@ https://emmameets.herokuapp.com/
 
 Emma Meets was created to provide a social media platform, for dog owners to find and leave reviews for dog related products. Users can sign up, reset their password by email, create a profile for their dog, browse existing products in the database, leave reviews and favorite products to their profile page. In addition they can remove these as well as their reviews. Each review has a rating that is dispayed as an average rating on the product page itself and in the product cards on the profile. If a user does not find a dog-related product on the page, they can create a category, which populates in a dropdown menu in the create product page. here they can upload an appropriate picture and information about the product they would like to review. After they are done, they can logout again.  
 
+## Note on Image Uploader
+
+Heroku does not support file uploads for free. Therefore I have taken out the option to upload a profile image or to attach an image to product when it is created. I had to remove the image uploader for now because Heroku would throw an error when trying to sign up and upload an image.
+
+Please login with the credentials red@mail.com and password: red to see a sample profile with a profile picture. 
+
+
 ## List of technologies used 
 
 - Bulma
