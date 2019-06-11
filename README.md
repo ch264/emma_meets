@@ -48,6 +48,8 @@ https://trello.com/c/pJTTsD6G/14-wireframes
 
 https://trello.com/c/nuxyuQmI/15-erd
 
+![EmmaMeets_ERD](EmmaMeets_ERD.jpg)
+
 
 ## unsolved problems
 - Average ratings do not always round up
