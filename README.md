@@ -27,7 +27,7 @@ Please login with the credentials red@mail.com and password: red to see a sample
 
 ## installation steps
 
-1. clone done the repository
+1. clone down the repository
 2. in your terminal run:
 	 - pip3 install -r 
 	 - python3 app.py
@@ -63,7 +63,7 @@ https://trello.com/c/nuxyuQmI/15-erd
 - when user logs in, they should go to a page with all recent reviews displayed (meaty content)
 - implement pagination on profile page
 - implement Elastic Search 
-- use instagram SPI to display pictures of profile
+- use instagram API to display pictures of profile
 - implement WYSIWIG
 - add birthdate and calculate automatic age change on profile
 - users should be added to product table
