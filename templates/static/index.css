@@ -1,0 +1,43 @@
+
+  /* Global style */
+
+  @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:600|Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Rock+Salt');
+  
+  
+  /* Layout */
+  
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.1em;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+      
+/* Nav Bar */
+  .nav-wrapper {
+    background-color: #f2f2f0;
+  }
+
+  a.nav-link {
+    color: #64bba6;
+  }
+  
+  a.navbar-item {
+    color: #676459;
+  }
+  
+  li.navbar-item:hover {
+    color: #64bba6;
+  }
+
+
+/* footer */
+.page-footer {
+  background-color: #f2f2f0;
+}

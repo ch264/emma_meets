@@ -1,0 +1,21 @@
+{
+  "name": "emmameets",
+  "version": "1.0.1",
+  "description": "emmameets app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next buil",
+    "start": "next start"
+  },
+  "keywords": [
+    "emmameets"
+  ],
+  "author": "Christina Hastenrath",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^9.0.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
